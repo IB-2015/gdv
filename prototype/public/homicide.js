@@ -20,12 +20,6 @@ d3.csv("homicide.csv")
   homicide_data = data;
 
   var homicide = d3.select("#homicide")
-  // .append("div")
-  // .style("width", "1700px")
-  // .style("height", "1200px")
-  // .style("border", "10px solid black")
-  // .style("float", "left")
-  // .style("clear", "none");
 
   var margin = { top: 20, right: 20, bottom: 30, left: 50 };
   var svg_width = 1000;
@@ -33,14 +27,8 @@ d3.csv("homicide.csv")
   var width = svg_width - margin.left - margin.right;
    var height = svg_height - margin.top - margin.bottom;
 
-  // var data = [10, 15, 20, 25, 30];
-
   // Append SVG
   var svg_holder = d3.select("#homicide_chart")
-  // .style("display", "inline-block")
-  // .style("border", "1px solid black")
-  // .style("width", "1000px")
-  // .style("height", "800px");
   var svg=svg_holder.append("svg")
               .attr("width", width)
               .attr("height", height)
@@ -79,34 +67,12 @@ d3.csv("homicide.csv")
    .y(function(d) { return y_scale(isNaN(d.rate) ? null : d.rate)}); // handle NaN from parseFloat
    homicide_line = line;
 
-   // for (i = 0; i < 1; i++) {
-   //    svg.append("g").append("path")
-   //            .datum(data[i].homicide)
-   //            .attr("transform", `translate(50, ${offset})`)
-   //            .attr("fill", "none")
-   //            .attr("stroke", "steelblue")
-   //            .attr("stroke-linejoin", "round")
-   //            .attr("stroke-linecap", "round")
-   //            .attr("stroke-width", 1.5)
-   //            .attr("d", line);
-   //  }
-
-
-    // var select_box = d3.select("#homicide_checkbox");
-    // for (i = 0; i < 5; i++) {
-    //   select_box.append("input")
-    //   .attr("type", "checkbox")
-    //   .attr("value", data[i].country)
-    //   .text(data[i].country)
-    //   .on("click", function(input) {
-    //     console.log(input);
-    //   });
-    // }
-
     var homicide_checkbox = document.getElementById("homicide_checkbox");
 
-    for (i = 0; i < 100; i++) {
+    for (i = 0; i < data.length; i++) {
       var check_label = document.createElement("label");
+      check_label.setAttribute("class", "checkbox_label");
+
       var input = document.createElement("input");
       input.setAttribute("type", "checkbox");
       input.setAttribute("name", i); // abusing name attribute for personal needs
@@ -155,12 +121,12 @@ function draw(input) {
 
 function changeColor(input) {
   console.log(input.value);
-  // d3.select("#homicide_line_path_" + input.name).attr("stroke", input.value);
+  d3.select("#homicide_line_path_" + input.name).remove();
   d3.select("#homicide_chart").select("svg").append("g")
           .attr("id", "homicide_line_path_" + input.name)
           .append("path")
           .datum(homicide_data[input.name].homicide)
-          .attr("transform", `translate(50, 0)`)
+          .attr("transform", `translate(50, 10)`)
           .attr("fill", "none")
           .attr("stroke", input.value)
           .attr("stroke-linejoin", "round")

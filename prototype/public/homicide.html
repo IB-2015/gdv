@@ -28,14 +28,22 @@
 
 #homicide_checkbox{
   margin-left:1%;
-  width:48%;
+  width:25%;
   height:50%;
   /* border:1px solid blue; */
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
-#homicide_checkbox > label {
+.checkbox_label {
   display: block;
+  margin: 1% 0% 2% 0%; /* top right bottom left */
+  /* border:1px solid blue; */
+}
+
+.checkbox_label > * {
+  /* visibility: hidden; */
+  margin: 0% 2% 0% 2%; /* top right bottom left */
+  /* border:1px solid blue; */
 }
 </style>
 <body>
@@ -43,8 +51,12 @@
 <script src="homicide.js"></script>
 <h1>Mordrate</h1>
 <div id="homicide">
-  <div id="homicide_chart"></div>
-  <div id="homicide_checkbox"></div>
+  <div id="homicide_chart">
+      <h2>chart</h2>
+  </div>
+  <div id="homicide_checkbox">
+      <h2>checkbox</h2>
+  </div>
 </div>
 </body>
 </html>
