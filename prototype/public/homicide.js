@@ -1,5 +1,7 @@
 var homicide_data;
 var homicide_line;
+var homicide_x_scale;
+var homicide_y_scale;
 
 d3.csv("homicide.csv")
 .then(function(data) {
@@ -38,6 +40,7 @@ d3.csv("homicide.csv")
   var x_scale = d3.scaleTime()
                 .domain([new Date(2000, 0, 1), new Date(2016, 0, 1)])
                 .range([0, width - 100]);
+  homicide_x_scale = x_scale;
   // Add scale to x axis
   var x_axis = d3.axisBottom()
                  .scale(x_scale);
@@ -46,6 +49,7 @@ d3.csv("homicide.csv")
   var y_scale = d3.scaleLinear()
                .domain([0, 100])
                .range([height/2, 0]);
+  homicide_y_scale = y_scale;
   // Add scale to y axis
   var y_axis = d3.axisLeft().scale(y_scale);
 
@@ -114,6 +118,20 @@ function draw(input) {
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", homicide_line);
+
+      // var lineAndDots = g.append("g")
+    	// 	.attr("class", "line-and-dots")
+      //   .attr("transform", "translate(" + ((margin.left + margin.right) / 2) + "," + 0 + ")")
+
+
+    // Data dots
+    // d3.select("#homicide_chart").select("svg")
+    // 		.data(homicide_data[input.name].homicide)
+    // 	.enter().append("circle")
+    //     .attr("fill", "#000000")
+    //     .attr("r", 50)
+    //     .attr("cx", function(d) { return homicide_x_scale(d.year); })
+    //     .attr("cy", function(d) { return isNaN(homicide_y_scale(d.rate)) ? null : homicide_y_scale(d.rate); });
   } else {
     d3.select("#homicide_line_path_" + input.name).remove();
   }
