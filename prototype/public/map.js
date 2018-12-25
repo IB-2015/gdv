@@ -1,15 +1,17 @@
 d3.json("countries.geojson")
 .then(function(data) {
   geojson = data;
-  geoscheme;
+  var geoscheme;
   d3.csv("geoscheme.csv")
   .then(function(data) {
     geoscheme = data;
   })
   .catch(function(error) {
     console.log(error);
-  })
+  });
 
+
+  drawMap(geojson);
 })
 .catch(function(error) {
   console.log(error);
