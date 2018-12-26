@@ -22,12 +22,88 @@ body {
 }
 
 #content .map path {
-  fill: red;
-  stroke: #aaa;
+  /* stroke: gray; */
 }
 
-.Southern {
+/* svg {
+  background: blue;
+} */
+
+.selected {
+  fill: red;
+}
+
+.Northern_Africa {
+  fill: red;
+  stroke: red;
+}
+.Sub-Saharan_Africa {
+  fill: purple;
+  stroke: purple;
+}
+.Latin_America_and_the_Caribbean {
   fill: blue;
+  stroke: blue;
+}
+.Northern_America {
+  fill: green;
+  stroke: green;
+}
+.none {
+  fill: black;
+  stroke: black;
+}
+.Central_Asia {
+  fill: orange;
+  stroke: orange;
+}
+.Eastern_Asia {
+  fill: red;
+  stroke: red;
+}
+.South-eastern_Asia {
+  fill: purple;
+  stroke: purple;
+}
+.Southern_Asia {
+  fill: blue;
+  stroke: blue;
+}
+.Western_Asia {
+  fill: green;
+  stroke: green;
+}
+.Eastern_Europe {
+  fill: yellow;
+  stroke: yellow;
+}
+.Northern_Europe {
+  fill: orange;
+  stroke: orange;
+}
+.Southern_Europe {
+  fill: red;
+  stroke: red;
+}
+.Western_Europe {
+  fill: purple;
+  stroke: purple;
+}
+.Australia_and_New_Zealand {
+  fill: blue;
+  stroke: blue;
+}
+.Melanesia {
+  fill: green;
+  stroke: green;
+}
+.Micronesia {
+  fill: yellow;
+  stroke: yellow;
+}
+.Polynesia {
+  fill: green;
+  stroke: green;
 }
 
 </style>
@@ -36,7 +112,7 @@ body {
   <script src="https://d3js.org/d3.v5.js"></script>
   <script src="map.js"></script>
   <div id="content">
-    <svg width="1800px" height="400px">
+    <svg width="1800px" height="800px">
       <g class="map"></g>
     </svg>
   </div>

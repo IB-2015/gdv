@@ -6,10 +6,23 @@ d3.json("countries.geojson")
 
   d3.csv("geoscheme.csv")
   .then(function(data) {
-    geoscheme = [];
+    var geoscheme = [];
+    var geoscheme_regions = [];
+    var geoscheme_sub_regions = [];
     data.forEach(function(d) {
       geoscheme.push(d);
+      if (!geoscheme_regions.includes(d["Region Name"].replace(new RegExp(" ", "g"), "_"))) {
+        geoscheme_regions.push(d["Region Name"].replace(new RegExp(" ", "g"), "_"));
+      }
+
+      if (!geoscheme_sub_regions.includes(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"))) {
+        geoscheme_sub_regions.push(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));
+      }
     });
+
+
+    console.log(geoscheme_regions);
+    console.log(geoscheme_sub_regions);
 
     // print length of both arrays
     console.log("geojson: " + geojson.features.length);
@@ -65,10 +78,10 @@ d3.json("countries.geojson")
 })
 
 function drawMap(geojson) {
-  var projection = d3.geoEquirectangular()
-    .scale(100)
-    .translate([200, 150]);
-
+  var projection = d3.geoMercator()
+    // .scale(100)
+    // .translate([200, 250]);
+projection.fitExtent([[0, 0], [1800, 500]], geojson);
   var geoGenerator = d3.geoPath()
     .projection(projection);
 
@@ -84,24 +97,25 @@ function drawMap(geojson) {
       .attr("class", function(d) { return d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_");})
       .attr('d', geoGenerator);
 
-    d3.selectAll(".none").style("fill", "black");
-    d3.selectAll(".Northern_Africa").style("fill", "#1759c4");
-    d3.selectAll(".Sub-Saharan_Africa").style("fill", "black");
-    d3.selectAll(".Latin_America_and_the_Caribbean").style("fill", "#bac60f");
-    d3.selectAll(".Northern_America").style("fill", "#1ba2ba");
-    d3.selectAll(".Central_Asia").style("fill", "black");
-    d3.selectAll(".Eastern_Asia").style("fill", "black");
-    d3.selectAll(".South-eastern_Asia").style("fill", "black");
-    d3.selectAll(".Southern_Asia").style("fill", "#d12017");
-    d3.selectAll(".Western_Asia").style("fill", "black");
-    d3.selectAll(".Eastern_Europe").style("fill", "#adfff8");
-    d3.selectAll(".Northern_Europe").style("fill", "black");
-    d3.selectAll(".Southern_Europe").style("fill", "black");
-    d3.selectAll(".Western_Europe").style("fill", "#1759c4");
-    d3.selectAll(".Australia_and_New_Zealand").style("fill", "black");
-    d3.selectAll(".Melanesia").style("fill", "black");
-    d3.selectAll(".Micronesia").style("fill", "black");
-    d3.selectAll(".Polynesia").style("fill", "black");
+    // d3.selectAll(".none").style("fill", "black");
+    // d3.selectAll(".Northern_Africa").style("fill", "#1759c4");
+    // d3.selectAll(".Sub-Saharan_Africa").style("fill", "black");
+    // d3.selectAll(".Latin_America_and_the_Caribbean").style("fill", "#bac60f");
+    // d3.selectAll(".Northern_America").style("fill", "#1ba2ba");
+    // d3.selectAll(".Central_Asia").style("fill", "black");
+    // d3.selectAll(".Eastern_Asia").style("fill", "black");
+    // d3.selectAll(".South-eastern_Asia").style("fill", "black");
+    // d3.selectAll(".Southern_Asia").style("fill", "#d12017");
+    // d3.selectAll(".Western_Asia").style("fill", "black");
+    // d3.selectAll(".Eastern_Europe").style("fill", "#adfff8");
+    // d3.selectAll(".Northern_Europe").style("fill", "black");
+    // d3.selectAll(".Southern_Europe").style("fill", "black");
+    // d3.selectAll(".Western_Europe").style("fill", "#1759c4");
+    // d3.selectAll(".Australia_and_New_Zealand").style("fill", "black");
+    // d3.selectAll(".Melanesia").style("fill", "black");
+    // d3.selectAll(".Micronesia").style("fill", "black");
+    // d3.selectAll(".Polynesia").style("fill", "black");
+
   }
 
   update(geojson);
