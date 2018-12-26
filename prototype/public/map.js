@@ -1,14 +1,15 @@
+var geojson;
+var geoscheme = [];
+var geoscheme_regions = [];
+var geoscheme_sub_regions = [];
 d3.json("countries.geojson")
 .then(function(data) {
-  var geojson = data;
-  var geoscheme;
+  geojson = data;
+  // var geoscheme;
 
 
   d3.csv("geoscheme.csv")
   .then(function(data) {
-    var geoscheme = [];
-    var geoscheme_regions = [];
-    var geoscheme_sub_regions = [];
     data.forEach(function(d) {
       geoscheme.push(d);
       if (!geoscheme_regions.includes(d["Region Name"].replace(new RegExp(" ", "g"), "_"))) {
@@ -81,7 +82,7 @@ function drawMap(geojson) {
   var projection = d3.geoMercator()
     // .scale(100)
     // .translate([200, 250]);
-projection.fitExtent([[0, 0], [1800, 500]], geojson);
+    projection.fitExtent([[0, 0], [1800, 500]], geojson);
   var geoGenerator = d3.geoPath()
     .projection(projection);
 
@@ -95,7 +96,20 @@ projection.fitExtent([[0, 0], [1800, 500]], geojson);
       .append('path')
       .attr("id", function(d) { return d.properties.ADMIN;})
       .attr("class", function(d) { return d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_");})
-      .attr('d', geoGenerator);
+      // .attr("class", "selected")
+      .attr('d', geoGenerator)
+      .on('click', selected);
+
+    function selected() {
+      var sub_region = d3.select(this).attr("class");
+      // d3.select('.selected').classed('selected', false);
+      // d3.select(this).classed('selected', true);
+      for (i = 0; i < geoscheme_sub_regions.length; i++) {
+        d3.selectAll("." + (geoscheme_sub_regions[i] == "" ? "none" : geoscheme_sub_regions[i])).classed('selected', false);
+      }
+
+        d3.selectAll("." + sub_region).classed('selected', true);
+    }
 
     // d3.selectAll(".none").style("fill", "black");
     // d3.selectAll(".Northern_Africa").style("fill", "#1759c4");
