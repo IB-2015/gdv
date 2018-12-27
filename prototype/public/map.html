@@ -18,16 +18,12 @@ index.html#
 body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   font-size: 14px;
-  color: #333;
+  /* color: #333; */
 }
 
 #content .map path {
   /* stroke: gray; */
 }
-
-/* svg {
-  background: blue;
-} */
 
 .Northern_Africa {
   fill: red;
@@ -103,9 +99,13 @@ body {
 }
 
 
-.selected {
-  fill: gray;
+.mouseover {
+  fill: DarkGray;
   stroke: gray;
+}
+
+#map {
+  background: DodgerBlue;
 }
 
 </style>
@@ -114,9 +114,9 @@ body {
   <script src="https://d3js.org/d3.v5.js"></script>
   <script src="map.js"></script>
   <div id="content">
-    <svg width="1800px" height="800px">
+    <!-- <svg id="map" width="640px" height="360px">
       <g class="map"></g>
-    </svg>
+    </svg> -->
   </div>
 
 
