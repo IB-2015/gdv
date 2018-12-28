@@ -1,41 +1,56 @@
-var express = require('express');
-var fs = require("fs");
-var d3 = require("d3");
-var countries = [];
-var homicide = [];
-var d3_countries;
-var d3_homicide;
-var app = express();
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+//const mongoose = require('./api/mongodb');
+const apiRoutes = require ('./api/routes/api_routes');
 
 
+
+//Logging middleware
+app.use(morgan('dev'));
+//Bodyparser Middleware
+//TODO evtl Middleware für formdata
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
+app.use(bodyParser.json());
+
+//Add CORS header to every request
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+  //Add headers for OPTIONS requests
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    return res.status(200).json({})
+  }
+  //Call next middleware
+  next();
+})
+
+//Set the static files location /public/img will be /img for users
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+//Routes for handling requests
+app.use('/api', apiRoutes);
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+//Catch all requests that dont match the routes
+app.use((req, res, next) => {
+  const error = new Error('Not found');
+  error.status = 404;
+  next(error);
+})
 
-fs.readFile("resources/geoscheme.csv", "utf8", function(error, data) {
-  d3_countries = d3.csvParse(data);
-  d3_countries.forEach(function(d) {
-    countries.push(d);
-    console.log(countries.length + '.) ' + d['Country or Area']);
-  })
-  console.log("geoscheme.csv parsed");
-});
-
-fs.readFile("resources/homicide.csv", "utf8", function(error, data) {
-  d3_homicide = d3.csvParse(data);
-  d3_homicide.forEach(function(d) {
-    homicide.push(d);
-    h = "";
-    for (i = 2000; i <= 2016; i++) {
-      h += parseFloat(d["" + i]) + " (" + i + ") ";
+//Middleware gets called when anything produces an error
+app.use((error, req, res, next) => {
+  res.status(error.status || 500)
+  res.json({
+    error: {
+      message: error.message
     }
-    console.log(homicide.length + '.) ' + d["UNODC Name"] + ' | ' + h);
   })
-  console.log("homicide.csv parsed");
-});
+})
+
+module.exports = app;

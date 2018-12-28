@@ -1,52 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<style>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
-svg {
-  font: 10px sans-serif;
-}
-
-.y.axis path {
-  display: none;
-}
-
-.y.axis line {
-  stroke: #fff;
-  stroke-opacity: .2;
-  shape-rendering: crispEdges;
-}
-
-.y.axis .zero line {
-  stroke: #000;
-  stroke-opacity: 1;
-}
-
-.title {
-  font: 300 78px Helvetica Neue;
-  fill: #666;
-}
-
-.birthyear,
-.age {
-  text-anchor: middle;
-}
-
-.birthyear {
-  fill: #fff;
-}
-
-rect {
-  fill-opacity: .6;
-  fill: #e377c2;
-}
-
-rect:first-child {
-  fill: #1f77b4;
-}
-
-</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+</head>
 <body>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="index.js"></script>
+    <p id="content">It Works!</p>
+    <script>
+        $.ajax({
+        url: "/api/crimes",
+        type: 'GET',
+        success: function (res) {
+            console.log(res)
+            //Show data in page or use otherwise
+            document.getElementById("content").innerHTML = res;
+        },
+        error: (err) => {
+            console.log(error)
+        }
+    });
+
+    </script>
+    
 </body>
 </html>
