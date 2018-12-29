@@ -292,6 +292,7 @@ function drawMap(geojson) {
 
   update(geojson);
 
+//print stuff
   // var elems = document.getElementsByClassName('Americas')
   // var africa = {
   //   "type": "FeatureCollection",
