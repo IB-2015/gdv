@@ -282,7 +282,7 @@ function drawMap(geojson) {
   var allElements = document.getElementsByTagName('*');
   for (var i = 0, n = allElements.length; i < n; i++)
   {
-    if (allElements[i].getAttribute('sub_region') === 'Southern_Asia')
+    if (allElements[i].getAttribute('sub_region') === 'Polynesia')
     {
       // Element exists with attribute. Add to array.
       elems.push(allElements[i]);
