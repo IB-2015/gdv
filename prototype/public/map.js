@@ -1,4 +1,5 @@
 var geojson;
+var geojson_africa;
 var geoscheme = [];
 var geoscheme_regions = [];
 var geoscheme_sub_regions = [];
@@ -15,66 +16,73 @@ d3.json("countries.geojson")
   geojson = data;
   // var geoscheme;
 
-
-  d3.csv("geoscheme.csv")
+  d3.json('africa.geojson')
   .then(function(data) {
-    data.forEach(function(d) {
-      geoscheme.push(d);
-      if (!geoscheme_regions.includes(d["Region Name"].replace(new RegExp(" ", "g"), "_"))) {
-        geoscheme_regions.push(d["Region Name"].replace(new RegExp(" ", "g"), "_"));
-      }
+    geojson_africa = data;
 
-      if (!geoscheme_sub_regions.includes(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"))) {
-        geoscheme_sub_regions.push(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));
-      }
-    });
-
-
-    // console.log(geoscheme_regions);
-    // console.log(geoscheme_sub_regions);
-
-    // print length of both arrays
-    // console.log("geojson: " + geojson.features.length);
-    // console.log("geoscheme: " + geoscheme.length);
-
-    // sort both arrays alphabetically
-    geojson.features.sort(function(a, b) {
-      return a.properties.ADMIN < b.properties.ADMIN ? -1 : 1;
-    });
-    geoscheme.sort(function(a, b) {
-      return a["Country or Area"] < b["Country or Area"]? -1 : 1;
-    });
-
-    // set geoscheme for every country and count missing afterwards
-    var missingScheme = 0;
-    var missing = [];
-    geojson.features.forEach(function(d) {
-      setScheme(d, geoscheme)
-      if (d.scheme == undefined) {
-        // console.log(d.properties.ADMIN + " has no matching scheme");
-        missing.push(d.properties.ADMIN);
-        missingScheme++;
-      } else {
-        // console.log(d.properties.ADMIN + " [" + d.scheme["Country or Area"] + " | " + d.scheme["Region Name"] + " | "  + d.scheme["Sub-region Name"] + "]");
-      }
-      // console.log("----");
-    });
-
-    console.log(missingScheme);
-    console.log(missing);
-
-    function setScheme(x, scheme) {
-      scheme.forEach(function(d) {
-        if (d["ISO-alpha3 Code"] === x.properties.ISO_A3) {
-          x.scheme = d;
-          return;
+    d3.csv("geoscheme.csv")
+    .then(function(data) {
+      data.forEach(function(d) {
+        geoscheme.push(d);
+        if (!geoscheme_regions.includes(d["Region Name"].replace(new RegExp(" ", "g"), "_"))) {
+          geoscheme_regions.push(d["Region Name"].replace(new RegExp(" ", "g"), "_"));
         }
-      })
-    }
+
+        if (!geoscheme_sub_regions.includes(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"))) {
+          geoscheme_sub_regions.push(d["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));
+        }
+      });
 
 
-    drawMap(geojson);
+      // console.log(geoscheme_regions);
+      // console.log(geoscheme_sub_regions);
 
+      // print length of both arrays
+      // console.log("geojson: " + geojson.features.length);
+      // console.log("geoscheme: " + geoscheme.length);
+
+      // sort both arrays alphabetically
+      geojson.features.sort(function(a, b) {
+        return a.properties.ADMIN < b.properties.ADMIN ? -1 : 1;
+      });
+      geoscheme.sort(function(a, b) {
+        return a["Country or Area"] < b["Country or Area"]? -1 : 1;
+      });
+
+      // set geoscheme for every country and count missing afterwards
+      var missingScheme = 0;
+      var missing = [];
+      geojson.features.forEach(function(d) {
+        setScheme(d, geoscheme)
+        if (d.scheme == undefined) {
+          // console.log(d.properties.ADMIN + " has no matching scheme");
+          missing.push(d.properties.ADMIN);
+          missingScheme++;
+        } else {
+          // console.log(d.properties.ADMIN + " [" + d.scheme["Country or Area"] + " | " + d.scheme["Region Name"] + " | "  + d.scheme["Sub-region Name"] + "]");
+        }
+        // console.log("----");
+      });
+
+      console.log(missingScheme);
+      console.log(missing);
+
+      function setScheme(x, scheme) {
+        scheme.forEach(function(d) {
+          if (d["ISO-alpha3 Code"] === x.properties.ISO_A3) {
+            x.scheme = d;
+            return;
+          }
+        })
+      }
+
+
+      drawMap(geojson);
+
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   })
   .catch(function(error) {
     console.log(error);
@@ -228,32 +236,11 @@ function drawMap(geojson) {
       if (active.node() === this) return reset();
       active.classed("active", false);
       active = d3.select(this).classed("active", true);
-      // var p_data = '';
-      // var data_set = [];
-      // var elems = document.getElementsByClassName('Africa')
-      // for (i = 0; i < elems.length; i++) {
-      //   // console.log(i);
-      //   // console.log(elems[i].getAttribute('d'));
-      //   p_data += elems[i].getAttribute('d');
-      //   console.log(d3.select(elems[i])['_groups'][0][0]['__data__']);
-      // };
-      // var path = g.append('path')
-      // .attr('id', 'Africa')
-      // .attr('d', p_data);
-      //
-      // console.log(this);
-      // console.log(active['_groups'][0][0]['__data__']);
-      // var el = document.getElementById('Afghanistan');
-      // var d3_el = d3.select(el);
-      // console.log(el);
-      // console.log(d3_el['_groups'][0][0]['__data__']);
-      // var continent = document.getElementById('Africa');
-      // var d3_continent = d3.select(continent);
-      // console.log(continent);
-      // console.log(d3_continent['_groups'][0][0]['__data__']);
-      // console.log(d);
-
-      var bounds = geoGenerator.bounds(d),
+      var obj = {
+        "type": "Feature",
+        "geometry": geojson_africa.features[0]
+      }
+      var bounds = geoGenerator.bounds(obj),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
@@ -291,15 +278,24 @@ function drawMap(geojson) {
   update(geojson);
 
 //print stuff
-  // var elems = document.getElementsByClassName('Americas')
-  // var africa = {
-  //   "type": "FeatureCollection",
-  //   "features": []
-  // }
-  // for (i = 0; i < elems.length; i++) {
-  //   var e = d3.select(elems[i])['_groups'][0][0]['__data__'];
-  //   delete e['scheme'];
-  //   africa.features.push(e);
-  // }
-  // console.log(JSON.stringify(africa));
+  var elems = [];
+  var allElements = document.getElementsByTagName('*');
+  for (var i = 0, n = allElements.length; i < n; i++)
+  {
+    if (allElements[i].getAttribute('sub_region') === 'Southern_Asia')
+    {
+      // Element exists with attribute. Add to array.
+      elems.push(allElements[i]);
+    }
+  }
+  var africa = {
+    "type": "FeatureCollection",
+    "features": []
+  }
+  for (i = 0; i < elems.length; i++) {
+    var e = d3.select(elems[i])['_groups'][0][0]['__data__'];
+    delete e['scheme'];
+    africa.features.push(e);
+  }
+  console.log(JSON.stringify(africa));
 }
