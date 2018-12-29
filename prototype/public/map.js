@@ -118,7 +118,8 @@ function drawMap(geojson) {
   // append g to svg
   var g = map_svg.append('g').attr('class', 'map');
 
-  var projection = d3.geoEquirectangular()
+
+  var projection = d3.geoMercator()
         // .scale(153)
         // .translate([width/2,height/1.5])
         // .rotate([rotated,0,0]); //center on USA because 'murica
@@ -126,7 +127,7 @@ function drawMap(geojson) {
     // .translate([200, 250]);
 
     projection.fitExtent([[0, 0], [640, 360]], geojson);
-    projection.rotate([rotated,0,0]);
+    projection.rotate([-15,0,0]);
   var geoGenerator = d3.geoPath()
     .projection(projection);
 
@@ -139,7 +140,7 @@ function drawMap(geojson) {
 
   function zoomed() {
     // g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
-    
+
     // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     g.attr("transform", d3.event.transform); // updated for d3 v4
   }
@@ -197,7 +198,9 @@ function drawMap(geojson) {
     u.enter()
       .append('path')
       .attr("id", function(d) { return d.properties.ADMIN;})
-      .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+      .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+      .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+      .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
       // .attr("class", "selected")
       .attr('d', geoGenerator)
       .on('mouseenter', highlightRegion)
@@ -227,7 +230,31 @@ function drawMap(geojson) {
       if (active.node() === this) return reset();
       active.classed("active", false);
       active = d3.select(this).classed("active", true);
-      console.log(d);
+      // var p_data = '';
+      // var data_set = [];
+      // var elems = document.getElementsByClassName('Africa')
+      // for (i = 0; i < elems.length; i++) {
+      //   // console.log(i);
+      //   // console.log(elems[i].getAttribute('d'));
+      //   p_data += elems[i].getAttribute('d');
+      //   console.log(d3.select(elems[i])['_groups'][0][0]['__data__']);
+      // };
+      // var path = g.append('path')
+      // .attr('id', 'Africa')
+      // .attr('d', p_data);
+      //
+      // console.log(this);
+      // console.log(active['_groups'][0][0]['__data__']);
+      // var el = document.getElementById('Afghanistan');
+      // var d3_el = d3.select(el);
+      // console.log(el);
+      // console.log(d3_el['_groups'][0][0]['__data__']);
+      // var continent = document.getElementById('Africa');
+      // var d3_continent = d3.select(continent);
+      // console.log(continent);
+      // console.log(d3_continent['_groups'][0][0]['__data__']);
+      // console.log(d);
+
       var bounds = geoGenerator.bounds(d),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
@@ -237,7 +264,7 @@ function drawMap(geojson) {
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
       map_svg.transition()
-          .duration(750)
+          .duration(1750)
           // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
           .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
     }
@@ -264,4 +291,16 @@ function drawMap(geojson) {
   }
 
   update(geojson);
+
+  // var elems = document.getElementsByClassName('Americas')
+  // var africa = {
+  //   "type": "FeatureCollection",
+  //   "features": []
+  // }
+  // for (i = 0; i < elems.length; i++) {
+  //   var e = d3.select(elems[i])['_groups'][0][0]['__data__'];
+  //   delete e['scheme'];
+  //   africa.features.push(e);
+  // }
+  // console.log(JSON.stringify(africa));
 }
