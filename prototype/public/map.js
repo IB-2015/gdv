@@ -60,14 +60,12 @@ d3.json("countries.geojson")
       // console.log("----");
     });
 
-    // console.log(missingScheme);
-    // console.log(missing);
+    console.log(missingScheme);
+    console.log(missing);
 
     function setScheme(x, scheme) {
       scheme.forEach(function(d) {
-        var xReg = new RegExp(x.properties.ADMIN, 'g');
-        var yReg = new RegExp(d["Country or Area"], 'g');
-        if (xReg.test(d["Country or Area"]) || yReg.test(x.properties.ADMIN)) {
+        if (d["ISO-alpha3 Code"] === x.properties.ISO_A3) {
           x.scheme = d;
           return;
         }
