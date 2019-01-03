@@ -9,7 +9,7 @@ var initX;
 var rotated = 90;
 var height = 360;
 var width = 640;
-var zoom_level = 0; // 0 world, 1 continent...
+var level = 0; // 0 world, 1 continent...
 //track scale only rotate when s === 1
 var s = 1;
 var mouseClicked = false;
@@ -66,6 +66,7 @@ Promise.all(promises).then(function(data) {
   for (i = continent_index; i < data.length; i++) {
     if (i < geoscheme_index) {
       geojson_continents[resources[i].split(".")[0]] = data[i];
+      // geojson_continents[resources[i].split(".")[0]].geometry = data[i].features;
     } else {
       geojson_schemes[resources[i].split(".")[0]] = data[i];
     }
@@ -110,6 +111,16 @@ Promise.all(promises).then(function(data) {
   console.log(missingScheme);
   console.log(missing);
 
+  // drawMap(geojson_countries);
+  console.log(geojson_continents.Africa);
+  // for (var key in geojson_continents) {
+  //   console.log(key + ": " + geojson_continents[key].features.length);
+  // }
+  // for (var key in geojson_schemes) {
+  //   console.log(key + ": " + geojson_schemes[key].features.length);
+  // }
+  // console.log(geojson_countries);
+  // drawMap(geojson_countries);
   drawMap(geojson_countries);
 
 }).catch(function(error) {
@@ -117,7 +128,7 @@ Promise.all(promises).then(function(data) {
 })
 
 function drawMap(geojson) {
-
+  console.log(geojson);
   var zoom = d3.zoom()
          .scaleExtent([1, 20])
          .on("zoom", zoomed);
@@ -196,10 +207,22 @@ function drawMap(geojson) {
       if (active.node() === this) return reset();
       active.classed("active", false);
       active = d3.select(this).classed("active", true);
-      var obj = {
-        "type": "Feature",
-        "geometry": geojson_continents[active.attr("region")].features[0]
+      if (level === 0) {
+        var obj = {
+          "type": "Feature",
+          "geometry": geojson_continents[active.attr("region")].geometry[0]
+        }
+      } else if (level === 1) {
+        var obj = {
+          "type": "Feature",
+          "geometry": geojson_schemes[active.attr("sub_region")].geometry[0]
+        }
+      } else if (level === 2) {
+        obj = d;
       }
+
+      level = ((level++) % 3);
+
       var bounds = geoGenerator.bounds(obj),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
@@ -208,10 +231,13 @@ function drawMap(geojson) {
           scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
           translate = [width / 2 - scale * x, height / 2 - scale * y];
 
+          console.log(translate);
+          console.log(scale);
       map_svg.transition()
           .duration(750)
           // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
           .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
+          // .call( zoom.transform, d3.zoomIdentity.translate([-69.45264606363037, -3.6934969517030254]).scale(0) ); // updated for d3 v4
 
       function rotate(x) {
              projection.rotate([x,0,0])
