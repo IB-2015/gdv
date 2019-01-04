@@ -139,8 +139,11 @@ function drawMap(geojson) {
   // append svg to parent div container
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
-        .attr("width", width)
-        .attr("height", height);
+        .attr("viewBox", "0 0 " + width + " " + height )
+        .attr("preserveAspectRatio", "xMinYMin");
+
+        //.attr("width", width)
+        //.attr("height", height);
 
         map_svg.call(zoom)
         .on("dblclick.zoom", null)
