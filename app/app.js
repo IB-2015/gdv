@@ -4,7 +4,8 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 //const mongoose = require('./api/mongodb');
-const apiRoutes = require ('./api/routes/api_routes');
+const statisticsRoutes = require ('./api/routes/statistics_routes');
+
 
 
 
@@ -34,7 +35,7 @@ app.use((req, res, next) => {
 app.use(express.static(__dirname + '/public'));
 
 //Routes for handling requests
-app.use('/api', apiRoutes);
+app.use('/api/data/statistics', statisticsRoutes);
 
 //Catch all requests that dont match the routes
 app.use((req, res, next) => {
