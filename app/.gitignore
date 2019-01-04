@@ -1,0 +1,8 @@
+# dependencies
+/node_modules
+
+#User specific files
+.tern-project
+
+#Logs
+yarn-error.log
