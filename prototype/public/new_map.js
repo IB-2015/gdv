@@ -6,9 +6,12 @@ var geoscheme_regions = [];
 var geoscheme_sub_regions = [];
 var active = d3.select(null);
 var initX;
-var rotated = 90;
-var height = 360;
-var width = 640;
+var x_rotation = -15;
+var y_rotation = 0;
+var z_rotation = 0;
+var factor = 1;
+var height = 460/factor;
+var width = 640/factor;
 var level = 0; // 0 world, 1 continent...
 //track scale only rotate when s === 1
 var s = 1;
@@ -112,7 +115,7 @@ Promise.all(promises).then(function(data) {
   console.log(missing);
 
   // drawMap(geojson_countries);
-  console.log(geojson_continents.Africa);
+  // console.log(geojson_continents.Africa);
   // for (var key in geojson_continents) {
   //   console.log(key + ": " + geojson_continents[key].features.length);
   // }
@@ -137,32 +140,88 @@ function drawMap(geojson) {
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
         .attr("width", width)
-        .attr("height", height)
-        .call(zoom);
+        .attr("height", height);
+
+        map_svg.call(zoom);
+    //     .on("dblclick.zoom", null)
+    //     .on("wheel.zoom", null)
+    //     // .on("mousedown.zoom", null)
+    // .on("touchstart.zoom", null)
+    // .on("touchmove.zoom", null)
+    // .on("touchend.zoom", null);;
 
   // append g to svg
-  var g = map_svg.append('g').attr('class', 'map');
+  var gS = []
+  var rS = [];
 
+  // var g = map_svg.append('g').attr('class', 'map');
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map'));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${width},0) scale(1)`));
+
+  // var g = map_svg.append('g').attr('class', 'map');
+  gS[0].append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "pink")
+    .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });
+  gS[1].append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "black")
+    .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });;
+    // .attr('transform', `translate(${width},0) scale(1)`);
+
+  for (i = 0; i < gS.length; i++) {
+    gS[i].attr("val", i);
+  }
 
   var projection = d3.geoMercator();
 
-    projection.fitExtent([[0, 0], [640, 360]], geojson);
-    projection.rotate([-15,0,0]);
+    projection.fitExtent([[0, 0], [width, height]], geojson);
+    projection.rotate([x_rotation,y_rotation,z_rotation]);
   var geoGenerator = d3.geoPath()
     .projection(projection);
 
   function rotateMap(endX) {
-        console.log("rotate:" + rotated + " | endX: " + endX + " | initX: " + initX);
-         projection.rotate([rotated + (endX - initX) * 360 / (s * width),0,0])
+        console.log("rotate:" + x_rotation + " | endX: " + endX + " | initX: " + initX);
+         projection.rotate([x_rotation + (endX - initX) * 360 / (s * width),y_rotation,z_rotation])
+         for (i = 0; i < gS.length; i++) {
+           g = gS[i];
              g.selectAll('path')       // re-project path data
             .attr('d', geoGenerator);
+          }
   }
 
   function zoomed() {
+    // for (i = 0; i < gS.length; i++) {
+      // g = gS[i];
     // g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
 
     // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
-    g.attr("transform", d3.event.transform); // updated for d3 v4
+    console.log(d3.event);
+      t = d3.event.transform;
+      tr = {"k": t.k, "x": t.x, "y": t.y}
+      gS[0].attr("transform", d3.event.transform); // updated for d3 v4
+      // drag
+      if (d3.event.sourceEvent instanceof WheelEvent) {
+        tr.x += width * d3.event.transform.k;
+      } else if (d3.event.sourceEvent instanceof MouseEvent) {
+        console.log("wg");
+        tr.x = t.x + width;
+      }
+      gS[1].attr("transform",  `translate(${tr.x},${tr.y}) scale(${tr.k})`); // updated for d3 v4
+      
   }
 
   function reset() {
@@ -176,76 +235,126 @@ function drawMap(geojson) {
   }
 
   function update(geojson) {
-    var u = g
-      .selectAll('path')
-      .data(geojson.features);
+    for (i = 0; i < gS.length; i++) {
+      g = gS[i];
+      var u = g
+        .selectAll('path')
+        .data(geojson.features);
 
-    u.enter()
-      .append('path')
-      .attr("id", function(d) { return d.properties.ADMIN;})
-      .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-      .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-      .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-      .attr('d', geoGenerator)
-      .on('mouseenter', highlightRegion)
-      .on('mouseout', resetRegion)
-      .on('click', zoomIn);
+      u.enter()
+        .append('path')
+        // .attr("id", function(d) { return d.properties.ADMIN;})
+        .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr('d', geoGenerator)
+        .on('mouseenter', highlightRegion)
+        .on('mouseout', resetRegion)
+        .on('click', zoomIn);
 
-    function highlightRegion() {
-      var sub_region = d3.select(this).attr("class").split(" ")[1];
+      function highlightRegion() {
+        var sub_region = d3.select(this).attr("class").split(" ")[1];
 
-      d3.selectAll("." + sub_region).classed('mouseover', true);
-    }
-
-    function resetRegion() {
-      var sub_region = d3.select(this).attr("class").split(" ")[1];
-
-      d3.selectAll("." + sub_region).classed('mouseover', false);
-    }
-
-    function zoomIn(d) {
-      if (active.node() === this) return reset();
-      active.classed("active", false);
-      active = d3.select(this).classed("active", true);
-      if (level === 0) {
-        var obj = {
-          "type": "Feature",
-          "geometry": geojson_continents[active.attr("region")].geometry[0]
-        }
-      } else if (level === 1) {
-        var obj = {
-          "type": "Feature",
-          "geometry": geojson_schemes[active.attr("sub_region")].geometry[0]
-        }
-      } else if (level === 2) {
-        obj = d;
+        d3.selectAll("." + sub_region).classed('mouseover', true);
       }
 
-      level = ((level++) % 3);
+      function resetRegion() {
+        var sub_region = d3.select(this).attr("class").split(" ")[1];
 
-      var bounds = geoGenerator.bounds(obj),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-          scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
-
-          console.log(translate);
-          console.log(scale);
-      map_svg.transition()
-          .duration(750)
-          // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-          .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
-          // .call( zoom.transform, d3.zoomIdentity.translate([-69.45264606363037, -3.6934969517030254]).scale(0) ); // updated for d3 v4
-
-      function rotate(x) {
-             projection.rotate([x,0,0])
-                 g.selectAll('path')       // re-project path data
-                .attr('d', geoGenerator);
+        d3.selectAll("." + sub_region).classed('mouseover', false);
       }
-    }
+
+      function zoomIn(d) {
+        if (active.node() === this) return reset();
+        active.classed("active", false);
+        active = d3.select(this).classed("active", true);
+        if (level === 0) {
+          var obj = {
+            "type": "Feature",
+            "geometry": geojson_continents[active.attr("region")].geometry[0]
+          }
+        } else if (level === 1) {
+          var obj = {
+            "type": "Feature",
+            "geometry": geojson_schemes[active.attr("sub_region")].geometry[0]
+          }
+        } else if (level === 2) {
+          obj = d;
+        }
+
+        level = ((level++) % 3);
+
+        var bounds = geoGenerator.bounds(obj),
+            dx = bounds[1][0] - bounds[0][0],
+            dy = bounds[1][1] - bounds[0][1],
+            x = (bounds[0][0] + bounds[1][0]) / 2,
+            y = (bounds[0][1] + bounds[1][1]) / 2,
+            scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+            translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+            console.log(translate);
+            console.log(scale);
+        map_svg.transition()
+            .duration(750)
+            // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
+            .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
+            // .call( zoom.transform, d3.zoomIdentity.translate([-69.45264606363037, -3.6934969517030254]).scale(0) ); // updated for d3 v4
+
+        function rotate(x) {
+               projection.rotate([x,0,0])
+                   g.selectAll('path')       // re-project path data
+                  .attr('d', geoGenerator);
+        }
+      }
+}
   }
 
   update(geojson);
+
+  var x
+  var rotate_h = d3.select('#content').append('div')
+            .attr('id', 'rotate_horizontal');
+  var rotate_left = rotate_h.append('button')
+            .attr('id', 'rotate_left')
+            .on('click', function(d) {
+              x_rotation += 30;
+              projection.rotate([x_rotation,y_rotation,z_rotation])
+                  g.selectAll('path')       // re-project path data
+                 .attr('d', geoGenerator);
+            })
+            .text("left");
+
+  var rotate_right = rotate_h.append('button')
+            .attr('id', 'rotate_right')
+            .on('click', function(d) {
+              x_rotation -= 30;
+              projection.rotate([x_rotation,y_rotation,z_rotation])
+                  g.selectAll('path')       // re-project path data
+                 .attr('d', geoGenerator);
+            })
+            .text("right");
+
+  var rotate_v = d3.select('#content').append('div')
+            .attr('id', 'rotate_vertical');
+
+  var rotate_up = rotate_h.append('button')
+    .attr('id', 'rotate_up')
+    .on('click', function(d) {
+      z_rotation += 30;
+      projection.rotate([x_rotation,y_rotation,z_rotation])
+          g.selectAll('path')       // re-project path data
+         .attr('d', geoGenerator);
+    })
+    .text("up");
+
+  var rotate_down = rotate_h.append('button')
+    .attr('id', 'rotate_right')
+    .on('click', function(d) {
+      z_rotation -= 30;
+      projection.rotate([x_rotation,y_rotation,z_rotation])
+          g.selectAll('path')       // re-project path data
+         .attr('d', geoGenerator);
+    })
+    .text("down");
+
 }
