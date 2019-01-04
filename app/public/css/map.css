@@ -1,0 +1,147 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    /* color: #333; */
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #content .map path {
+    /* stroke: gray; */
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  g {
+      border:1px solid red;
+  
+  }
+  
+  svg {
+      border:1px solid red;
+  }
+  
+  .Africa {
+    fill: red;
+    /* stroke: black; */
+  }
+  
+  .Americas {
+    fill: green;
+    /* stroke: black; */
+  }
+  
+  .Asia {
+    fill: orange;
+    /* stroke: orange; */
+  }
+  
+  .Europe {
+    fill: DodgerBlue;
+    /* stroke: DodgerBlue; */
+  }
+  
+  .Oceania {
+    fill: purple;
+    /* stroke: purple; */
+  }
+  
+  #Africa {
+    fill: yellow;
+  }
+  
+  .Sub-Saharan_Africa {
+    fill: purple;
+    stroke: purple;
+  }
+  .Latin_America_and_the_Caribbean {
+    fill: blue;
+    stroke: blue;
+  }
+  .Northern_America {
+    fill: green;
+    stroke: green;
+  }
+  
+  .Northern_Africa {
+    fill: red;
+    stroke: red;
+  }
+  .Sub-Saharan_Africa {
+    fill: purple;
+    stroke: purple;
+  }
+  .Latin_America_and_the_Caribbean {
+    fill: blue;
+    stroke: blue;
+  }
+  .Northern_America {
+    fill: green;
+    stroke: green;
+  }
+  .none {
+    fill: black;
+    stroke: black;
+  }
+  .Central_Asia {
+    fill: orange;
+    stroke: orange;
+  }
+  .Eastern_Asia {
+    fill: red;
+    stroke: red;
+  }
+  .South-eastern_Asia {
+    fill: purple;
+    stroke: purple;
+  }
+  .Southern_Asia {
+    fill: blue;
+    stroke: blue;
+  }
+  .Western_Asia {
+    fill: green;
+    stroke: green;
+  }
+  .Eastern_Europe {
+    fill: yellow;
+    stroke: yellow;
+  }
+  .Northern_Europe {
+    fill: orange;
+    stroke: orange;
+  }
+  .Southern_Europe {
+    fill: red;
+    stroke: red;
+  }
+  .Western_Europe {
+    fill: purple;
+    stroke: purple;
+  }
+  .Australia_and_New_Zealand {
+    fill: blue;
+    stroke: blue;
+  }
+  .Melanesia {
+    fill: green;
+    stroke: green;
+  }
+  .Micronesia {
+    fill: yellow;
+    stroke: yellow;
+  }
+  .Polynesia {
+    fill: green;
+    stroke: green;
+  }
+  
+  
+  .mouseover {
+    fill: DarkGray;
+    stroke: gray;
+  }
+  
+  #map {
+    background: white;
+  }

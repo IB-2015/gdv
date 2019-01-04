@@ -1,206 +1,53 @@
-<!-- Popular / About d3indepth’s Block c6df643a689ce9278b3341f87b6fcf04
-Updated August 26, 2017
-Basic geo example
 
-Open
-Basic D3 geo example.
-
-From D3 in Depth book by Peter Cook.
-
-index.html# -->
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html>
 <head>
-  <title>Basic geo (svg)</title>
-</head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>World Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<style>
-body {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 14px;
-  /* color: #333; */
-  margin: 0px;
-  padding: 0px;
-}
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-#content .map path {
-  /* stroke: gray; */
-  margin: 0px;
-  padding: 0px;
-}
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-g {
-    border:1px solid red;
-
-}
-
-svg {
-    border:1px solid red;
-}
-
-.Africa {
-  fill: red;
-  /* stroke: black; */
-}
-
-.Americas {
-  fill: green;
-  /* stroke: black; */
-}
-
-.Asia {
-  fill: orange;
-  /* stroke: orange; */
-}
-
-.Europe {
-  fill: DodgerBlue;
-  /* stroke: DodgerBlue; */
-}
-
-.Oceania {
-  fill: purple;
-  /* stroke: purple; */
-}
-
-#Africa {
-  fill: yellow;
-}
-/* .Africa {
-  fill: red;
-  stroke: black;
-}
-
-.Americas {
-  fill: red;
-  stroke: black;
-}
-
-.Asia {
-  fill: red;
-  stroke: black;
-}
-
-.Europe {
-  fill: red;
-  stroke: black;
-}
-
-.Oceania {
-  fill: red;
-  stroke: black;
-} */
-
-
-.Sub-Saharan_Africa {
-  fill: purple;
-  stroke: purple;
-}
-.Latin_America_and_the_Caribbean {
-  fill: blue;
-  stroke: blue;
-}
-.Northern_America {
-  fill: green;
-  stroke: green;
-}
-
-.Northern_Africa {
-  fill: red;
-  stroke: red;
-}
-.Sub-Saharan_Africa {
-  fill: purple;
-  stroke: purple;
-}
-.Latin_America_and_the_Caribbean {
-  fill: blue;
-  stroke: blue;
-}
-.Northern_America {
-  fill: green;
-  stroke: green;
-}
-.none {
-  fill: black;
-  stroke: black;
-}
-.Central_Asia {
-  fill: orange;
-  stroke: orange;
-}
-.Eastern_Asia {
-  fill: red;
-  stroke: red;
-}
-.South-eastern_Asia {
-  fill: purple;
-  stroke: purple;
-}
-.Southern_Asia {
-  fill: blue;
-  stroke: blue;
-}
-.Western_Asia {
-  fill: green;
-  stroke: green;
-}
-.Eastern_Europe {
-  fill: yellow;
-  stroke: yellow;
-}
-.Northern_Europe {
-  fill: orange;
-  stroke: orange;
-}
-.Southern_Europe {
-  fill: red;
-  stroke: red;
-}
-.Western_Europe {
-  fill: purple;
-  stroke: purple;
-}
-.Australia_and_New_Zealand {
-  fill: blue;
-  stroke: blue;
-}
-.Melanesia {
-  fill: green;
-  stroke: green;
-}
-.Micronesia {
-  fill: yellow;
-  stroke: yellow;
-}
-.Polynesia {
-  fill: green;
-  stroke: green;
-}
-
-
-.mouseover {
-  fill: DarkGray;
-  stroke: gray;
-}
-
-#map {
-  background: white;
-}
-
-</style>
-
-<body>
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/map.css" />
   <script src="https://d3js.org/d3.v5.js"></script>
   <script src="new_map.js"></script>
-  <div id="content">
-    <!-- <svg id="map" width="640px" height="360px">
-      <g class="map"></g>
-    </svg> -->
+</head>
+<body>
+
+  <div class="container-fluid">
+    <div class="row mapContainer">
+      <div class="col-sm-10">
+        <!-- Map-->
+          <div id="content">
+            </div>
+      </div>
+      <div class="col-sm-2">
+        <!-- Map menü-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- Land 1-->
+      </div>
+      <div class="col-sm-6">
+        <!-- Land 2-->
+      </div>
+    </div>
   </div>
 
 
+  
 </body>
 </html>
-<!-- LICENSE#
-Released under the GNU General Public License, version 3. -->
+
+
+
