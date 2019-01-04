@@ -9,7 +9,7 @@ var initX;
 var x_rotation = -15;
 var y_rotation = 0;
 var z_rotation = 0;
-var factor = 1;
+var factor = (640/(window.screen.availWidth * (2/3)));
 var height = 460/factor;
 var width = 640/factor;
 var level = 0; // 0 world, 1 continent...
@@ -142,9 +142,9 @@ function drawMap(geojson) {
         .attr("width", width)
         .attr("height", height);
 
-        map_svg.call(zoom);
-    //     .on("dblclick.zoom", null)
-    //     .on("wheel.zoom", null)
+        map_svg.call(zoom)
+        .on("dblclick.zoom", null)
+        .on("wheel.zoom", null);
     //     // .on("mousedown.zoom", null)
     // .on("touchstart.zoom", null)
     // .on("touchmove.zoom", null)
@@ -155,32 +155,123 @@ function drawMap(geojson) {
   var rS = [];
 
   // var g = map_svg.append('g').attr('class', 'map');
+  // high row
   gS.push(map_svg.append('g')
   .attr("width", width)
   .attr("height", height)
-  .attr('class', 'map'));
+  .attr('class', 'map')
+  .attr('transform', `translate(0,0) scale(1)`));
   gS.push(map_svg.append('g')
   .attr("width", width)
   .attr("height", height)
   .attr('class', 'map')
   .attr('transform', `translate(${width},0) scale(1)`));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${2*width},0) scale(1)`));
 
+  // middle row
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(0,${height}) scale(1)`));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${width},${height}) scale(1)`));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${2*width},${height}) scale(1)`));
+
+  // low row
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(0,${2*height}) scale(1)`));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${width},${2*height}) scale(1)`));
+  gS.push(map_svg.append('g')
+  .attr("width", width)
+  .attr("height", height)
+  .attr('class', 'map')
+  .attr('transform', `translate(${2*width},${2*height}) scale(1)`));
   // var g = map_svg.append('g').attr('class', 'map');
-  gS[0].append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "pink")
-    .on("mouseover", function() {
-      console.log(d3.select(this).node().parentNode.getAttribute("val"));
-    });
-  gS[1].append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "black")
-    .on("mouseover", function() {
-      console.log(d3.select(this).node().parentNode.getAttribute("val"));
-    });;
-    // .attr('transform', `translate(${width},0) scale(1)`);
+
+  // gS[0].append("rect")
+  //   .attr("width", "100%")
+  //   .attr("height", "100%")
+  //   // .attr("fill", "yellow")
+  //   .on("mouseover", function() {
+  //   console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  // });
+  // gS[1].append("rect")
+  //   .attr("width", "100%")
+  //   .attr("height", "100%")
+  //   // .attr("fill", "pink")
+  //   .on("mouseover", function() {
+  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //   });
+  // gS[2].append("rect")
+  //   .attr("width", "100%")
+  //   .attr("height", "100%")
+  //   // .attr("fill", "black")
+  //   .on("mouseover", function() {
+  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //   });
+  //
+  //   gS[5].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "yellow")
+  //     .on("mouseover", function() {
+  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //   });
+  //   gS[4].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "pink")
+  //     .on("mouseover", function() {
+  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //     });
+  //   gS[3].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "black")
+  //     .on("mouseover", function() {
+  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //     });
+  //
+  //   gS[8].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "yellow")
+  //     .on("mouseover", function() {
+  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //   });
+  //   gS[6].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "pink")
+  //     .on("mouseover", function() {
+  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //     });
+  //   gS[7].append("rect")
+  //     .attr("width", "100%")
+  //     .attr("height", "100%")
+  //     // .attr("fill", "black")
+  //     .on("mouseover", function() {
+  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  //     });
 
   for (i = 0; i < gS.length; i++) {
     gS[i].attr("val", i);
@@ -211,17 +302,72 @@ function drawMap(geojson) {
     // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     console.log(d3.event);
       t = d3.event.transform;
-      tr = {"k": t.k, "x": t.x, "y": t.y}
-      gS[0].attr("transform", d3.event.transform); // updated for d3 v4
+      t.x = t.x % (2 *width * d3.event.transform.k);
+      t.y = t.y % (2 *height * d3.event.transform.k);
+      h2 = {"k": t.k, "x": t.x, "y": t.y};
+      h1 = {"k": t.k, "x": t.x, "y": t.y};
+      h0 = {"k": t.k, "x": t.x, "y": t.y};
+
+      m2 = {"k": t.k, "x": t.x, "y": t.y};
+      m1 = {"k": t.k, "x": t.x, "y": t.y};
+      m0 = {"k": t.k, "x": t.x, "y": t.y};
+
+      l2 = {"k": t.k, "x": t.x, "y": t.y};
+      l1 = {"k": t.k, "x": t.x, "y": t.y};
+      l0 = {"k": t.k, "x": t.x, "y": t.y};
       // drag
       if (d3.event.sourceEvent instanceof WheelEvent) {
-        tr.x += width * d3.event.transform.k;
+        // h0.x = h0.x * d3.event.transform.k;
+        // h1.x = h1.x + width * d3.event.transform.k;
+        // h2.x = h2.x + 2 * width * d3.event.transform.k;
+        // m0.x = m0.x * d3.event.transform.k;
+        // m1.x = m1.x + width * d3.event.transform.k;
+        // m2.x = m2.x + 2 * width * d3.event.transform.k;
+        // l0.x = l0.x * d3.event.transform.k;
+        // l1.x = l1.x + width * d3.event.transform.k;
+        // l2.x = l2.x + 2 * width * d3.event.transform.k;
+
+        // h0.y = h0.y * d3.event.transform.k;
+        // h1.y = h1.y + height * d3.event.transform.k;
+        // h2.y = h2.y + 2 * height * d3.event.transform.k;
+        // m0.y = m0.y * d3.event.transform.k;
+        // m1.y = m1.y + height * d3.event.transform.k;
+        // m2.y = m2.y + 2 * height * d3.event.transform.k;
+        // l0.y = l0.y * d3.event.transform.k;
+        // l1.y = l1.y + height * d3.event.transform.k;
+        // l2.y = l2.y + 2 * height * d3.event.transform.k;
       } else if (d3.event.sourceEvent instanceof MouseEvent) {
-        console.log("wg");
-        tr.x = t.x + width;
+        h0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
+        h1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
+        h2.x = (t.x + 2 * width) > (2 * width) ? (t.x - width) : (t.x + 2 * width);
+
+        m0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
+        m1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
+        m2.x = (t.x + 2 * width) > (2 * width) ? (t.x - width) : (t.x + 2 * width);
+        m0.y = t.y + height > (2 * height) ? (t.y - 2 * height) : (t.y + height);
+        m1.y = m2.y = m0.y;
+
+        l0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
+        l1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
+        l2.x = (t.x + 2 * width) > (2 * width) ? (t.x - width) : (t.x + 2 * width);
+        l0.y = (t.y + 2 * height) > (2 * height) ? (t.y - height) : (t.y + 2 * height);
+        l1.y = l2.y = l0.y;
       }
-      gS[1].attr("transform",  `translate(${tr.x},${tr.y}) scale(${tr.k})`); // updated for d3 v4
-      
+
+      if (d3.event.sourceEvent instanceof WheelEvent || d3.event.sourceEvent instanceof MouseEvent && t.k === 1.0) {
+        gS[0].attr("transform", `translate(${h0.x},${h0.y}) scale(${h0.k})`); // updated for d3 v4
+        gS[1].attr("transform",  `translate(${h1.x},${h1.y}) scale(${h1.k})`); // updated for d3 v4
+        gS[2].attr("transform",  `translate(${h2.x},${h2.y}) scale(${h2.k})`); // updated for d3 v4
+
+        gS[3].attr("transform", `translate(${m0.x},${m0.y}) scale(${m0.k})`); // updated for d3 v4
+        gS[4].attr("transform",  `translate(${m1.x},${m1.y}) scale(${m1.k})`); // updated for d3 v4
+        gS[5].attr("transform",  `translate(${m2.x},${m2.y}) scale(${m2.k})`); // updated for d3 v4
+
+        gS[6].attr("transform", `translate(${l0.x},${l0.y}) scale(${l0.k})`); // updated for d3 v4
+        gS[7].attr("transform",  `translate(${l1.x},${l1.y}) scale(${l1.k})`); // updated for d3 v4
+        gS[8].attr("transform",  `translate(${l2.x},${l2.y}) scale(${l2.k})`); // updated for d3 v4
+      }
+
   }
 
   function reset() {
@@ -310,51 +456,4 @@ function drawMap(geojson) {
   }
 
   update(geojson);
-
-  var x
-  var rotate_h = d3.select('#content').append('div')
-            .attr('id', 'rotate_horizontal');
-  var rotate_left = rotate_h.append('button')
-            .attr('id', 'rotate_left')
-            .on('click', function(d) {
-              x_rotation += 30;
-              projection.rotate([x_rotation,y_rotation,z_rotation])
-                  g.selectAll('path')       // re-project path data
-                 .attr('d', geoGenerator);
-            })
-            .text("left");
-
-  var rotate_right = rotate_h.append('button')
-            .attr('id', 'rotate_right')
-            .on('click', function(d) {
-              x_rotation -= 30;
-              projection.rotate([x_rotation,y_rotation,z_rotation])
-                  g.selectAll('path')       // re-project path data
-                 .attr('d', geoGenerator);
-            })
-            .text("right");
-
-  var rotate_v = d3.select('#content').append('div')
-            .attr('id', 'rotate_vertical');
-
-  var rotate_up = rotate_h.append('button')
-    .attr('id', 'rotate_up')
-    .on('click', function(d) {
-      z_rotation += 30;
-      projection.rotate([x_rotation,y_rotation,z_rotation])
-          g.selectAll('path')       // re-project path data
-         .attr('d', geoGenerator);
-    })
-    .text("up");
-
-  var rotate_down = rotate_h.append('button')
-    .attr('id', 'rotate_right')
-    .on('click', function(d) {
-      z_rotation -= 30;
-      projection.rotate([x_rotation,y_rotation,z_rotation])
-          g.selectAll('path')       // re-project path data
-         .attr('d', geoGenerator);
-    })
-    .text("down");
-
 }
