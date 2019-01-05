@@ -1,4 +1,4 @@
-body {
+    body {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 14px;
     /* color: #333; */
@@ -6,10 +6,29 @@ body {
     padding: 0px;
   }
 
+  .countryDetails {
+    width: 50%;
+    height: 100%;
+    border: solid #6d6a6a
+  }
+
+  .mapContainer {
+    padding: 0px;
+  }
+
   #map {
-    width:100%;
-    height: auto;
-}
+      display: block;
+      margin: auto;
+      padding: 0px;
+      width: 100%;
+      height: auto;
+    }
+
+    /*only for testing*/
+    .details {
+        height: 150px;
+    }
+
   #content .map path {
     /* stroke: gray; */
     margin: 0px;
@@ -147,5 +166,5 @@ body {
   }
   
   #map {
-    background: white;
+    background: rgb(235, 222, 209);
   }
