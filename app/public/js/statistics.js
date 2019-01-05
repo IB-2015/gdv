@@ -6,6 +6,7 @@ const clickRegion = (datum, index, nodes) => {
         //Use data here
         console.log(regionData)
         createLineChart(regionData, 1)
+        createLineChart(regionData, 2)
     
     });
   }
@@ -13,10 +14,8 @@ const clickRegion = (datum, index, nodes) => {
   const createLineChart = (data, position) => {
       const height = 350;
       const width = 350;
-/*     var svgWidth = 600, svgHeight = 400;
-    var margin = { top: 20, right: 20, bottom: 30, left: 50 };
-    var width = svgWidth - margin.left - margin.right;
-    var height = svgHeight - margin.top - margin.bottom; */
+      var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    document.getElementById('country'+position).innerHTML = "";
     var svg = d3.select('#country'+position)
         .append('svg')
         .attr('id', 'country'+position)
@@ -28,13 +27,13 @@ const clickRegion = (datum, index, nodes) => {
         .attr("transform", 
             "translate(" + margin.left + "," + margin.top + ")"
         );
-
-    var x = d3.scaleTime().rangeRound([0, width]);
-    var y = d3.scaleLinear().rangeRound([height, 0]);
+    
+    var x = d3.scaleLinear().rangeRound([2003, 2014]);
+    var y = d3.scaleLinear().rangeRound([100000, 0]);
 
     var line = d3.line()
-        .x(function(d) { return x(d.date)})
-        .y(function(d) { return y(d.value)})
+        .x(function(d) { return x('2014')})
+        .y(function(d) { return y(d['2014'])})
    x.domain(d3.extent(data, function(d) { return d.Country }));
    y.domain(d3.extent(data, function(d) { return d['2014'] }));
 
@@ -43,5 +42,15 @@ const clickRegion = (datum, index, nodes) => {
     .call(d3.axisBottom(x))
     .select(".domain")
     .remove();
+
+   g.append("g")
+   .call(d3.axisLeft(y))
+   .append("text")
+   .attr("fill", "#000")
+   .attr("transform", "rotate(-90)")
+   .attr("y", 6)
+   .attr("dy", "0.71em")
+   .attr("text-anchor", "end")
+   .text("Price ($)");
 
   }
