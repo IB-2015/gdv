@@ -31,3 +31,7 @@ exports.getAllStatisticsData = (req, res, next) => {
 exports.getHomicideData = (req, res, next) => {
     fs.readFile(DATA_PATH+'homicide.csv', "utf8").then(data => res.status(200).json(data))
 }
+
+exports.getAssaultData = (req, res, next) => {
+    fs.readFile(DATA_PATH+'gcs_assault.csv', "utf8").then(data => res.status(200).json(data))
+}

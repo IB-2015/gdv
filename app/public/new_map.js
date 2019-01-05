@@ -75,10 +75,10 @@ Promise.all(promises).then(function(data) {
     }
   }
 
-  console.log(geojson_continents);
+/*   console.log(geojson_continents);
   console.log(geojson_schemes);
   console.log(geoscheme_regions);
-  console.log(geoscheme_sub_regions);
+  console.log(geoscheme_sub_regions); */
 
   // sort both geojson_countries and geoscheme alphabetically
   geojson_countries.features.sort(function(a, b) {
@@ -111,8 +111,8 @@ Promise.all(promises).then(function(data) {
     }
   });
 
-  console.log(missingScheme);
-  console.log(missing);
+  //console.log(missingScheme);
+ // console.log(missing);
 
   // drawMap(geojson_countries);
   // console.log(geojson_continents.Africa);
@@ -131,7 +131,7 @@ Promise.all(promises).then(function(data) {
 })
 
 function drawMap(geojson) {
-  console.log(geojson);
+ // console.log(geojson);
   var zoom = d3.zoom()
          .scaleExtent([1, 20])
          .on("zoom", zoomed);
@@ -399,7 +399,10 @@ function drawMap(geojson) {
         .attr('d', geoGenerator)
         .on('mouseenter', highlightRegion)
         .on('mouseout', resetRegion)
-        .on('click', zoomIn);
+        .on('click', clickRegion); //->statistics.js
+        //.on('click', zoomIn);
+
+
 
       function highlightRegion() {
         var sub_region = d3.select(this).attr("class").split(" ")[1];

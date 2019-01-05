@@ -8,3 +8,5 @@ module.exports = router;
 router.get('/all', statisticsController.getAllStatisticsData);
 
 router.get('/homicide', statisticsController.getHomicideData);
+
+router.get('/assault', statisticsController.getAssaultData);
