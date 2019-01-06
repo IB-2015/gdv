@@ -164,7 +164,7 @@ function drawMap(geojson) {
   .attr("height", height)
   .attr('class', 'map')
   .attr('transform', `translate(0,0) scale(1)`));
-  gS.push(map_svg.append('g')
+/*   gS.push(map_svg.append('g')
   .attr("width", width)
   .attr("height", height)
   .attr('class', 'map')
@@ -208,7 +208,7 @@ function drawMap(geojson) {
   .attr("height", height)
   .attr('class', 'map')
   .attr('transform', `translate(${2*width},${2*height}) scale(1)`));
-  // var g = map_svg.append('g').attr('class', 'map');
+ */  // var g = map_svg.append('g').attr('class', 'map');
 
   // gS[0].append("rect")
   //   .attr("width", "100%")
@@ -341,7 +341,7 @@ function drawMap(geojson) {
         // l2.y = l2.y + 2 * height * d3.event.transform.k;
       } else if (d3.event.sourceEvent instanceof MouseEvent) {
         h0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
-        h1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
+        /* h1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
         h2.x = (t.x + 2 * width) > (2 * width) ? (t.x - width) : (t.x + 2 * width);
 
         m0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
@@ -354,12 +354,12 @@ function drawMap(geojson) {
         l1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
         l2.x = (t.x + 2 * width) > (2 * width) ? (t.x - width) : (t.x + 2 * width);
         l0.y = (t.y + 2 * height) > (2 * height) ? (t.y - height) : (t.y + 2 * height);
-        l1.y = l2.y = l0.y;
+        l1.y = l2.y = l0.y; */
       }
 
       if (d3.event.sourceEvent instanceof WheelEvent || d3.event.sourceEvent instanceof MouseEvent && t.k === 1.0) {
         gS[0].attr("transform", `translate(${h0.x},${h0.y}) scale(${h0.k})`); // updated for d3 v4
-        gS[1].attr("transform",  `translate(${h1.x},${h1.y}) scale(${h1.k})`); // updated for d3 v4
+        /* gS[1].attr("transform",  `translate(${h1.x},${h1.y}) scale(${h1.k})`); // updated for d3 v4
         gS[2].attr("transform",  `translate(${h2.x},${h2.y}) scale(${h2.k})`); // updated for d3 v4
 
         gS[3].attr("transform", `translate(${m0.x},${m0.y}) scale(${m0.k})`); // updated for d3 v4
@@ -368,7 +368,7 @@ function drawMap(geojson) {
 
         gS[6].attr("transform", `translate(${l0.x},${l0.y}) scale(${l0.k})`); // updated for d3 v4
         gS[7].attr("transform",  `translate(${l1.x},${l1.y}) scale(${l1.k})`); // updated for d3 v4
-        gS[8].attr("transform",  `translate(${l2.x},${l2.y}) scale(${l2.k})`); // updated for d3 v4
+        gS[8].attr("transform",  `translate(${l2.x},${l2.y}) scale(${l2.k})`); // updated for d3 v4 */
       }
 
   }
@@ -392,9 +392,9 @@ function drawMap(geojson) {
 
       u.enter()
         .append('path')
-        // .attr("id", function(d) { return d.properties.ADMIN;})
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr("id", function(d) { return d.properties.ADMIN;})
         .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr('d', geoGenerator)
         .on('mouseenter', highlightRegion)

@@ -21,7 +21,7 @@ const getCrimeDataForRegion = (region) => {
           let keys = Object.keys(country);
           //Years 2003-2014
           for (let index = 0; index < 12; index++) {
-              country[keys[index]] = parseFloat(country[keys[index]].replace(/,/g, "")); 
+              country[keys[index]] = parseInt(country[keys[index]].replace(/,/g, "")); 
           }
 
           if(country.Region === region){

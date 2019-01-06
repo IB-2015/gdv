@@ -1,7 +1,13 @@
+var regionClicked
+
 const clickRegion = (datum, index, nodes) => {
-    //attributes[0] = region
-    //attributes[1] = subregion
+    console.log(d3.event.target.attributes[2].value)
+
     const clickedRegion = d3.event.target.attributes[0].value;
+    const clickedSubregion = d3.event.target.attributes[1].value;
+    const clickedCountry = d3.event.target.attributes[2].value;
+
+
     let regionData = getCrimeDataForRegion(clickedRegion).then(regionData =>{ 
         //Use data here
         console.log(regionData)
@@ -15,6 +21,9 @@ const clickRegion = (datum, index, nodes) => {
       const height = 350;
       const width = 350;
       var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+
+      const years = ["2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"];
+      
     document.getElementById('country'+position).innerHTML = "";
     var svg = d3.select('#country'+position)
         .append('svg')
@@ -29,7 +38,7 @@ const clickRegion = (datum, index, nodes) => {
         );
     
     var x = d3.scaleLinear().rangeRound([2003, 2014]);
-    var y = d3.scaleLinear().rangeRound([100000, 0]);
+    var y = d3.scaleLinear().rangeRound([0, 50000]);
 
     var line = d3.line()
         .x(function(d) { return x('2014')})
@@ -51,6 +60,6 @@ const clickRegion = (datum, index, nodes) => {
    .attr("y", 6)
    .attr("dy", "0.71em")
    .attr("text-anchor", "end")
-   .text("Price ($)");
+   .text("Mordrate");
 
   }
