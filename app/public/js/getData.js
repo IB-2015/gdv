@@ -30,3 +30,32 @@ const getCrimeDataForRegion = (region) => {
       })    
     return results});
 }   
+
+const getCrimeDataForCountry = (clickedCountry) => {
+    return fetch('/api/data/statistics/assault')
+    .then(res => {return res.json()})
+    .then(crimeData => { 
+        let data = d3.csvParse(crimeData);
+        let result;
+        data.forEach( country => {
+            let countryName = country.Country;
+            if(countryName.includes('*')){
+                countryName = countryName.substring(0, countryName.length-1)
+                country.Country = countryName
+            }
+
+            if(country.Country === clickedCountry) {
+                let keys = Object.keys(country);
+                //Years 2003-2014
+                for (let index = 0; index < 12; index++) {
+                    country[keys[index]] = parseInt(country[keys[index]].replace(/,/g, "")); 
+                }
+
+                result = country;
+            }
+        })    
+      return result});
+  }   
+  
+  
+
