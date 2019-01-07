@@ -415,13 +415,27 @@ function drawMap(geojson, sub_regions) {
       function highlightRegion(thiss) {
         var sub_region = d3.select(thiss).attr("class").split(" ")[1];
         detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
-        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', true);
+        // d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', true);
+        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")])
+          .each(function(d) {
+            var level_config = ['region', 'sub_region', 'id']
+            var node = d3.select(this);
+            var lvl = (+node.attr("detail_level") + 1) % 3;
+            node.classed('mouseover_' + node.attr(level_config[lvl]), true);
+          })
       }
 
       function resetRegion(thiss) {
         var sub_region = d3.select(thiss).attr("class").split(" ")[1];
         detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
-        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', false);
+        // d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', false);
+        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")])
+          .each(function(d) {
+            var level_config = ['region', 'sub_region', 'id']
+            var node = d3.select(this);
+            var lvl = (+node.attr("detail_level") + 1) % 3;
+            node.classed('mouseover_' + node.attr(level_config[lvl]), false);
+          })
       }
 
       function zoomIn(d) {

@@ -1,7 +1,7 @@
     html {
       height: 100%;
     }
-    
+
     body {
       height: 100%;
       overflow-y: hidden;
@@ -75,45 +75,45 @@
     margin: 0px;
     padding: 0px;
   }
-  
+
   g {
       border:1px solid red;
-  
+
   }
-  
+
   svg {
       border:1px solid red;
   }
-  
+
   .Africa {
     fill: red;
     /* stroke: black; */
   }
-  
+
   .Americas {
     fill: green;
     /* stroke: black; */
   }
-  
+
   .Asia {
     fill: orange;
     /* stroke: orange; */
   }
-  
+
   .Europe {
     fill: DodgerBlue;
     /* stroke: DodgerBlue; */
   }
-  
+
   .Oceania {
     fill: purple;
     /* stroke: purple; */
   }
-  
+
   #Africa {
     fill: yellow;
   }
-  
+
   .Sub-Saharan_Africa {
     fill: purple;
     stroke: purple;
@@ -126,7 +126,7 @@
     fill: green;
     stroke: green;
   }
-  
+
   .Northern_Africa {
     fill: red;
     stroke: red;
@@ -199,13 +199,99 @@
     fill: green;
     stroke: green;
   }
-  
-  
+
+
   .mouseover {
     fill: DarkGray;
     stroke: gray;
   }
-  
+  .mouseover_Sub-Saharan_Africa {
+    fill: purple;
+    stroke: purple;
+  }
+  .mouseover_Latin_America_and_the_Caribbean {
+    fill: blue;
+    stroke: blue;
+  }
+  .mouseover_Northern_America {
+    fill: green;
+    stroke: green;
+  }
+
+  .mouseover_Northern_Africa {
+    fill: red;
+    stroke: red;
+  }
+  .mouseover_Sub-Saharan_Africa {
+    fill: purple;
+    stroke: purple;
+  }
+  .mouseover_Latin_America_and_the_Caribbean {
+    fill: blue;
+    stroke: blue;
+  }
+  .mouseover_Northern_America {
+    fill: green;
+    stroke: green;
+  }
+  .mouseover_none {
+    fill: black;
+    stroke: black;
+  }
+  .mouseover_Central_Asia {
+    fill: orange;
+    stroke: orange;
+  }
+  .mouseover_Eastern_Asia {
+    fill: red;
+    stroke: red;
+  }
+  .mouseover_South-eastern_Asia {
+    fill: purple;
+    stroke: purple;
+  }
+  .mouseover_Southern_Asia {
+    fill: blue;
+    stroke: blue;
+  }
+  .mouseover_Western_Asia {
+    fill: green;
+    stroke: green;
+  }
+  .mouseover_Eastern_Europe {
+    fill: yellow;
+    stroke: yellow;
+  }
+  .mouseover_Northern_Europe {
+    fill: orange;
+    stroke: orange;
+  }
+  .mouseover_Southern_Europe {
+    fill: red;
+    stroke: red;
+  }
+  .mouseover_Western_Europe {
+    fill: purple;
+    stroke: purple;
+  }
+  .mouseover_Australia_and_New_Zealand {
+    fill: blue;
+    stroke: blue;
+  }
+  .mouseover_Melanesia {
+    fill: green;
+    stroke: green;
+  }
+  .mouseover_Micronesia {
+    fill: yellow;
+    stroke: yellow;
+  }
+  .mouseover_Polynesia {
+    fill: green;
+    stroke: green;
+  }
+
+
   #map {
     background: rgb(235, 222, 209);
   }
