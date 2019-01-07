@@ -9,9 +9,17 @@ var initX;
 var x_rotation = -15;
 var y_rotation = 0;
 var z_rotation = 0;
-var factor = (640/(window.screen.availWidth * (2/3)));
+/* var factor = (640/(window.screen.availWidth * (2/3)));
 var height = 460/factor;
-var width = 640/factor;
+var width = 640/factor; */
+var width = window.innerWidth
+|| document.documentElement.clientWidth
+|| document.body.clientWidth;
+
+var height = window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
 var level = 0; // 0 world, 1 continent...
 //track scale only rotate when s === 1
 var s = 1;

@@ -1,11 +1,46 @@
+    html {
+      height: 100%;
+    }
+    
     body {
-    font-family: "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 14px;
-    /* color: #333; */
-    margin: 0px;
-    padding: 0px;
+      height: 100%;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      font-family: "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 14px;
+      margin: 0px;
+      padding: 0px;
   }
 
+  div.container-fluid {
+    position: absolute;
+  }
+  .fullHeight {
+    height: 100%;
+
+  }
+
+  .filter {
+    width: 100%;
+  }
+
+  .evenWidth {
+    display: table;
+  }
+
+  .moveToTop {
+    z-index: 10;
+  }
+
+  .moveToBackground {
+    z-index: 0;
+  }
+
+  #detailsLayer {
+    height: 100%;
+    width: 100%;
+  }
+  /*
   .countryDetails {
     width: 50%;
     height: 100%;
@@ -22,6 +57,8 @@
     height: 100%;
   }
 
+  */
+
   .mapContainer {
     padding: 0px;
   }
@@ -30,13 +67,7 @@
       display: block;
       margin: auto;
       padding: 0px;
-      width: 100%;
       height: 100%;
-    }
-
-    /*only for testing*/
-    .details {
-        height: 150px;
     }
 
   #content .map path {

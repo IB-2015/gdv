@@ -18,43 +18,52 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" type="text/css" media="screen" href="./css/map.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/homicide.css" />
+
   <script src="https://d3js.org/d3.v5.js"></script>
+   <!--
   <script src="./js/getData.js"></script>
   <script src="./js/statistics.js"></script>
   <script src="new_map.js"></script>
+  -->
 </head>
 <body>
-
-  <div class="container-fluid">
-    <div class="row mapContainer">
-      <div class="col-sm-11 mapContainer">
+  <div class="container-fluid fullHeight moveToTop" id="mapLayer">
+    <div class="row fullHeight">
+      <div class="col-sm-11 fullHeight mapContainer">
         <!-- Map-->
-          <div id="content">
+          <div class="fullHeight" id="content">
             </div>
       </div>
-      <div class="col-sm-1 ">
+      <div class="col-sm-1 filters fullHeight">
         <label for="box1">Filterbox</label>
         <input type="checkbox" name="box1" id="box1">
         <label for="monts">Year slider</label>
         <input type="month" name="month" id="monts">
+        <input type="button" value="Background" id="switchLayer">
         <!-- Map menü-->
       </div>
     </div>
-    <div class="row details">
-      <div class="col-sm-6 countryDetails">
-        <div class="countryContainer" id="country1"></div>
-        <!-- Land 1-->
+  </div>
+  <div class="container-fluid fullHeight evenWidth" id="detailsLayer">
+    <div class="row fullHeight">
+      <p>test</p>
+      <div class="col-sm-6 fullHeight ">
+          <div class="fullHeight" id="country1container">
+            </div>
       </div>
-      <div class="col-sm-6 countryDetails">
-          <div class="countryContainer" id="country2"></div>
-
-          <!-- Land 2-->
+      <div class="col-sm-6 fullHeight">
+          <div class="fullHeight" id="country2container">
+            </div>
       </div>
     </div>
   </div>
 
-
-  
+  <script src="./js/getData.js"></script>
+  <script src="./js/statistics.js"></script>
+  <script src="homicide.js"></script>
+  <script src="./js/actions.js"></script>
+  <script src="new_map.js"></script>
 </body>
 </html>
 
