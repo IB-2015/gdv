@@ -75,10 +75,10 @@ Promise.all(promises).then(function(data) {
     }
   }
 
-/*   console.log(geojson_continents);
+   // console.log(geojson_continents);
   console.log(geojson_schemes);
-  console.log(geoscheme_regions);
-  console.log(geoscheme_sub_regions); */
+  // console.log(geoscheme_regions);
+  // console.log(geoscheme_sub_regions);
 
   // sort both geojson_countries and geoscheme alphabetically
   geojson_countries.features.sort(function(a, b) {
@@ -111,26 +111,13 @@ Promise.all(promises).then(function(data) {
     }
   });
 
-  //console.log(missingScheme);
- // console.log(missing);
-
-  // drawMap(geojson_countries);
-  // console.log(geojson_continents.Africa);
-  // for (var key in geojson_continents) {
-  //   console.log(key + ": " + geojson_continents[key].features.length);
-  // }
-  // for (var key in geojson_schemes) {
-  //   console.log(key + ": " + geojson_schemes[key].features.length);
-  // }
-  // console.log(geojson_countries);
-  // drawMap(geojson_countries);
   drawMap(geojson_countries);
 
 }).catch(function(error) {
   console.log(error);
 })
 
-function drawMap(geojson) {
+function drawMap(geojson, sub_regions) {
  // console.log(geojson);
   var zoom = d3.zoom()
          .scaleExtent([1, 20])
@@ -142,16 +129,13 @@ function drawMap(geojson) {
         .attr("viewBox", "0 0 " + width + " " + height )
         .attr("preserveAspectRatio", "xMinYMin");
 
-        //.attr("width", width)
-        //.attr("height", height);
-
-        map_svg.call(zoom)
+        /*map_svg.call(zoom)
         .on("dblclick.zoom", null)
         .on("wheel.zoom", null);
-    //     // .on("mousedown.zoom", null)
-    // .on("touchstart.zoom", null)
-    // .on("touchmove.zoom", null)
-    // .on("touchend.zoom", null);;
+        .on("mousedown.zoom", null)
+        .on("touchstart.zoom", null)
+        .on("touchmove.zoom", null)
+        .on("touchend.zoom", null);*/
 
   // append g to svg
   var gS = []
@@ -208,73 +192,73 @@ function drawMap(geojson) {
   .attr("height", height)
   .attr('class', 'map')
   .attr('transform', `translate(${2*width},${2*height}) scale(1)`));
- */  // var g = map_svg.append('g').attr('class', 'map');
+    var g = map_svg.append('g').attr('class', 'map');
 
-  // gS[0].append("rect")
-  //   .attr("width", "100%")
-  //   .attr("height", "100%")
-  //   // .attr("fill", "yellow")
-  //   .on("mouseover", function() {
-  //   console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  // });
-  // gS[1].append("rect")
-  //   .attr("width", "100%")
-  //   .attr("height", "100%")
-  //   // .attr("fill", "pink")
-  //   .on("mouseover", function() {
-  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //   });
-  // gS[2].append("rect")
-  //   .attr("width", "100%")
-  //   .attr("height", "100%")
-  //   // .attr("fill", "black")
-  //   .on("mouseover", function() {
-  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //   });
-  //
-  //   gS[5].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "yellow")
-  //     .on("mouseover", function() {
-  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //   });
-  //   gS[4].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "pink")
-  //     .on("mouseover", function() {
-  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //     });
-  //   gS[3].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "black")
-  //     .on("mouseover", function() {
-  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //     });
-  //
-  //   gS[8].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "yellow")
-  //     .on("mouseover", function() {
-  //     console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //   });
-  //   gS[6].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "pink")
-  //     .on("mouseover", function() {
-  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //     });
-  //   gS[7].append("rect")
-  //     .attr("width", "100%")
-  //     .attr("height", "100%")
-  //     // .attr("fill", "black")
-  //     .on("mouseover", function() {
-  //       console.log(d3.select(this).node().parentNode.getAttribute("val"));
-  //     });
+  gS[0].append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    // .attr("fill", "yellow")
+    .on("mouseover", function() {
+    console.log(d3.select(this).node().parentNode.getAttribute("val"));
+  });
+  gS[1].append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    // .attr("fill", "pink")
+    .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });
+  gS[2].append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    // .attr("fill", "black")
+    .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });
+
+    gS[5].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "yellow")
+      .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });
+    gS[4].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "pink")
+      .on("mouseover", function() {
+        console.log(d3.select(this).node().parentNode.getAttribute("val"));
+      });
+    gS[3].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "black")
+      .on("mouseover", function() {
+        console.log(d3.select(this).node().parentNode.getAttribute("val"));
+      });
+
+    gS[8].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "yellow")
+      .on("mouseover", function() {
+      console.log(d3.select(this).node().parentNode.getAttribute("val"));
+    });
+    gS[6].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "pink")
+      .on("mouseover", function() {
+        console.log(d3.select(this).node().parentNode.getAttribute("val"));
+      });
+    gS[7].append("rect")
+      .attr("width", "100%")
+      .attr("height", "100%")
+      // .attr("fill", "black")
+      .on("mouseover", function() {
+        console.log(d3.select(this).node().parentNode.getAttribute("val"));
+      });*/
 
   for (i = 0; i < gS.length; i++) {
     gS[i].attr("val", i);
@@ -320,25 +304,25 @@ function drawMap(geojson) {
       l0 = {"k": t.k, "x": t.x, "y": t.y};
       // drag
       if (d3.event.sourceEvent instanceof WheelEvent) {
-        // h0.x = h0.x * d3.event.transform.k;
-        // h1.x = h1.x + width * d3.event.transform.k;
-        // h2.x = h2.x + 2 * width * d3.event.transform.k;
-        // m0.x = m0.x * d3.event.transform.k;
-        // m1.x = m1.x + width * d3.event.transform.k;
-        // m2.x = m2.x + 2 * width * d3.event.transform.k;
-        // l0.x = l0.x * d3.event.transform.k;
-        // l1.x = l1.x + width * d3.event.transform.k;
-        // l2.x = l2.x + 2 * width * d3.event.transform.k;
+        /* h0.x = h0.x * d3.event.transform.k;
+        h1.x = h1.x + width * d3.event.transform.k;
+        h2.x = h2.x + 2 * width * d3.event.transform.k;
+        m0.x = m0.x * d3.event.transform.k;
+        m1.x = m1.x + width * d3.event.transform.k;
+        m2.x = m2.x + 2 * width * d3.event.transform.k;
+        l0.x = l0.x * d3.event.transform.k;
+        l1.x = l1.x + width * d3.event.transform.k;
+        l2.x = l2.x + 2 * width * d3.event.transform.k;
 
-        // h0.y = h0.y * d3.event.transform.k;
-        // h1.y = h1.y + height * d3.event.transform.k;
-        // h2.y = h2.y + 2 * height * d3.event.transform.k;
-        // m0.y = m0.y * d3.event.transform.k;
-        // m1.y = m1.y + height * d3.event.transform.k;
-        // m2.y = m2.y + 2 * height * d3.event.transform.k;
-        // l0.y = l0.y * d3.event.transform.k;
-        // l1.y = l1.y + height * d3.event.transform.k;
-        // l2.y = l2.y + 2 * height * d3.event.transform.k;
+        h0.y = h0.y * d3.event.transform.k;
+        h1.y = h1.y + height * d3.event.transform.k;
+        h2.y = h2.y + 2 * height * d3.event.transform.k;
+        m0.y = m0.y * d3.event.transform.k;
+        m1.y = m1.y + height * d3.event.transform.k;
+        m2.y = m2.y + 2 * height * d3.event.transform.k;
+        l0.y = l0.y * d3.event.transform.k;
+        l1.y = l1.y + height * d3.event.transform.k;
+        l2.y = l2.y + 2 * height * d3.event.transform.k;*/
       } else if (d3.event.sourceEvent instanceof MouseEvent) {
         h0.x = t.x > (2 * width) ? (t.x - 3 * width) : (t.x);
         /* h1.x = t.x + width > (2 * width) ? (t.x - 2 * width) : (t.x + width);
@@ -383,9 +367,11 @@ function drawMap(geojson) {
         .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
   }
 
-  function update(geojson) {
+  function update(geojson, sub_regions) {
     for (i = 0; i < gS.length; i++) {
       g = gS[i];
+
+
       var u = g
         .selectAll('path')
         .data(geojson.features);
@@ -394,26 +380,40 @@ function drawMap(geojson) {
         .append('path')
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr("id", function(d) { return d.properties.ADMIN;})
+        .attr("id", function(d) { return d.properties.ADMIN.replace(new RegExp(" ", "g"), "_");})
         .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr('d', geoGenerator)
-        .on('mouseenter', highlightRegion)
-        .on('mouseout', resetRegion)
-        .on('click', clickRegion); //->statistics.js
+        .attr('detail_level', 0)
+        .on('mouseenter', function(d) {highlightRegion(this);})
+        .on('mouseout', function(d) {resetRegion(this);})
+        .on('click',function(d) {
+          changeDetailLevel(this);
+          clickRegion();
+        }); //->statistics.js
         //.on('click', zoomIn);
 
-
-
-      function highlightRegion() {
-        var sub_region = d3.select(this).attr("class").split(" ")[1];
-
-        d3.selectAll("." + sub_region).classed('mouseover', true);
+      function changeDetailLevel(c) {
+        var country = d3.select(c);
+        var detail_level = country.attr('detail_level');
+        var new_detail_level = (detail_level + 1) % 3;
+        detail_level_config = ["[region=" + country.attr("region") + "]", "[sub_region=" + country.attr("sub_region") + "]", "#" + country.attr("id")];
+        console.log(detail_level_config[detail_level]);
+        resetRegion(c);
+        d3.selectAll(detail_level_config[detail_level]).attr('detail_level', new_detail_level);
+        // country.attr('detail_level', detail_level);
+        highlightRegion(c);
+        // console.log(d3.selectAll(detail_level_config[detail_level]).attr('detail_level'));
+      }
+      function highlightRegion(thiss) {
+        var sub_region = d3.select(thiss).attr("class").split(" ")[1];
+        detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
+        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', true);
       }
 
-      function resetRegion() {
-        var sub_region = d3.select(this).attr("class").split(" ")[1];
-
-        d3.selectAll("." + sub_region).classed('mouseover', false);
+      function resetRegion(thiss) {
+        var sub_region = d3.select(thiss).attr("class").split(" ")[1];
+        detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
+        d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', false);
       }
 
       function zoomIn(d) {
@@ -461,5 +461,5 @@ function drawMap(geojson) {
 }
   }
 
-  update(geojson);
+  update(geojson, sub_regions);
 }
