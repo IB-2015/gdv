@@ -200,11 +200,41 @@
     stroke: green;
   }
 
+  .selected {
+    fill: #00ff00;
+    stroke: #00ff00;
+  }
 
   .mouseover {
     fill: DarkGray;
     stroke: gray;
   }
+
+  .mouseover_Africa {
+    fill: gray;
+    stroke: gray;
+  }
+
+  .mouseover_Americas {
+    fill: gray;
+    stroke: gray;
+  }
+
+  .mouseover_Asia {
+    fill: gray;
+    stroke: gray;
+  }
+
+  .mouseover_Europe {
+    fill: gray;
+    stroke: gray;
+  }
+
+  .mouseover_Oceania {
+    fill: gray;
+    stroke: gray;
+  }
+
   .mouseover_Sub-Saharan_Africa {
     fill: purple;
     stroke: purple;
@@ -219,8 +249,8 @@
   }
 
   .mouseover_Northern_Africa {
-    fill: red;
-    stroke: red;
+    fill: blue;
+    stroke: blue;
   }
   .mouseover_Sub-Saharan_Africa {
     fill: purple;

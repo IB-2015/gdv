@@ -4,7 +4,7 @@ var geojson_schemes = {};
 var geoscheme = [];
 var geoscheme_regions = [];
 var geoscheme_sub_regions = [];
-var active = d3.select(null);
+var active = [];
 var initX;
 var x_rotation = -15;
 var y_rotation = 0;
@@ -407,33 +407,56 @@ function drawMap(geojson, sub_regions) {
         detail_level_config = ["[region=" + country.attr("region") + "]", "[sub_region=" + country.attr("sub_region") + "]", "#" + country.attr("id")];
         console.log(detail_level_config[detail_level]);
         resetRegion(c);
-        d3.selectAll(detail_level_config[detail_level]).attr('detail_level', new_detail_level);
+        var prev = (detail_level - 1) < 0 ? 2 : detail_level - 1;
+        var selection;
+        if (prev === 0) {
+          selection = d3.selectAll("[region=" + country.attr("region") + "]");
+        } else if (prev === 1) {
+          selection = d3.selectAll("[sub_region=" + country.attr("sub_region") + "]");
+        } else if (prev === 2) {
+          selection = d3.select("#" + country.attr("id"));
+        }
+        selection.each(function(d, i) {
+          if (active.includes(this)) {
+            console.log(d3.select(active[active.indexOf(this)]).attr('id') + ' in ' + detail_level_config[prev]);
+            active.splice(active.indexOf(this), 1) // remove elem
+            console.log(active.includes(this));
+            d3.select(this).classed('selected', false);
+          }
+        })
+        d3.selectAll(detail_level_config[detail_level]).each(function(d, i) {
+          if (!active.includes(active[i])) {
+              active.push(this);
+              d3.select(this).classed('selected', true);
+          }
+          d3.select(this).attr('detail_level', new_detail_level);
+        })
         // country.attr('detail_level', detail_level);
-        highlightRegion(c);
+        setTimeout(function() { highlightRegion(c); }, 100);
         // console.log(d3.selectAll(detail_level_config[detail_level]).attr('detail_level'));
       }
       function highlightRegion(thiss) {
-        var sub_region = d3.select(thiss).attr("class").split(" ")[1];
+        // var sub_region = d3.select(thiss).attr("class").split(" ")[1];
         detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
         // d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', true);
         d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")])
           .each(function(d) {
             var level_config = ['region', 'sub_region', 'id']
             var node = d3.select(this);
-            var lvl = (+node.attr("detail_level") + 1) % 3;
+            var lvl = (+node.attr("detail_level")) % 3;
             node.classed('mouseover_' + node.attr(level_config[lvl]), true);
           })
       }
 
       function resetRegion(thiss) {
-        var sub_region = d3.select(thiss).attr("class").split(" ")[1];
+        // var sub_region = d3.select(thiss).attr("class").split(" ")[1];
         detail_level_config = ["[region=" + d3.select(thiss).attr("region") + "]", "[sub_region=" + d3.select(thiss).attr("sub_region") + "]", "#" + d3.select(thiss).attr("id")];
         // d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")]).classed('mouseover', false);
         d3.selectAll(detail_level_config[+d3.select(thiss).attr("detail_level")])
           .each(function(d) {
             var level_config = ['region', 'sub_region', 'id']
             var node = d3.select(this);
-            var lvl = (+node.attr("detail_level") + 1) % 3;
+            var lvl = (+node.attr("detail_level")) % 3;
             node.classed('mouseover_' + node.attr(level_config[lvl]), false);
           })
       }
