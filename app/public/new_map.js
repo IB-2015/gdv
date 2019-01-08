@@ -26,7 +26,7 @@ var s = 1;
 var mouseClicked = false;
 
 var resources = [
-  "countries.geojson",
+  "countries.geo.json",
   "geoscheme.csv",
   "Africa.geojson",
   "Americas.geojson",
@@ -111,7 +111,7 @@ Promise.all(promises).then(function(data) {
     // console.log("----");
     function setScheme(geojson_country, scheme) {
       scheme.forEach(function(d) {
-        if (d["ISO-alpha3 Code"] === geojson_country.properties.ISO_A3) {
+        if (d["ISO-alpha3 Code"] === geojson_country.id /*properties.ISO_A3*/) {
           geojson_country.scheme = d;
           return;
         }
@@ -388,7 +388,7 @@ function drawMap(geojson, sub_regions) {
         .append('path')
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr("id", function(d) { return d.properties.ADMIN.replace(new RegExp(" ", "g"), "_");})
+        .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
         .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr('d', geoGenerator)
         .attr('detail_level', 0)
