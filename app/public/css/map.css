@@ -110,8 +110,11 @@
     /* stroke: purple; */
   }
 
-  #Africa {
+  /* #Americas {
     fill: yellow;
+  } */
+  #Canada {
+    fill: orange;
   }
 
   .Sub-Saharan_Africa {
@@ -135,10 +138,16 @@
     fill: purple;
     stroke: purple;
   }
-  .Latin_America_and_the_Caribbean {
+  #Latin_America_and_the_Caribbean {
     fill: blue;
     stroke: blue;
   }
+
+  #Brazil {
+    fill: red;
+    stroke: blue;
+  }
+
   .Northern_America {
     fill: green;
     stroke: green;
@@ -321,7 +330,10 @@
     stroke: green;
   }
 
-
+  path {
+    transition: fill 4s ease;
+    transition: stroke 4s ease;
+  }
   #map {
     background: rgb(235, 222, 209);
   }

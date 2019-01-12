@@ -76,17 +76,30 @@ Promise.all(promises).then(function(data) {
   var geoscheme_index = continent_index + n_continents;
   for (i = continent_index; i < data.length; i++) {
     if (i < geoscheme_index) {
+      data[i].geometry[0].properties = {"name": resources[i].split(".")[0]};
       geojson_continents[resources[i].split(".")[0]] = data[i];
       // geojson_continents[resources[i].split(".")[0]].geometry = data[i].features;
     } else {
+      data[i].geometry[0].properties = {"name": resources[i].split(".")[0]};
       geojson_schemes[resources[i].split(".")[0]] = data[i];
     }
   }
 
-   // console.log(geojson_continents);
+   console.log(geojson_continents);
+  for(key in geojson_schemes) {
+    s = geojson_schemes[key].geometry[0];
+    setScheme(s, geoscheme)
+    function setScheme(sub_region, scheme) {
+      scheme.forEach(function(d) {
+        if(s.properties.name == d["Sub-region Name"].replace(new RegExp(" ", "g"), "_")) {
+          console.log("match");
+          sub_region.properties.region = d["Region Name"].replace(new RegExp(" ", "g"), "_");
+          return;
+        }
+      })
+    }
+  }
   console.log(geojson_schemes);
-  // console.log(geoscheme_regions);
-  // console.log(geoscheme_sub_regions);
 
   // sort both geojson_countries and geoscheme alphabetically
   geojson_countries.features.sort(function(a, b) {
@@ -113,19 +126,21 @@ Promise.all(promises).then(function(data) {
       scheme.forEach(function(d) {
         if (d["ISO-alpha3 Code"] === geojson_country.id /*properties.ISO_A3*/) {
           geojson_country.scheme = d;
+          geojson_country.properties.sub_region = d["Sub-region Name"]
+          geojson_country.properties.region = d["Region Name"]
           return;
         }
       })
     }
   });
 
-  drawMap(geojson_countries);
+  drawMap(geojson_countries, geojson_schemes, geojson_continents);
 
 }).catch(function(error) {
   console.log(error);
 })
 
-function drawMap(geojson, sub_regions) {
+function drawMap(geojson, sub_regions, continents) {
  // console.log(geojson);
   var zoom = d3.zoom()
          .scaleExtent([1, 20])
@@ -135,7 +150,43 @@ function drawMap(geojson, sub_regions) {
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
         .attr("viewBox", "0 0 " + width + " " + height )
-        .attr("preserveAspectRatio", "xMinYMin");
+        .attr("preserveAspectRatio", "xMinYMin")
+        .on("click", function() {
+          console.log("hello");
+        })
+        .on('dblclick', function() {
+          console.log("world");
+          changeLayer();
+        })
+
+  layer = ["region", "sub_region", "country"]
+  layer_index = 0;
+  function changeLayer() {
+    console.log("dbclick sort");
+    layer_index++
+    show(layer[layer_index % layer.length]);
+  }
+
+  function getSecondLayer() {
+    return layer[(layer_index+1) % 3];
+  }
+
+  function show(category) {
+    console.log(category);
+    gg = gg.sort(function(a, b) {
+      return a.getAttribute("category") == category ? 1 : -1;
+    })
+    // second_layer = "";
+    // i = 0;
+    // gg.each(function(d) {
+    //   // console.log(d);
+    //   if (d.getAttribute('category') != layer[layer_index]) {
+    //     if (i++ > 0)
+    //       second_layer = d.getAttribute('category')
+    //   };
+    // })
+    console.log("second_layer: " + layer[(layer_index+1) % 3]);
+  }
 
         /*map_svg.call(zoom)
         .on("dblclick.zoom", null)
@@ -151,11 +202,22 @@ function drawMap(geojson, sub_regions) {
 
   // var g = map_svg.append('g').attr('class', 'map');
   // high row
-  gS.push(map_svg.append('g')
-  .attr("width", width)
-  .attr("height", height)
-  .attr('class', 'map')
-  .attr('transform', `translate(0,0) scale(1)`));
+  // gS.push(map_svg.append('g')
+  // .attr("width", width)
+  // .attr("height", height)
+  // .attr('class', 'map')
+  // .attr('transform', `translate(0,0) scale(1)`));
+  // var g_africa = map_svg.append('g')
+  // .attr("width", width)
+  // .attr("height", height)
+  // .attr('class', 'map')
+  // .attr('transform', `translate(0,0) scale(1)`);
+  //
+  // var g_europe = map_svg.append('g')
+  // .attr("width", width)
+  // .attr("height", height)
+  // .attr('class', 'map')
+  // .attr('transform', `translate(0,0) scale(1)`);
 /*   gS.push(map_svg.append('g')
   .attr("width", width)
   .attr("height", height)
@@ -277,7 +339,7 @@ function drawMap(geojson, sub_regions) {
     projection.fitExtent([[0, 0], [width, height]], geojson);
     projection.rotate([x_rotation,y_rotation,z_rotation]);
   var geoGenerator = d3.geoPath()
-    .projection(projection);
+    .projection(projection)
 
   function rotateMap(endX) {
         console.log("rotate:" + x_rotation + " | endX: " + endX + " | initX: " + initX);
@@ -375,30 +437,454 @@ function drawMap(geojson, sub_regions) {
         .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
   }
 
-  function update(geojson, sub_regions) {
-    for (i = 0; i < gS.length; i++) {
-      g = gS[i];
-
-
-      var u = g
+  function update(geojson, sub_regions, continents) {
+    // for (i = 0; i < gS.length; i++) {
+    //   g = gS[i];
+    var lastClick = +new Date();
+      console.log(continents);
+      t = textures.lines().heavier();
+      console.log(t);
+      mouseover_allowed = true
+      for (i = 0; i < geojson.features.length; i++) {
+        var country = map_svg.append('g')
+        .attr("category", "country")
+        .attr("level", 2)
+        .attr("selected", false)
         .selectAll('path')
-        .data(geojson.features);
+        .data([geojson.features[i]]);
+        // console.log(geojson.features[i]);
+        var path = country.enter()
+          .append('path')
+          .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+          .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+          .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
+          // .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+          .attr("class", function(d) { return "country"; })
+          .attr('d', geoGenerator)
+          .attr('detail_level', 0)
+          .on('click', function(d) {
+              selected = d3.select(this).classed('selected')
+              d3.select(this).classed('selected', !selected)
+          })
+          // .on("dblclick",function(d){
+          //   console.log("node was double clicked");
+          //   changeLayer();
+          // });
 
-      u.enter()
-        .append('path')
-        .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
-        .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr('d', geoGenerator)
-        .attr('detail_level', 0)
-        .on('mouseenter', function(d) {highlightRegion(this);})
-        .on('mouseout', function(d) {resetRegion(this);})
-        .on('click',function(d) {
-          changeDetailLevel(this);
-          clickRegion();
-        }); //->statistics.js
+          // .on('mouseenter', function(d) {
+          //   console.log(d.properties.name + " mouseenter");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          // })
+          // .on('mouseout', function(d) {
+          //   console.log(d.properties.name + " mouseout");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, false)
+          //   // mouseover_allowed = !mouseover_allowed;
+          //   // sortGAfterIndex();
+          // })
+          // .on('mouseover', function(d) {
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          //   if (mouseover_allowed && (d3.select(this).classed('selected') == true)) {
+          //     console.log(d.properties.name + " mouseover");
+          //     name = this.parentNode.getAttribute("name")
+          //     indexGG();
+          //     sortGAfterSelection(name);
+          //     // mouseover_allowed = !mouseover_allowed;
+          //   } else {
+          //     console.log(d.properties.name + " mouseover false");
+          //   }
+          // })
+          // .on('click', function(d) {
+          //   console.log(d.properties.name + " click");
+          //   d3.select(this.parentNode).attr("level", 0) // set g attr
+          //   d3.select("[name="+this.parentNode.getAttribute("sub_region")+"]").attr("level", 0);
+          //   d3.select("[name="+this.parentNode.getAttribute("region")+"]").attr("level", 0);
+          //   d3.select(this.parentNode).attr("selected", true)
+          //   d3.select('#' + d.properties.sub_region).node().parentNode.setAttribute("level", 0)
+          //   d3.select('#' + d.properties.sub_region).node().parentNode.setAttribute("selected", false)
+          //
+          //   setLevelIdentifier([d3.select(this),
+          //     d3.select("[name="+this.parentNode.getAttribute("sub_region")+"]"),
+          //     d3.select("[name="+this.parentNode.getAttribute("region")+"]")], this.parentNode.getAttribute("region"))
+          //
+          //   // d3.select('#' + d.properties.sub_region).classed("selected", false)
+          //   d3.select(this).classed('mouseover_' + d.properties.name, false)
+          //   selected = d3.select(this).classed('selected')
+          //   d3.select(this).classed('selected', !selected)
+          //
+          //   // if (d3.select(this).classed('selected') == false)
+          //     // sortTest("region", this.parentNode.getAttribute("region"));
+          //   sortTest("sub_region", this.parentNode.getAttribute("sub_region"));
+          //   // sortGAfterLevel(this.parentNode.getAttribute("category"), this.parentNode.getAttribute("name"))
+          //   // d3.select(this).on('mouseout', sortGAfterSelection)
+          // }) //->statistics.js
+
+          path.node().parentNode.setAttribute("region", path.attr("region"));
+          path.node().parentNode.setAttribute("sub_region", path.attr("sub_region"));
+          path.node().parentNode.setAttribute("name", path.attr("id"));
+      }
+
+      for (key in sub_regions) {
+        var sub_region = map_svg.append('g')
+        .attr("category", "sub_region")
+        .attr("selected", false)
+        .attr("level", 2)
+        .selectAll('path')
+        .data(sub_regions[key].geometry);
+
+        sub_region.call(t)
+        var path = sub_region.enter()
+          .append('path')
+          .attr("id", function(d) {return d.properties.name})
+          .attr("region", function(d) {return d.properties.region})
+          .attr("class", function(d) {return d.properties.name})
+          .attr('d', geoGenerator)
+          .on('click', function(d) {
+              selected = d3.select(this).classed('selected')
+              d3.select(this).classed('selected', !selected)
+          })
+          // .on("dblclick",function(d){
+          //   console.log("node was double clicked");
+          //   changeLayer();
+          // });
+
+          // .on('mouseenter', function(d) {
+          //   console.log(d.properties.name + " mouseenter");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          // })
+          // .on('mouseout', function(d) {
+          //   console.log(d.properties.name + " mouseout");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, false)
+          //   // mouseover_allowed = !mouseover_allowed;
+          //   sortGAfterIndex();
+          // })
+          // .on('mouseover', function(d) {
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          //   if (mouseover_allowed && (d3.select(this).classed('selected') == true)) {
+          //     console.log(d.properties.name + " mouseover");
+          //     name = this.parentNode.getAttribute("name")
+          //     indexGG();
+          //     sortGAfterSelection(name);
+          //     // mouseover_allowed = !mouseover_allowed;
+          //   } else {
+          //     console.log(d.properties.name + " mouseover false");
+          //   }
+          // })
+          // .on('click', function(d) {
+          //
+          //   console.log(d.properties.name + " click");
+          //   d3.select(this.parentNode).attr("level", 1)
+          //   d3.select("[name="+this.parentNode.getAttribute("region")+"]").attr("level", 1);
+          //   d3.select(this.parentNode).attr("selected", true)
+          //   d3.select('#' + d.properties.region).node().parentNode.setAttribute("level", 1)
+          //   d3.select('#' + d.properties.region).node().parentNode.setAttribute("selected", false)
+          //
+          //   setLevelIdentifier([d3.select(this), d3.select("[name="+this.parentNode.getAttribute("region")+"]")], this.parentNode.getAttribute("region"))
+          //
+          //   // d3.select('#' + d.properties.region).classed("selected", false)
+          //   d3.select(this).classed('mouseover_' + d.properties.name, false)
+          //   selected = d3.select(this).classed('selected')
+          //   d3.select(this).classed('selected', !selected) // first click => true, second click => false
+          //   // con = d3.select("g[region="+this.getAttribute('region')+"]");
+          //   // con.attr("selected", !con.attr('selected'));
+          //   // d3.select("path[region="+this.getAttribute('region')+"]").classed('selected', !d3.select("path[region="+this.getAttribute('region')+"]"))
+          //   // if (d3.select(this).classed('selected') == false)
+          //     sortTest("region", this.parentNode.getAttribute("region"));
+          //   // sortGAfterLevel("region"/*this.parentNode.getAttribute("category")*/, this.parentNode.getAttribute("region"))
+          //   // d3.select(this).on('mouseout', sortGAfterSelection)
+          // })
+          path.node().parentNode.setAttribute("region", path.attr("region"));
+          path.node().parentNode.setAttribute("name", path.attr("id"));
+      }
+
+      for (key in continents) {
+        var continent = map_svg.append('g')
+        .attr("category", "region")
+        .attr("level", 2)
+        .attr("selected", false)
+        .selectAll('path')
+        .data(continents[key].geometry);
+
+        continent.call(t)
+        var path = continent.enter()
+          .append('path')
+          .attr("id", function(d) {return d.properties.name})
+          .attr("class",  function(d) {return d.properties.name})
+          .attr('d', geoGenerator)
+          .on('click', function(d) {
+              selected = d3.select(this).classed('selected')
+              d3.select(this).classed('selected', !selected)
+          })
+          // .on("dblclick",function(d){
+          //   console.log("node was double clicked");
+          //   changeLayer();
+          // });
+
+          // .on('mouseenter', function(d) {
+          //   console.log(d.properties.name + " mouseenter");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          // })
+          // .on('mouseout', function(d) {
+          //   console.log(d.properties.name + " mouseout");
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, false)
+          //   console.log(d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name));
+          //   d3.select("g[region="+name+"]").attr("level", 2);
+          //   // console.log(d3.select("g[region="+name+"]").attr("level"));
+          //   d3.select("g[sub_region="+name+"]").attr("level", 2);
+          //   sortGAfterIndex()
+          //   mouseover_allowed = !mouseover_allowed;
+          // })
+          // .on('mouseover', function(d) {
+          //   d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name, true)
+          //   if (mouseover_allowed && (d3.select(this).classed('selected') == true)) {
+          //     console.log(d.properties.name + " mouseover");
+          //     name = this.parentNode.getAttribute("name")
+          //     indexGG();
+          //     sortGAfterSelection(name);
+          //     // mouseover_allowed = !mouseover_allowed;
+          //   } else {
+          //     console.log(d.properties.name + " mouseover false");
+          //   }
+          //
+          //   console.log(d3.select("#" + d.properties.name).classed('mouseover_' + d.properties.name));
+          // })
+          // .on('click', function(d) {
+          //   console.log(d.properties.name + " click");
+          //   d3.select(this.parentNode).attr("selected", true)
+          //   d3.select(this).classed('mouseover_' + d.properties.name, false)
+          //   selected = d3.select(this).classed('selected')
+          //   d3.select(this).classed('selected', !selected)
+          //   // if (d3.select(this).classed('selected') == false)
+          //   //   sortTest("region", this.parentNode.getAttribute("region"));
+          //     // .on('mouseout', function() {
+          //     //   sortGAfterIndex();
+          //     // })
+          //   // d3.select(this).on('click', sortGAfterSelection)
+          // })
+
+          path.node().parentNode.setAttribute("name", path.attr("id"));
+          // console.log(path.node().parentNode.getAttribute("sub_region", path.attr("id")) != null);
+        }
+          // .style('fill', "url(#circles-1)")
+          // .style('fill-opacity', 0)
+          // .append(t.url())
+          // .style('stroke-width', 1)
+          // .style('stroke', '#B10000')
+          // .style('stroke-linejoin', 'round');
+
+          // var pattern = continent.enter().append("defs")
+        	// .append("pattern")
+        	// 	.attr("id", "hash4_4")
+        	// 	.attr("width",8)
+        	// 	.attr("height",8)
+        	// 	.attr("patternUnits","userSpaceOnUse")
+        	// 	.attr("patternTransform","rotate(60)")
+        	// .append("rect")
+        	// 	.attr({ width:"4", height:"8", transform:"translate(0,0)", fill:"#88AAEE" });
+      // console.log(geojson.features );
+
+
+      // var u = g
+      //   .attr("category", "country")
+      //   .attr("selected", "false")
+      //   .selectAll('path')
+      //   .data(geojson.features);
+      //
+      // u.enter()
+      //   .append('path')
+      //   .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+      //   .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+      //   .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
+      //   .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+      //   .attr('d', geoGenerator)
+      //   .attr('detail_level', 0)
+      //   .on('mouseenter', function(d) {highlightRegion(this);})
+      //   .on('mouseout', function(d) {resetRegion(this);})
+      //   .on('click',function(d) {
+      //     console.log(d.properties.name);
+      //     // changeDetailLevel(this);
+      //     clickRegion();
+      //   }); //->statistics.js
         //.on('click', zoomIn);
+
+
+        gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
+        // var previous_gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
+
+
+        function setLevelIdentifier(ls, level_identifier) {
+          ls.forEach(function(d) {
+            d.attr("level_identifier", level_identifier)
+          })
+        }
+
+        function sortTest(category, name) {
+          indexGG()
+          gg = gg.sort(function(a, b) {
+            a_criteria = a.getAttribute(category);
+            if (a_criteria == null)
+              a_criteria = a.getAttribute("name");
+            return a_criteria == name ? -1 : 1;
+          }).sort(function(a, b) {
+            a_criteria = a.getAttribute(category);
+            if (a_criteria == null)
+              a_criteria = a.getAttribute("name");
+            b_criteria = b.getAttribute(category);
+            if (b_criteria == null)
+              b_criteria = b.getAttribute("name");
+
+            if (a_criteria == name && b_criteria == name)
+              return a.getAttribute('index') - b.getAttribute('index');
+            else
+              return 0;
+          }).sort(function(a, b) {
+            level_config = [{
+              "region": 1,
+              "sub_region": 0,
+              "country": 2
+            },
+            {
+              "region": 0,
+              "sub_region": 2,
+              "country": 1
+            },
+            {
+              "region": 2,
+              "sub_region": 1,
+              "country": 0
+            }]
+            config2 = level_config[+a.getAttribute('level')]
+            return (config2[a.getAttribute('category')] - config2[b.getAttribute('category')])
+          })
+        }
+
+
+        function sortGAfterLevel(category, name) {
+          config = {
+            "true": 0,
+            "false": 1
+          }
+
+          level_config = [{
+            "region": 1,
+            "sub_region": 0,
+            "country": 2
+          },
+          {
+            "region": 0,
+            "sub_region": 2,
+            "country": 1
+          },
+          {
+            "region": 2,
+            "sub_region": 1,
+            "country": 0
+          }]
+          console.log("sort after level");
+          // indexGG()
+          console.log("before name");
+          gg.each(function(d) {
+            console.log(d);
+          })
+          gg.sort(function(a, b) {
+            a == null;
+            return -1;
+          });
+
+          console.log("name");
+          gg.each(function(d) {
+            console.log(d);
+          })
+
+          // sortGAfterIndexRelativeToName(category, name);
+
+          // console.log("relative to name");
+          // gg.each(function(d) {
+          //   console.log(d);
+          // })
+
+          // gg.sort(function(a, b) {
+          //   config2 = level_config[+a.getAttribute('level')]
+          //   return (config2[a.getAttribute('category')] - config2[b.getAttribute('category')])
+          // })
+          // console.log("end");
+          // gg.each(function(d) {
+          //   console.log(d);
+          // })
+          // indexGG()
+        }
+
+        function sortGAfterSelection(name) {
+          console.log("sort after selection name");
+          gg.sort(function(a, b) {
+            return a.getAttribute("name") == name ? -1 : 1;
+          });
+        }
+
+        function sortGAfterIndex() {
+          console.log("sort after index");
+          gg.sort(function(a, b) {
+            return a.getAttribute('category') == "country" ? 1 : -1;
+            // return a.getAttribute('index') - b.getAttribute('index');
+          });
+        }
+
+        function sortGAfterIndexRelativeToName(category, name) {
+          console.log("sort after index relative to name");
+          gg.sort(function(a, b) {
+            a_criteria = a.getAttribute('name');
+            b_criteria = b.getAttribute('name');;
+            if (a_criteria != category) {
+              a_criteria = a.getAttribute(category)
+            }
+
+            if (b_category != category) {
+              b_criteria = b.getAttribute(category);
+            }
+
+            if (a_criteria == name && b_criteria == name)
+              return a.getAttribute('index') - b.getAttribute('index');
+          });
+        }
+
+        function indexGG() {
+          i = 0
+          gg.each(function(d) {
+            d.setAttribute('index', i++);
+          })
+        }
+
+        // indexGG()
+
+        // console.log(map_svg.selectAll('g'));
+        // console.log(map_svg.selectAll('g')._groups[0]);
+        // var gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
+        // gg.sort(function(a, b) {
+        //   config = {
+        //     "continent": 0,
+        //     "sub_region": 1,
+        //     "country": 2
+        //   }
+        //   console.log(a.getAttribute('category'));
+        //   console.log(a.getAttribute('category') +  '-' + b.getAttribute('category') + '=' + (config[a.getAttribute('category')] - config[b.getAttribute('category')]));
+        //   return (config[a.getAttribute('category')] - config[b.getAttribute('category')]);
+        // });
+
+        // map_svg.append("path")
+        // .datum(
+        //   geojson_continents["Europe"].geometry
+        //   // {type: "LineString", coordinates:
+        //   //       line.geometry.coordinates
+        //   //       // line.geometry.coordinates.concat(line2.geometry.coordinates)
+        //   //       // [[-5, 40], [-5, 50], [10, 50], [10, 40], [-5, 40]] // points in decimal degrees
+        //   //      }
+        //      )
+        // .attr("d", geoGenerator)
+        // .style('fill', '#B10000')
+        // .style('fill-opacity', 0)
+        // .style('stroke-width', 1)
+        // .style('stroke', '#B10000')
+        // .style('stroke-linejoin', 'round');
+        // .style('fill': '#B10000', 'fill-opacity': 0.3)
 
       function changeDetailLevel(c) {
         var country = d3.select(c);
@@ -503,8 +989,50 @@ function drawMap(geojson, sub_regions) {
                   .attr('d', geoGenerator);
         }
       }
-}
+// }
   }
 
-  update(geojson, sub_regions);
+  update(geojson, sub_regions, continents);
+}
+
+function httpGet(theUrl, name, parameter)
+{
+    parameterString = JSON.stringify({"name": name, "array": parameter});
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "POST", theUrl, false ); // false for synchronous request
+    xmlHttp.setRequestHeader("Content-Type", "application/json")
+    xmlHttp.send(parameterString);
+    return xmlHttp.responseText;
+}
+
+function arraysEqual(a, b) {
+      if (a === b) return true;
+      if (a == null || b == null) return false;
+      if (a.length != b.length) return false;
+
+      // If you don't care about the order of the elements inside
+      // the array, you should sort both arrays here.
+      // Please note that calling sort on an array will modify that array.
+      // you might want to clone your array first.
+      a = [a[0], a[1]].sort();
+      b = [b[0], b[1]].sort();
+      for (var i = 0; i < a.length; ++i) {
+        aMin = a[i] - 10;
+        aMax = a[i] + 10;
+        bMin = b[i] - 2;
+        bMax = b[i] + 2;
+        // if (a[i] !== b[i]) return false;
+        if (b[i] <= aMax || b[i] >= aMin) return false;
+      }
+      return true;
+}
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
