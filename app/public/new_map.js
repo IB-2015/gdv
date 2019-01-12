@@ -993,6 +993,29 @@ function drawMap(geojson, sub_regions, continents) {
   }
 
   update(geojson, sub_regions, continents);
+
+  console.log("print stuff");
+  allCountryPaths = d3.selectAll("path")
+  .filter(function(d, i) {
+    return this.parentNode.getAttribute('category') == 'country' && this.parentNode.getAttribute('region') == 'Africa';
+  })
+
+  ii = 0;
+  collection = {
+    "type": "FeatureCollection",
+    "features": []
+  }
+  allCountryPaths.each(function(d, i) {
+    console.log(this.parentNode.getAttribute('name'));
+    e = d3.select(this)['_groups'][0][0]['__data__']
+    delete e['scheme']
+    collection.features.push(e);
+    ii++;
+  })
+  console.log(ii);
+  console.log(JSON.stringify(collection));
+
+
 }
 
 function httpGet(theUrl, name, parameter)
