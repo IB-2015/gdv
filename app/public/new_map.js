@@ -83,21 +83,18 @@ Promise.all(promises).then(function(data) {
     }
   }
 
-   console.log(geojson_continents);
   for(key in geojson_schemes) {
     s = geojson_schemes[key].geometry[0];
     setScheme(s, geoscheme)
     function setScheme(sub_region, scheme) {
       scheme.forEach(function(d) {
         if(s.properties.name == d["Sub-region Name"].replace(new RegExp(" ", "g"), "_")) {
-          console.log("match");
           sub_region.properties.region = d["Region Name"].replace(new RegExp(" ", "g"), "_");
           return;
         }
       })
     }
   }
-  console.log(geojson_schemes);
 
   // sort both geojson_countries and geoscheme alphabetically
   geojson_countries.features.sort(function(a, b) {
@@ -111,6 +108,7 @@ Promise.all(promises).then(function(data) {
   var missingScheme = 0;
   var missing = [];
   geojson_countries.features.forEach(function(d) {
+    d.properties.name = d.properties.name.replace(new RegExp(" ", "g"), "_")
     setScheme(d, geoscheme)
     if (d.scheme == undefined) {
       // console.log(d.properties.ADMIN + " has no matching scheme");
@@ -139,19 +137,11 @@ Promise.all(promises).then(function(data) {
 })
 
 function drawMap(geojson, sub_regions, continents) {
-
   // append svg to parent div container
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
         .attr("viewBox", "0 0 " + width + " " + height )
         .attr("preserveAspectRatio", "xMinYMin")
-        .on("click", function() {
-          console.log("hello");
-        })
-        .on('dblclick', function() {
-          console.log("world");
-          changeLayer();
-        })
 
   layer = ["region", "sub_region", "country"]
   layer_index = 0;
@@ -182,123 +172,145 @@ function drawMap(geojson, sub_regions, continents) {
 
 
   function update(geojson, sub_regions, continents) {
-    var lastClick = +new Date();
-      console.log(continents);
-      t = textures.lines().heavier();
-      console.log(t);
-      mouseover_allowed = true
-      for (i = 0; i < geojson.features.length; i++) {
-        var country = map_svg.append('g')
-        .attr("category", "country")
-        .attr("level", 2)
-        .attr("selected", false)
-        .selectAll('path')
-        .data([geojson.features[i]]);
-        // console.log(geojson.features[i]);
-        var path = country.enter()
-          .append('path')
-          .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-          .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-          .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
-          // .attr("class", function(d) { return "sub_region " + (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
-          .attr("class", function(d) { return "country"; })
-          .attr('d', geoGenerator)
-          .attr('detail_level', 0)
-          .on('click', function(d) {
-              selected = d3.select(this).classed('selected')
-              d3.select(this).classed('selected', !selected)
-          })
-          // .on("dblclick",function(d){
-          //   console.log("node was double clicked");
-          //   changeLayer();
-          // });
 
-          path.node().parentNode.setAttribute("region", path.attr("region"));
-          path.node().parentNode.setAttribute("sub_region", path.attr("sub_region"));
-          path.node().parentNode.setAttribute("name", path.attr("id"));
+    /* dblclick callbacks for map and map elements */
+    var map_element_dblclick = function() {
+      changeLayer();
+    }
+    var map_dblclick = function() {
+      console.log("map double clicked");
+      changeLayer();
+    };
+
+    /* dblclick callbacks for map and map elements (region, country etc.) */
+    var map_cc = clickcancel();
+    map_cc.on('click', null);
+    map_cc.on('dblclick', map_dblclick);
+
+    /*
+      prohibit dblclick event on map when mouse over map element to prevent map from changing layer twice
+     */
+    var enable_map_dblclick = function() {
+      map_cc.on('dblclick', map_dblclick);
+    };
+    var disable_map_dblclick = function() {
+      map_cc.on('dblclick', null);
+    }
+    map_svg.call(map_cc);
+
+    var map_element_cc = clickcancel();
+    map_element_cc.on('click', function(d, index) {
+      name = ""
+      if (d.properties != undefined)
+        name = d.properties.name
+      else
+        name = d.getAttribute('name')
+      // console.log(name + "  click");
+      path = d3.select(`[name=${name}]`).select('path');
+      selected = path.classed('selected')
+      selected = path.classed('selected', !selected)
+    });
+    map_element_cc.on('dblclick', function(d, index) {
+      name = ""
+      if (d.properties != undefined)
+        name = d.properties.name
+      else
+        name = d.getAttribute('name')
+      // console.log(name + "  dblclick");
+      changeLayer();
+    });
+
+    for (i = 0; i < geojson.features.length; i++) {
+      var country = map_svg.append('g')
+      .attr("category", "country")
+      .attr("level", 2)
+      .attr("selected", false)
+      .selectAll('path')
+      .data([geojson.features[i]]);
+      // console.log(geojson.features[i]);
+      var path = country.enter()
+        .append('path')
+        .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
+        .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
+        .attr("class", function(d) { return "country"; })
+        .attr('d', geoGenerator)
+        .attr('detail_level', 0)
+        .on('mouseenter', disable_map_dblclick)
+        .on('mouseout', enable_map_dblclick)
+        .call(map_element_cc);
+
+        path.node().parentNode.setAttribute("region", path.attr("region"));
+        path.node().parentNode.setAttribute("sub_region", path.attr("sub_region"));
+        path.node().parentNode.setAttribute("name", path.attr("id"));
+    }
+
+    for (key in sub_regions) {
+      var sub_region = map_svg.append('g')
+      .attr("category", "sub_region")
+      .attr("selected", false)
+      .attr("level", 2)
+      .selectAll('path')
+      .data(sub_regions[key].geometry);
+
+      var path = sub_region.enter()
+        .append('path')
+        .attr("id", function(d) {return d.properties.name})
+        .attr("region", function(d) {return d.properties.region})
+        .attr("class", function(d) {return d.properties.name})
+        .attr('d', geoGenerator)
+        .on('mouseenter', disable_map_dblclick)
+        .on('mouseout', enable_map_dblclick)
+        .call(map_element_cc);;
+
+        path.node().parentNode.setAttribute("region", path.attr("region"));
+        path.node().parentNode.setAttribute("name", path.attr("id"));
+    }
+
+    for (key in continents) {
+      var continent = map_svg.append('g')
+      .attr("category", "region")
+      .attr("level", 2)
+      .attr("selected", false)
+      .selectAll('path')
+      .data(continents[key].geometry);
+
+      var path = continent.enter()
+        .append('path')
+        .attr("id", function(d) {return d.properties.name})
+        .attr("class",  function(d) {return d.properties.name})
+        .attr('d', geoGenerator)
+        .on('mouseenter', disable_map_dblclick)
+        .on('mouseout', enable_map_dblclick)
+        .call(map_element_cc);
+
+        path.node().parentNode.setAttribute("name", path.attr("id"));
       }
 
-      for (key in sub_regions) {
-        var sub_region = map_svg.append('g')
-        .attr("category", "sub_region")
-        .attr("selected", false)
-        .attr("level", 2)
-        .selectAll('path')
-        .data(sub_regions[key].geometry);
+      gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
 
-        sub_region.call(t)
-        var path = sub_region.enter()
-          .append('path')
-          .attr("id", function(d) {return d.properties.name})
-          .attr("region", function(d) {return d.properties.region})
-          .attr("class", function(d) {return d.properties.name})
-          .attr('d', geoGenerator)
-          .on('click', function(d) {
-              selected = d3.select(this).classed('selected')
-              d3.select(this).classed('selected', !selected)
-          })
-          // .on("dblclick",function(d){
-          //   console.log("node was double clicked");
-          //   changeLayer();
-          // });
-
-          path.node().parentNode.setAttribute("region", path.attr("region"));
-          path.node().parentNode.setAttribute("name", path.attr("id"));
+      function sortGAfterIndex() {
+        console.log("sort after index");
+        gg.sort(function(a, b) {
+          return a.getAttribute('index') - b.getAttribute('index');
+        });
       }
 
-      for (key in continents) {
-        var continent = map_svg.append('g')
-        .attr("category", "region")
-        .attr("level", 2)
-        .attr("selected", false)
-        .selectAll('path')
-        .data(continents[key].geometry);
+      function indexGG() {
+        i = 0
+        gg.each(function(d) {
+          d.setAttribute('index', i++);
+        })
+      }
 
-        continent.call(t)
-        var path = continent.enter()
-          .append('path')
-          .attr("id", function(d) {return d.properties.name})
-          .attr("class",  function(d) {return d.properties.name})
-          .attr('d', geoGenerator)
-          .on('click', function(d) {
-              selected = d3.select(this).classed('selected')
-              d3.select(this).classed('selected', !selected)
-          })
-          // .on("dblclick",function(d){
-          //   console.log("node was double clicked");
-          //   changeLayer();
-          // });
-
-          path.node().parentNode.setAttribute("name", path.attr("id"));
-          // console.log(path.node().parentNode.getAttribute("sub_region", path.attr("id")) != null);
-        }
-
-
-        gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
-
-        function sortGAfterIndex() {
-          console.log("sort after index");
-          gg.sort(function(a, b) {
-            return a.getAttribute('index') - b.getAttribute('index');
-          });
-        }
-
-        function indexGG() {
-          i = 0
-          gg.each(function(d) {
-            d.setAttribute('index', i++);
-          })
-        }
-
-        // indexGG()
-        // .attr("d", geoGenerator)
-        // .style('fill', '#B10000')
-        // .style('fill-opacity', 0)
-        // .style('stroke-width', 1)
-        // .style('stroke', '#B10000')
-        // .style('stroke-linejoin', 'round');
-        // .style('fill': '#B10000', 'fill-opacity': 0.3)
-// }
+      // indexGG()
+      // .attr("d", geoGenerator)
+      // .style('fill', '#B10000')
+      // .style('fill-opacity', 0)
+      // .style('stroke-width', 1)
+      // .style('stroke', '#B10000')
+      // .style('stroke-linejoin', 'round');
+      // .style('fill': '#B10000', 'fill-opacity': 0.3)
   }
 
   update(geojson, sub_regions, continents);
@@ -380,11 +392,11 @@ function clickcancel() {
   return d3rebind(cc, dispatcher, 'on');
 }
 
-var cc = clickcancel();
-d3.select('#map').call(cc);
-cc.on('click', function(d, index) {
-    d3.select('#map').text(d3.select('#map').text() + 'click, ');
-});
-cc.on('dblclick', function(d, index) {
-    d3.select('#map').text(d3.select('#map').text() + 'dblclick, ');
-});
+// var cc = clickcancel();
+// d3.select('#map').call(cc);
+// cc.on('click', function(d, index) {
+//     d3.select('#map').text(d3.select('#map').text() + 'click, ');
+// });
+// cc.on('dblclick', function(d, index) {
+//     d3.select('#map').text(d3.select('#map').text() + 'dblclick, ');
+// });
