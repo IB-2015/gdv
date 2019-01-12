@@ -141,7 +141,7 @@ function drawMap(geojson, sub_regions, continents) {
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
         .attr("viewBox", "0 0 " + width + " " + height )
-        .attr("preserveAspectRatio", "xMinYMin")
+        .attr("preserveAspectRatio", "xMidYMid meet")
 
   layer = ["region", "sub_region", "country"]
   layer_index = 0;
