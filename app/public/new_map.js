@@ -122,6 +122,7 @@ Promise.all(promises).then(function(data) {
       scheme.forEach(function(d) {
         if (d["ISO-alpha3 Code"] === geojson_country.id /*properties.ISO_A3*/) {
           geojson_country.scheme = d;
+          geojson_country.properties.id = geojson_country.id;
           geojson_country.properties.sub_region = d["Sub-region Name"]
           geojson_country.properties.region = d["Region Name"]
           return;
@@ -288,7 +289,7 @@ function drawMap(geojson, sub_regions, continents) {
         .append('path')
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
         .attr("sub_region", function(d) {return (d.scheme == undefined ? "none" : d.scheme["Sub-region Name"].replace(new RegExp(" ", "g"), "_"));})
-        .attr("id", function(d) { return d.properties.name.replace(new RegExp(" ", "g"), "_");})
+        .attr("id", function(d) { return d.properties.id;})
         .attr("class", function(d) { return "country"; })
         .attr('d', geoGenerator)
         .attr('detail_level', 0)
@@ -466,12 +467,3 @@ function sleep(milliseconds) {
     }
   }
 }
-
-// var cc = clickcancel();
-// d3.select('#map').call(cc);
-// cc.on('click', function(d, index) {
-//     d3.select('#map').text(d3.select('#map').text() + 'click, ');
-// });
-// cc.on('dblclick', function(d, index) {
-//     d3.select('#map').text(d3.select('#map').text() + 'dblclick, ');
-// });
