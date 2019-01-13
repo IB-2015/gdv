@@ -188,7 +188,8 @@ function drawMap(geojson, sub_regions, continents) {
 
     projection.fitExtent([[0, 0], [width, height]], geojson);
     projection.rotate([x_rotation,y_rotation,z_rotation]);
-    projection = projection.scale(305)
+    // console.log(width);
+    projection = projection.scale(305 * (width / 1920)) // hocus pocus
   var geoGenerator = d3.geoPath()
     .projection(projection)
 
