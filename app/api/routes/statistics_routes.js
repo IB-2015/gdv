@@ -14,3 +14,7 @@ router.get('/assault', statisticsController.getAssaultData);
 router.get('/education', statisticsController.getEducationData);
 
 router.get('/gdp', statisticsController.getGDPData);
+
+router.get('/gini', statisticsController.getGINIData);
+
+

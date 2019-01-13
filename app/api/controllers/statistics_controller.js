@@ -44,4 +44,8 @@ exports.getGDPData = (req, res, next) => {
     fs.readFile(DATA_PATH+'gdp.csv', "utf8").then(data => res.status(200).json(data))
 }
 
+exports.getGINIData = (req, res, next) => {
+    fs.readFile(DATA_PATH+'gini.csv', "utf8").then(data => res.status(200).json(data))
+}
+
 
