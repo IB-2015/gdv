@@ -203,7 +203,7 @@ function drawMap(geojson, sub_regions, continents) {
     map_svg.call(map_cc);
 
     var map_element_cc = clickcancel();
-    map_element_cc.on('click', function(d, index) {      
+    map_element_cc.on('click', function(d, index) {
       name = ""
       if (d.properties != undefined)
         name = d.properties.name
@@ -234,18 +234,30 @@ function drawMap(geojson, sub_regions, continents) {
       d3.selectAll("path")
         .filter(function(d, i) {
           return this.parentNode.getAttribute('category') == getCurrentLayer();
-        }).each(function(d) {
-          d3.select(this)
-          .style("fill", "red")
         })
-      setTimeout(function(){ changeLayer(); }, 3000);
+        .each(function(d) {
+          d3.select(this)
+          .transition()
+          .style("opacity", 0.5)
+          .duration(1000)
+        })
 
       d3.selectAll("path")
         .filter(function(d, i) {
-          return this.parentNode.getAttribute('category') == getCurrentLayer();
+          return this.parentNode.getAttribute('category') == getSecondLayer();
         })
-        .transition()
-        .style("opacity", 1.0).duration(2000);
+        .each(function(d) {
+          d3.select(this)
+          .transition()
+          .style("opacity", 1.0)
+          .duration(1000)
+        })
+
+      setTimeout(function(){
+
+         changeLayer();
+
+      }, 500);
     });
 
     for (i = 0; i < geojson.features.length; i++) {
@@ -255,7 +267,7 @@ function drawMap(geojson, sub_regions, continents) {
       .attr("selected", false)
       .selectAll('path')
       .data([geojson.features[i]]);
-      // console.log(geojson.features[i]);
+
       var path = country.enter()
         .append('path')
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
@@ -268,7 +280,7 @@ function drawMap(geojson, sub_regions, continents) {
         .on('mouseout', enable_map_dblclick)
         .style("fill", "white")
         .style("stroke", "gray")
-        .style("opacity", 1.0)
+        .style("opacity", 0.5)
         .call(map_element_cc);
 
         path.node().parentNode.setAttribute("region", path.attr("region"));
@@ -294,7 +306,7 @@ function drawMap(geojson, sub_regions, continents) {
         .on('mouseout', enable_map_dblclick)
         .style("fill", "gray")
         .style("stroke", "black")
-        .style("opacity", 1.0)
+        .style("opacity", 0.5)
         .call(map_element_cc);;
 
         path.node().parentNode.setAttribute("region", path.attr("region"));
@@ -427,6 +439,15 @@ function clickcancel() {
     };
   }
   return d3rebind(cc, dispatcher, 'on');
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
 
 // var cc = clickcancel();
