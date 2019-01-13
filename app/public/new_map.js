@@ -137,6 +137,23 @@ Promise.all(promises).then(function(data) {
 })
 
 function drawMap(geojson, sub_regions, continents) {
+
+  var color_config = {
+    "region": {
+      "fill": "black",
+      "stroke": "DarkGray"
+    },
+    "sub_region": {
+      "fill": "gray",
+      "stroke": "black"
+    },
+    "country": {
+      "fill": "white",
+      "stroke": "gray"
+    }
+  }
+
+
   // append svg to parent div container
   var map_svg = d3.select('#content').append('svg')
         .attr('id', 'map')
@@ -171,6 +188,7 @@ function drawMap(geojson, sub_regions, continents) {
 
     projection.fitExtent([[0, 0], [width, height]], geojson);
     projection.rotate([x_rotation,y_rotation,z_rotation]);
+    projection = projection.scale(305)
   var geoGenerator = d3.geoPath()
     .projection(projection)
 
@@ -178,58 +196,8 @@ function drawMap(geojson, sub_regions, continents) {
   function update(geojson, sub_regions, continents) {
 
     /* dblclick callbacks for map and map elements */
-    var map_element_dblclick = function() {
-      changeLayer();
-    }
-    var map_dblclick = function() {
-      console.log("map double clicked");
-      changeLayer();
-    };
 
-    /* dblclick callbacks for map and map elements (region, country etc.) */
-    var map_cc = clickcancel();
-    map_cc.on('click', null);
-    map_cc.on('dblclick', map_dblclick);
-
-    /*
-      prohibit dblclick event on map when mouse over map element to prevent map from changing layer twice
-     */
-    var enable_map_dblclick = function() {
-      map_cc.on('dblclick', map_dblclick);
-    };
-    var disable_map_dblclick = function() {
-      map_cc.on('dblclick', null);
-    }
-    map_svg.call(map_cc);
-
-    var map_element_cc = clickcancel();
-    map_element_cc.on('click', function(d, index) {
-      name = ""
-      if (d.properties != undefined)
-        name = d.properties.name
-      else
-        name = d.getAttribute('name')
-      // console.log(name + "  click");
-      path = d3.select(`[name=${name}]`).select('path');
-      selected = path.classed('selected')
-      selected = path.classed('selected', !selected)
-      selected = path.classed('selected')
-
-      pathTransition = path.transition()
-      if (selected) {
-        pathTransition.style("fill", "red").duration(1000);
-        pathTransition.style("stroke", "blue").duration(500);
-      } else {
-        pathTransition.style("fill", "black").duration(1000);
-        pathTransition.style("stroke", "DarkGray").duration(1000);
-      }
-    });
-    map_element_cc.on('dblclick', function(d, index) {
-      name = ""
-      if (d.properties != undefined)
-        name = d.properties.name
-      else
-        name = d.getAttribute('name')
+    function dblclick(d) {
 
       d3.selectAll("path")
         .filter(function(d, i) {
@@ -258,6 +226,53 @@ function drawMap(geojson, sub_regions, continents) {
          changeLayer();
 
       }, 500);
+    }
+
+    /* dblclick callbacks for map and map elements (region, country etc.) */
+    var map_cc = clickcancel();
+    map_cc.on('click', null);
+    map_cc.on('dblclick', function(d, index) {
+      dblclick(d)
+    });
+
+    /*
+      prohibit dblclick event on map when mouse over map element to prevent map from changing layer twice
+     */
+    var enable_map_dblclick = function() {
+      map_cc.on('dblclick', function(d, index) {
+        dblclick(d)
+      });
+    };
+    var disable_map_dblclick = function() {
+      map_cc.on('dblclick', null);
+    }
+    map_svg.call(map_cc);
+
+    var map_element_cc = clickcancel();
+    map_element_cc.on('click', function(d, index) {
+      name = ""
+      if (d.properties != undefined)
+        name = d.properties.name
+      else
+        name = d.getAttribute('name')
+
+      category = d3.select(`[name=${name}]`).attr('category');
+      path = d3.select(`[name=${name}]`).select('path');
+      selected = path.classed('selected')
+      selected = path.classed('selected', !selected)
+      selected = path.classed('selected')
+
+      pathTransition = path.transition()
+      if (selected) {
+        pathTransition.style("fill", "red").duration(1000);
+        pathTransition.style("stroke", "blue").duration(500);
+      } else {
+        pathTransition.style("fill", color_config[category].fill).duration(1000);
+        pathTransition.style("stroke", color_config[category].stroke).duration(1000);
+      }
+    });
+    map_element_cc.on('dblclick', function(d, index) {
+      dblclick(d)
     });
 
     for (i = 0; i < geojson.features.length; i++) {
@@ -278,8 +293,9 @@ function drawMap(geojson, sub_regions, continents) {
         .attr('detail_level', 0)
         .on('mouseenter', disable_map_dblclick)
         .on('mouseout', enable_map_dblclick)
-        .style("fill", "white")
-        .style("stroke", "gray")
+        .style("fill", color_config.country.fill)
+        .style("stroke", color_config.country.stroke)
+        // .style(color_config.country)
         .style("opacity", 0.5)
         .call(map_element_cc);
 
@@ -304,8 +320,8 @@ function drawMap(geojson, sub_regions, continents) {
         .attr('d', geoGenerator)
         .on('mouseenter', disable_map_dblclick)
         .on('mouseout', enable_map_dblclick)
-        .style("fill", "gray")
-        .style("stroke", "black")
+        .style("fill", color_config.sub_region.fill)
+        .style("stroke", color_config.sub_region.stroke)
         .style("opacity", 0.5)
         .call(map_element_cc);;
 
@@ -328,8 +344,8 @@ function drawMap(geojson, sub_regions, continents) {
         .attr('d', geoGenerator)
         .on('mouseenter', disable_map_dblclick)
         .on('mouseout', enable_map_dblclick)
-        .style("fill", "black")
-        .style("stroke", "DarkGray")
+        .style("fill", color_config.region.fill)
+        .style("stroke", color_config.region.stroke)
         .style("opacity", 1.0)
         .call(map_element_cc);
 
