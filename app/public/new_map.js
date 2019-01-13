@@ -467,3 +467,8 @@ function sleep(milliseconds) {
     }
   }
 }
+
+getHomicideData(['UGA', 'EST']).then(data => {
+  //Use data here
+  console.log(data)
+})
