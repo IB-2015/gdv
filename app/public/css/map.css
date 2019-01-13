@@ -52,29 +52,29 @@
       border:1px solid red;
   }
 
-  .Africa {
+  /* .Africa {
     fill: red;
-    /* stroke: black; */
+    stroke: black;
   }
 
   .Americas {
     fill: green;
-    /* stroke: black; */
+    stroke: black;
   }
 
   .Asia {
     fill: orange;
-    /* stroke: orange; */
+    stroke: orange;
   }
 
   .Europe {
     fill: DodgerBlue;
-    /* stroke: DodgerBlue; */
+    stroke: DodgerBlue;
   }
 
   .Oceania {
     fill: purple;
-    /* stroke: purple; */
+    stroke: purple;
   }
 
   .Sub-Saharan_Africa {
@@ -158,12 +158,12 @@
   .Polynesia {
     fill: green;
     stroke: green;
-  }
+  } */
 
-  .selected {
+  /* .selected {
     fill: #00ff00;
     stroke: #00ff00;
-  }
+  } */
 
   .mouseover {
     fill: DarkGray;
@@ -284,10 +284,10 @@
   .country {
     stroke: DarkGray;
   }
-  path {
+  /* path {
     transition: fill 4s ease;
     transition: stroke 4s ease;
-  }
+  } */
   #map {
     background: #a3cee9;
   }
