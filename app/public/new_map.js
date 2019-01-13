@@ -4,14 +4,9 @@ var geojson_schemes = {};
 var geoscheme = [];
 var geoscheme_regions = [];
 var geoscheme_sub_regions = [];
-var active = [];
-var initX;
 var x_rotation = -15;
 var y_rotation = 0;
 var z_rotation = 0;
-/* var factor = (640/(window.screen.availWidth * (2/3)));
-var height = 460/factor;
-var width = 640/factor; */
 var width = window.innerWidth
 || document.documentElement.clientWidth
 || document.body.clientWidth;
@@ -105,22 +100,13 @@ Promise.all(promises).then(function(data) {
   });
 
   // set geoscheme for every country and count missing afterwards
-  var missingScheme = 0;
-  var missing = [];
   geojson_countries.features.forEach(function(d) {
     d.properties.name = d.properties.name.replace(new RegExp(" ", "g"), "_")
     setScheme(d, geoscheme)
-    if (d.scheme == undefined) {
-      // console.log(d.properties.ADMIN + " has no matching scheme");
-      missing.push(d.properties.ADMIN);
-      missingScheme++;
-    } else {
-      // console.log(d.properties.ADMIN + " [" + d.scheme["Country or Area"] + " | " + d.scheme["Region Name"] + " | "  + d.scheme["Sub-region Name"] + "]");
-    }
-    // console.log("----");
+
     function setScheme(geojson_country, scheme) {
       scheme.forEach(function(d) {
-        if (d["ISO-alpha3 Code"] === geojson_country.id /*properties.ISO_A3*/) {
+        if (d["ISO-alpha3 Code"] === geojson_country.id) {
           geojson_country.scheme = d;
           geojson_country.properties.name = geojson_country.id;
           geojson_country.properties.sub_region = d["Sub-region Name"]
@@ -164,7 +150,6 @@ function drawMap(geojson, sub_regions, continents) {
   layer = ["region", "sub_region", "country"]
   layer_index = 0;
   function changeLayer() {
-    console.log("dbclick sort");
     layer_index++
     show(layer[layer_index % layer.length]);
   }
@@ -178,19 +163,16 @@ function drawMap(geojson, sub_regions, continents) {
   }
 
   function show(category) {
-    console.log(category);
     gg = gg.sort(function(a, b) {
       return a.getAttribute("category") == category ? 1 : -1;
     })
-    console.log("second_layer: " + layer[(layer_index+1) % 3]);
   }
 
   var projection = d3.geoMercator();
+      projection.fitExtent([[0, 0], [width, height]], geojson);
+      projection.rotate([x_rotation,y_rotation,z_rotation]);
+      projection = projection.scale(305 * (width / 1920)) // hocus pocus
 
-    projection.fitExtent([[0, 0], [width, height]], geojson);
-    projection.rotate([x_rotation,y_rotation,z_rotation]);
-    // console.log(width);
-    projection = projection.scale(305 * (width / 1920)) // hocus pocus
   var geoGenerator = d3.geoPath()
     .projection(projection)
 
@@ -198,9 +180,7 @@ function drawMap(geojson, sub_regions, continents) {
   function update(geojson, sub_regions, continents) {
 
     /* dblclick callbacks for map and map elements */
-
     function dblclick(d) {
-
       d3.selectAll("path")
         .filter(function(d, i) {
           return this.parentNode.getAttribute('category') == getCurrentLayer();
@@ -224,9 +204,7 @@ function drawMap(geojson, sub_regions, continents) {
         })
 
       setTimeout(function(){
-
          changeLayer();
-
       }, 500);
     }
 
@@ -297,7 +275,6 @@ function drawMap(geojson, sub_regions, continents) {
         .on('mouseout', enable_map_dblclick)
         .style("fill", color_config.country.fill)
         .style("stroke", color_config.country.stroke)
-        // .style(color_config.country)
         .style("opacity", 0.5)
         .call(map_element_cc);
 
@@ -357,7 +334,6 @@ function drawMap(geojson, sub_regions, continents) {
       gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
 
       function sortGAfterIndex() {
-        console.log("sort after index");
         gg.sort(function(a, b) {
           return a.getAttribute('index') - b.getAttribute('index');
         });
@@ -402,7 +378,6 @@ function printStuff() {
     collection.features.push(e);
     ii++;
   })
-  console.log(ii);
   console.log(JSON.stringify(collection));
 }
 
