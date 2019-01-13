@@ -15,11 +15,6 @@ var height = window.innerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
-var level = 0; // 0 world, 1 continent...
-//track scale only rotate when s === 1
-var s = 1;
-var mouseClicked = false;
-
 var resources = [
   "countries.geo.json",
   "geoscheme.csv",
@@ -258,7 +253,6 @@ function drawMap(geojson, sub_regions, continents) {
     for (i = 0; i < geojson.features.length; i++) {
       var country = map_svg.append('g')
       .attr("category", "country")
-      .attr("level", 2)
       .attr("selected", false)
       .selectAll('path')
       .data([geojson.features[i]]);
@@ -270,7 +264,6 @@ function drawMap(geojson, sub_regions, continents) {
         .attr("id", function(d) { return d.properties.name;})
         .attr("class", function(d) { return "country"; })
         .attr('d', geoGenerator)
-        .attr('detail_level', 0)
         .on('mouseenter', disable_map_dblclick)
         .on('mouseout', enable_map_dblclick)
         .style("fill", color_config.country.fill)
@@ -287,7 +280,6 @@ function drawMap(geojson, sub_regions, continents) {
       var sub_region = map_svg.append('g')
       .attr("category", "sub_region")
       .attr("selected", false)
-      .attr("level", 2)
       .selectAll('path')
       .data(sub_regions[key].geometry);
 
@@ -311,7 +303,6 @@ function drawMap(geojson, sub_regions, continents) {
     for (key in continents) {
       var continent = map_svg.append('g')
       .attr("category", "region")
-      .attr("level", 2)
       .attr("selected", false)
       .selectAll('path')
       .data(continents[key].geometry);
