@@ -178,24 +178,52 @@ function drawMap(geojson, sub_regions, continents) {
   function update(geojson, sub_regions, continents) {
 
     /* dblclick callbacks for map and map elements */
-    var map_element_dblclick = function() {
-      changeLayer();
+
+    function dblclick(d) {
+
+      d3.selectAll("path")
+        .filter(function(d, i) {
+          return this.parentNode.getAttribute('category') == getCurrentLayer();
+        })
+        .each(function(d) {
+          d3.select(this)
+          .transition()
+          .style("opacity", 0.5)
+          .duration(1000)
+        })
+
+      d3.selectAll("path")
+        .filter(function(d, i) {
+          return this.parentNode.getAttribute('category') == getSecondLayer();
+        })
+        .each(function(d) {
+          d3.select(this)
+          .transition()
+          .style("opacity", 1.0)
+          .duration(1000)
+        })
+
+      setTimeout(function(){
+
+         changeLayer();
+
+      }, 500);
     }
-    var map_dblclick = function() {
-      console.log("map double clicked");
-      changeLayer();
-    };
 
     /* dblclick callbacks for map and map elements (region, country etc.) */
     var map_cc = clickcancel();
     map_cc.on('click', null);
-    map_cc.on('dblclick', map_dblclick);
+    map_cc.on('dblclick', function(d, index) {
+      dblclick(d)
+    });
 
     /*
       prohibit dblclick event on map when mouse over map element to prevent map from changing layer twice
      */
     var enable_map_dblclick = function() {
-      map_cc.on('dblclick', map_dblclick);
+      map_cc.on('dblclick', function(d, index) {
+        dblclick(d)
+      });
     };
     var disable_map_dblclick = function() {
       map_cc.on('dblclick', null);
@@ -225,39 +253,7 @@ function drawMap(geojson, sub_regions, continents) {
       }
     });
     map_element_cc.on('dblclick', function(d, index) {
-      name = ""
-      if (d.properties != undefined)
-        name = d.properties.name
-      else
-        name = d.getAttribute('name')
-
-      d3.selectAll("path")
-        .filter(function(d, i) {
-          return this.parentNode.getAttribute('category') == getCurrentLayer();
-        })
-        .each(function(d) {
-          d3.select(this)
-          .transition()
-          .style("opacity", 0.5)
-          .duration(1000)
-        })
-
-      d3.selectAll("path")
-        .filter(function(d, i) {
-          return this.parentNode.getAttribute('category') == getSecondLayer();
-        })
-        .each(function(d) {
-          d3.select(this)
-          .transition()
-          .style("opacity", 1.0)
-          .duration(1000)
-        })
-
-      setTimeout(function(){
-
-         changeLayer();
-
-      }, 500);
+      dblclick(d)
     });
 
     for (i = 0; i < geojson.features.length; i++) {
