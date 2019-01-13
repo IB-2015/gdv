@@ -33,5 +33,15 @@ exports.getHomicideData = (req, res, next) => {
 }
 
 exports.getAssaultData = (req, res, next) => {
-    fs.readFile(DATA_PATH+'gcs_assault.csv', "utf8").then(data => res.status(200).json(data))
+    fs.readFile(DATA_PATH+'assault.csv', "utf8").then(data => res.status(200).json(data))
 }
+
+exports.getEducationData = (req, res, next) => {
+    fs.readFile(DATA_PATH+'education_index.csv', "utf8").then(data => res.status(200).json(data))
+}
+
+exports.getGDPData = (req, res, next) => {
+    fs.readFile(DATA_PATH+'gdp.csv', "utf8").then(data => res.status(200).json(data))
+}
+
+

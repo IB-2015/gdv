@@ -10,3 +10,7 @@ router.get('/all', statisticsController.getAllStatisticsData);
 router.get('/homicide', statisticsController.getHomicideData);
 
 router.get('/assault', statisticsController.getAssaultData);
+
+router.get('/education', statisticsController.getEducationData);
+
+router.get('/gdp', statisticsController.getGDPData);

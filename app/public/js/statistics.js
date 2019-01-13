@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 const createLineChart = (data, position) => {
       const height = 350;
       const width = 350;
