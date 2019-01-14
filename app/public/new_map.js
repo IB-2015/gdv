@@ -4,6 +4,8 @@ var geojson_schemes = {};
 var geoscheme = [];
 var geoscheme_regions = [];
 var geoscheme_sub_regions = [];
+var selected_objects = [null, null]
+var next_replace_index = 0; // helper for selected_objects
 var x_rotation = -15;
 var y_rotation = 0;
 var z_rotation = 0;
@@ -231,6 +233,46 @@ function drawMap(geojson, sub_regions, continents) {
       else
         name = d.getAttribute('name')
 
+      selected_countries = getCountriesForName(name)
+      value = {
+        "category": d3.select(`[name=${name}]`).attr('category'),
+        "name": name,
+        "countries": selected_countries
+      }
+
+      selection1 = selected_objects[0]
+      selection2 = selected_objects[1]
+      deselected_name = null
+
+      if (selection1 == null && selection2 == null) {
+        console.log("empty");
+        selected_objects[selected_objects.indexOf(null)] = value
+      } else if (selection1 != null && selection1.name != name && selection2 == null) {
+        console.log("one empty");
+        selected_objects[selected_objects.indexOf(null)] = value
+      } else if (selection2 != null && selection2.name != name && selection1 == null) {
+        console.log("two empty");
+        selected_objects[selected_objects.indexOf(null)] = value
+      } else if (selection1.name == name || selection2.name == name) {
+        console.log(name + " there");
+        if (selection1.name == name) {
+          console.log("0");
+          deselected_name = selected_objects[0].name
+          selected_objects[0] = null;
+        } else if (selection2.name == name) {
+          console.log("1");
+          deselected_name = selected_objects[1].name
+          selected_objects[1] = null;
+        }
+      } else {
+        console.log(name + " new");
+        index = next_replace_index++ % 2
+        deselected_name = selected_objects[index].name
+        selected_objects[index] = value
+      }
+
+      console.log(selected_objects);
+
       category = d3.select(`[name=${name}]`).attr('category');
       path = d3.select(`[name=${name}]`).select('path');
       selected = path.classed('selected')
@@ -244,6 +286,17 @@ function drawMap(geojson, sub_regions, continents) {
       } else {
         pathTransition.style("fill", color_config[category].fill).duration(1000);
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
+      }
+
+      if (deselected_name != null) {
+        deselected_category = d3.select(`[name=${deselected_name}]`).attr('category');
+        deselected_path = d3.select(`[name=${deselected_name}]`).select('path');
+        deselected_selected = deselected_path.classed('selected')
+        deselected_selected = deselected_path.classed('selected', false)
+        deselected_selected = deselected_path.classed('selected')
+        deselected_pathTransition = deselected_path.transition()
+        deselected_pathTransition.style("fill", color_config[category].fill).duration(1000);
+        deselected_pathTransition.style("stroke", color_config[category].stroke).duration(1000);
       }
     });
     map_element_cc.on('dblclick', function(d, index) {
@@ -348,6 +401,25 @@ function drawMap(geojson, sub_regions, continents) {
   }
 
   update(geojson, sub_regions, continents);
+}
+
+function getCountriesForName(name) {
+  selection = d3.selectAll(`g[name=${name}]`);
+  category = selection.attr('category');
+  selection = d3.selectAll(`g[category=country]`);
+  countries = [];
+
+  if (category == 'country') {
+    return [name];
+  }
+
+  selection.filter(function(d) {
+    if (this.getAttribute(category) == name) {
+      countries.push(this.getAttribute('name'))
+    }
+  });
+
+  return countries;
 }
 
 function printStuff() {
