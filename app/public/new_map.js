@@ -20,6 +20,10 @@ var height = window.innerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
+var max_homicide_country;
+var max_homicide_sub_region;
+var max_homicide_region;
+
 var map_svg = d3.select('#content').append('svg')
       .attr('id', 'map')
       .attr("viewBox", "0 0 " + width + " " + height )
@@ -340,6 +344,7 @@ function drawMap(geojson, sub_regions, continents) {
       dblclick(d)
     });
 
+    setAllMaxHomicideValues();
     for (i = 0; i < geojson.features.length; i++) {
       var country = map_svg.append('g')
       .attr("category", "country")
@@ -459,6 +464,74 @@ function getCountriesForName(name) {
   return countries;
 }
 
+function setAllMaxHomicideValues() {
+
+  all_countries = []
+  all_sub_regions = {}
+  all_regions = {}
+
+  for (key in geojson_schemes)
+    all_sub_regions[key] = []
+  for (key in geojson_continents)
+    all_regions[key] = []
+
+  geojson_countries.features
+  .forEach(function(d) {
+    if (d.properties.sub_region != undefined) {
+        for (key in geojson_schemes)
+          if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
+            all_sub_regions[key].push(d.id)
+          }
+        for (key in geojson_continents)
+          if (key == d.properties.region) {
+            all_regions[key].push(d.id)
+          }
+        }
+    all_countries.push(d.id)
+  });
+  pr_c = []
+  all_countries.forEach(function(d) {
+    pr_c.push(getHomicideData([d]))
+  })
+
+  Promise.all(pr_c).then(data => {
+    values = []
+    data.forEach(function(d) {
+      val = d[0] != undefined ? d[0].value : null
+      values.push(val)
+    })
+    max_homicide_country=Math.max(...values);
+    console.log("Country Max: " + max_homicide_country);
+  })
+
+  pr_sr = []
+  for (key in all_sub_regions)
+    pr_sr.push(getHomicideData(all_sub_regions[key]));
+  Promise.all(pr_sr).then(data => {
+    values = []
+    data.forEach(function(d) {
+      val = d[0] != undefined ? d[0].value : null
+      values.push(val)
+    })
+    max_homicide_sub_region=Math.max(...values);
+    console.log("Sub Region Max: " + max_homicide_sub_region);
+  })
+
+  pr_r = []
+  for (key in all_regions)
+    pr_r.push(getHomicideData(all_regions[key]));
+  Promise.all(pr_r).then(data => {
+    values = []
+    data.forEach(function(d) {
+      val = d[0] != undefined ? d[0].value : null
+      values.push(val)
+    })
+    max_homicide_region=Math.max(...values);
+    console.log("Region Max: " + max_homicide_region);
+  })
+
+}
+
 function printStuff() {
   console.log("print stuff");
   allCountryPaths = d3.selectAll("path")
@@ -543,7 +616,7 @@ function sleep(milliseconds) {
   }
 }
 
-getHomicideData(['UGA', 'EST']).then(data => {
-  //Use data here
-  console.log(data)
-})
+// getHomicideData(['UGA', 'EST']).then(data => {
+//   //Use data here
+//   console.log(data)
+// })
