@@ -9,6 +9,9 @@ var next_replace_index = 0; // helper for selected_objects
 var x_rotation = -15;
 var y_rotation = 0;
 var z_rotation = 0;
+var gg;
+var projection = d3.geoMercator();
+var geoGenerator
 var width = window.innerWidth
 || document.documentElement.clientWidth
 || document.body.clientWidth;
@@ -16,6 +19,32 @@ var width = window.innerWidth
 var height = window.innerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
+
+var map_svg = d3.select('#content').append('svg')
+      .attr('id', 'map')
+      .attr("viewBox", "0 0 " + width + " " + height )
+      .attr("preserveAspectRatio", "xMidYMid meet")
+// var first_selection = d3.select('#selection1').append('svg')
+//       .attr("viewBox", "0 0 " + width + " " + height )
+//       .attr("preserveAspectRatio", "xMidYMid meet")
+// var second_selection = d3.select('#selection2').append('svg')
+//       .attr("viewBox", "0 0 " + width + " " + height )
+//       .attr("preserveAspectRatio", "xMidYMid meet")
+
+var color_config = {
+  "region": {
+    "fill": "black",
+    "stroke": "DarkGray"
+  },
+  "sub_region": {
+    "fill": "gray",
+    "stroke": "black"
+  },
+  "country": {
+    "fill": "white",
+    "stroke": "gray"
+  }
+}
 
 var resources = [
   "countries.geo.json",
@@ -121,29 +150,6 @@ Promise.all(promises).then(function(data) {
 })
 
 function drawMap(geojson, sub_regions, continents) {
-
-  var color_config = {
-    "region": {
-      "fill": "black",
-      "stroke": "DarkGray"
-    },
-    "sub_region": {
-      "fill": "gray",
-      "stroke": "black"
-    },
-    "country": {
-      "fill": "white",
-      "stroke": "gray"
-    }
-  }
-
-
-  // append svg to parent div container
-  var map_svg = d3.select('#content').append('svg')
-        .attr('id', 'map')
-        .attr("viewBox", "0 0 " + width + " " + height )
-        .attr("preserveAspectRatio", "xMidYMid meet")
-
   layer = ["region", "sub_region", "country"]
   layer_index = 0;
   function changeLayer() {
@@ -165,12 +171,11 @@ function drawMap(geojson, sub_regions, continents) {
     })
   }
 
-  var projection = d3.geoMercator();
-      projection.fitExtent([[0, 0], [width, height]], geojson);
-      projection.rotate([x_rotation,y_rotation,z_rotation]);
-      projection = projection.scale(305 * (width / 1920)) // hocus pocus
+  projection.fitExtent([[0, 0], [width, height]], geojson);
+  projection.rotate([x_rotation,y_rotation,z_rotation]);
+  projection = projection.scale(305 * (width / 1920)) // hocus pocus
 
-  var geoGenerator = d3.geoPath()
+  geoGenerator = d3.geoPath()
     .projection(projection)
 
 

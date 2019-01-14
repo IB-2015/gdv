@@ -35,19 +35,30 @@ const build_render_date = (dataObject) => {
   education = dataObject.education[0];
   gdp = dataObject.gdp[0];
   gini = dataObject.gini[0];
-
-  return [
+  console.log(education[year]);
+  console.log(gdp[year]);
+  console.log(gini[year]);
+  return {
+    "radar" : [
     {
       className: name, // optional can be used for styling
       axes: [
-        {axis: "assault", value: 13},
-        {axis: "homicide", value: 6},
-        {axis: "education", value: 5},
-        {axis: "gdp", value: 9},
-        {axis: "gini", value: 2}
+        {axis: "education", value: education[year] *100},
+        {axis: "gdp", value: (gdp[year] / 126655.598081739) * 100},
+        {axis: "gini", value: 100 - gini[year]}
       ]
-    }
-  ]
+    },
+    {
+      className: "Test", // optional can be used for styling
+      axes: [
+        {axis: "education", value: 0.25 *100},
+        {axis: "gdp", value: (12568 / 126655.598081739) * 100},
+        {axis: "gini", value: 100 - 50.0}
+      ]
+    }],
+    "bar": [{"name": name, "homicide": homicide[year]}, {"name": "Europe", "homicide": 11.4}]
+  }
+
   // return [
   //   {
   //     className: dataObject.country, // optional can be used for styling
