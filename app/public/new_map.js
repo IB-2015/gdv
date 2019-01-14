@@ -243,16 +243,21 @@ function drawMap(geojson, sub_regions, continents) {
       selection1 = selected_objects[0]
       selection2 = selected_objects[1]
       deselected_name = null
+      drawLeft = false;
+      drawRight = false;
 
       if (selection1 == null && selection2 == null) {
         console.log("empty");
         selected_objects[selected_objects.indexOf(null)] = value
+        drawLeft = true;
       } else if (selection1 != null && selection1.name != name && selection2 == null) {
-        console.log("one empty");
-        selected_objects[selected_objects.indexOf(null)] = value
-      } else if (selection2 != null && selection2.name != name && selection1 == null) {
         console.log("two empty");
         selected_objects[selected_objects.indexOf(null)] = value
+        drawRight = true;
+      } else if (selection2 != null && selection2.name != name && selection1 == null) {
+        console.log("one empty");
+        selected_objects[selected_objects.indexOf(null)] = value
+        drawLeft = true
       } else if (selection1.name == name || selection2.name == name) {
         console.log(name + " there");
         if (selection1.name == name) {
@@ -267,6 +272,11 @@ function drawMap(geojson, sub_regions, continents) {
       } else {
         console.log(name + " new");
         index = next_replace_index++ % 2
+        if (index == 0) {
+          drawLeft = true
+        } else {
+          drawRight = true;
+        }
         deselected_name = selected_objects[index].name
         selected_objects[index] = value
       }
@@ -298,6 +308,13 @@ function drawMap(geojson, sub_regions, continents) {
         deselected_pathTransition.style("fill", color_config[category].fill).duration(1000);
         deselected_pathTransition.style("stroke", color_config[category].stroke).duration(1000);
       }
+
+      if (drawLeft) {
+        draw(d3.select("#country1"), value.countries)
+      }
+      if (drawRight)
+        draw(d3.select("#country2"), value.countries)
+
     });
     map_element_cc.on('dblclick', function(d, index) {
       dblclick(d)
