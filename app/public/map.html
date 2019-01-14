@@ -19,8 +19,9 @@
 
   <link rel="stylesheet" type="text/css" media="screen" href="./css/map.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="./css/homicide.css" />
+  <link rel="stylesheet" href="https://rawgit.com/tpreusse/radar-chart-d3/master/src/radar-chart.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/radar-chart.css" />
 
-  <script src="https://d3js.org/d3.v5.js"></script>
    <!--
   <script src="./js/getData.js"></script>
   <script src="./js/statistics.js"></script>
@@ -45,10 +46,22 @@
     </div>
   </div>
 
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <script>
+    window.d3v5 = d3
+    // window.d3 = null
+</script>
   <script src="./js/getData.js"></script>
   <script src="./js/statistics.js"></script>
-  <script src="homicide.js"></script>
   <script src="./js/actions.js"></script>
+  <script src="https://d3js.org/d3.v3.js"></script>
+  <script>
+    window.d3v3 = d3
+    window.d3 = window.d3v5
+  </script>
+  <!-- <script src="https://d3js.org/d3.v5.js"></script> -->
+  <script src="./js/radar-chart.js"></script>
+  <script src="./js/draw_radar_chart.js"></script>
   <script src="./js/drawCharts.js"></script>
   <script src="new_map.js"></script>
 </body>

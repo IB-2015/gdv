@@ -247,30 +247,30 @@ function drawMap(geojson, sub_regions, continents) {
       drawRight = false;
 
       if (selection1 == null && selection2 == null) {
-        console.log("empty");
+        // console.log("empty");
         selected_objects[selected_objects.indexOf(null)] = value
         drawLeft = true;
       } else if (selection1 != null && selection1.name != name && selection2 == null) {
-        console.log("two empty");
+        // console.log("two empty");
         selected_objects[selected_objects.indexOf(null)] = value
         drawRight = true;
       } else if (selection2 != null && selection2.name != name && selection1 == null) {
-        console.log("one empty");
+        // console.log("one empty");
         selected_objects[selected_objects.indexOf(null)] = value
         drawLeft = true
       } else if (selection1.name == name || selection2.name == name) {
-        console.log(name + " there");
+        // console.log(name + " there");
         if (selection1.name == name) {
-          console.log("0");
+          // console.log("0");
           deselected_name = selected_objects[0].name
           selected_objects[0] = null;
         } else if (selection2.name == name) {
-          console.log("1");
+          // console.log("1");
           deselected_name = selected_objects[1].name
           selected_objects[1] = null;
         }
       } else {
-        console.log(name + " new");
+        // console.log(name + " new");
         index = next_replace_index++ % 2
         if (index == 0) {
           drawLeft = true
@@ -310,10 +310,10 @@ function drawMap(geojson, sub_regions, continents) {
       }
 
       if (drawLeft) {
-        draw(d3.select("#country1"), value.countries)
+        draw("#country1", value.countries)
       }
       if (drawRight)
-        draw(d3.select("#country2"), value.countries)
+        draw("#country2", value.countries)
 
     });
     map_element_cc.on('dblclick', function(d, index) {
