@@ -53,13 +53,7 @@ const selectData = (data, countryList) => {
     data.forEach(country => {
         if(countryList.indexOf(country.ISO_A3) > -1) {
             //Convert string format of numbers 
-            let keys = Object.keys(country);
-            keys.forEach(key => {
-                let yearFound = years.indexOf(key);
-                if(yearFound > -1) {
-                    country[key] = parseFloat(country[key])
-                }
-            })
+            country['value'] = parseFloat(country['value'])
             countryData.push(country)
         }
     })
@@ -71,36 +65,17 @@ const selectData = (data, countryList) => {
     //More than 1 country selected -> return average data for given list of countries
     if(countryList.length > 1){
       let averageCountries = {
-          'name': 'averageOfCountries'
+          'name': 'averageOfCountries',
+          'value': 0.0
       };
-      let keys = Object.keys(countryData[0]);
-      
-      //Initialize object for average data, set datatype for year attributes
-      keys.forEach(key => {
-        let yearFound = years.indexOf(key);
-        if(yearFound > -1){
-            averageCountries[years[yearFound]] = 0.0;
-        }
-      })
 
       countryData.forEach(country => {
-          //Iterate over each objects key to find the year columns
-          keys.forEach(key => {
-              let yearFound = years.indexOf(key);
-              if(yearFound > -1){
-                  //Add value of year attribute to total average
-                averageCountries[key] += parseFloat(country[key])
-              }
-          })    
+          //Iterate over each objects and sum up value
+          averageCountries['value'] += country['value'];
       })
       
       //Divide by total number of found countries to get the average
-      Object.keys(averageCountries).forEach(key => {
-          if (key != 'name') {
-              averageCountries[key] = averageCountries[key]/countryList.length;
-          }
-      })
-      delete averageCountries.key;
+      averageCountries['value'] = averageCountries['value']/countryList.length;
       return [averageCountries];
     } else {
         //Only 1 country selected
