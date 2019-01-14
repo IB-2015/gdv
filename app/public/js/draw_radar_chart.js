@@ -17,7 +17,7 @@ const drawRadarChart = (id, data) => {
           .attr("text-anchor", "middle")
           .style("font-size", "16px")
           .style("text-decoration", "underline")
-          .text(radar_data[0].className);
+          .text(radar_data[0].name);
   var main_g = svg.append('g').classed('single', 1).datum(radar_data).call(chart);
   main_g
     .attr('transform', 'translate('+0+','+ (cfg.h * 0.2) +')')

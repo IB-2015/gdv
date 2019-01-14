@@ -7,11 +7,11 @@
 .radar-chart.focus .area.focused {
   fill-opacity: 0.9;
 }
-.area.Germany, .Germany .circle {
+.area.country1, .country1 .circle {
   fill: #ADD8E6;
   stroke: none;
 }
-.area.France, .France .circle {
+.area.country2, .country2 .circle {
   fill: blue;
   stroke: none;
 }
