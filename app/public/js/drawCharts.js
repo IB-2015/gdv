@@ -7,7 +7,7 @@ const draw = (id, countries) => {
     dataObject.education = data[1];
     dataObject.gdp = data[2];
     dataObject.gini = data[3];
-    render_data = build_render_date(dataObject);
+    render_data = build_render_date(id, dataObject);
     drawRadarChart(id, render_data);
   })
 
@@ -28,7 +28,7 @@ const getData = (countries) => {
   return Promise.all(promises);
 }
 
-const build_render_date = (dataObject) => {
+const build_render_date = (id, dataObject) => {
   year = 2006;
   name = dataObject.homicide[0].country;
   homicide = dataObject.homicide[0];
@@ -41,7 +41,8 @@ const build_render_date = (dataObject) => {
   return {
     "radar" : [
     {
-      className: name, // optional can be used for styling
+      className: id.split('#')[1], // optional can be used for styling
+      name: name,
       axes: [
         {axis: "education", value: education.value *100},
         {axis: "gdp", value: (gdp.value / 126655.598081739) * 100},
