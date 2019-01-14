@@ -125,12 +125,12 @@ Promise.all(promises).then(function(data) {
     return a["Country or Area"] < b["Country or Area"] ? -1 : 1;
   });
 
-  d3.csv("homicide0.csv").then(function(data0) {
+  // d3.csv("homicide0.csv").then(function(data0) {
   // set geoscheme for every country and count missing afterwards
   geojson_countries.features.forEach(function(d) {
     d.properties.name = d.properties.name.replace(new RegExp(" ", "g"), "_")
     setScheme(d, geoscheme)
-    setHomicide(d, data0)
+    // setHomicide(d, data0)
 
     function setScheme(geojson_country, scheme) {
       scheme.forEach(function(d) {
@@ -144,21 +144,21 @@ Promise.all(promises).then(function(data) {
       })
     }
 
-    function setHomicide(geojson_country, homicide) {
-      homicide.forEach(function(d) {
-        if (d.ISO_A3 === geojson_country.id) {
-          console.log(d);
-          geojson_country.homicide = d;
-          return;
-        }
-      })
-    }
+    // function setHomicide(geojson_country, homicide) {
+    //   homicide.forEach(function(d) {
+    //     if (d.ISO_A3 === geojson_country.id) {
+    //       console.log(d);
+    //       geojson_country.homicide = d;
+    //       return;
+    //     }
+    //   })
+    // }
   });
 
 
   drawMap(geojson_countries, geojson_schemes, geojson_continents);
 
-}) // csv
+// }) // csv
 
 }).catch(function(error) {
   console.log(error);
@@ -356,7 +356,7 @@ function drawMap(geojson, sub_regions, continents) {
         .attr('d', geoGenerator)
         .on('mouseenter', disable_map_dblclick)
         .on('mouseout', enable_map_dblclick)
-        .style("fill", function(d) {return d.homicide != undefined ? "rgb(" + (isNaN(d.homicide[year]) ? 0 : d.homicide[year] /50*255)+",0,0)" : color_config.country.fill})
+        .style("fill", color_config.country.fill)//function(d) {return d.homicide != undefined ? "rgb(" + (isNaN(d.homicide[year]) ? 0 : d.homicide[year] /50*255)+",0,0)" : })
         .style("stroke", color_config.country.stroke)
         .style("opacity", 0.5)
         .call(map_element_cc);

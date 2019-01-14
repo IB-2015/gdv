@@ -1,11 +1,12 @@
 const draw = (id, countries) => {
   dataObject = null;
   getData(countries).then(function(data) {
-    dataObject.assault = data[0];
-    dataObject.homicide = data[1];
-    dataObject.education = data[2];
-    dataObject.gdp = data[3];
-    dataObject.gini = data[4];
+    console.log(data);
+    // dataObject.assault = data[0];
+    dataObject.homicide = data[0];
+    dataObject.education = data[1];
+    dataObject.gdp = data[2];
+    dataObject.gini = data[3];
     render_data = build_render_date(dataObject);
     drawRadarChart(id, render_data);
   })
@@ -19,7 +20,7 @@ const draw = (id, countries) => {
 const getData = (countries) => {
   dataObject = {}
   promises = []
-  promises.push(getAssaultData(countries));
+  // promises.push(getAssaultData(countries));
   promises.push(getHomicideData(countries));
   promises.push(getEducationData(countries));
   promises.push(getGDPData(countries));
@@ -29,23 +30,22 @@ const getData = (countries) => {
 
 const build_render_date = (dataObject) => {
   year = 2006;
-  name = dataObject.assault[0].country;
-  assault = dataObject.assault[0];
+  name = dataObject.homicide[0].country;
   homicide = dataObject.homicide[0];
   education = dataObject.education[0];
   gdp = dataObject.gdp[0];
   gini = dataObject.gini[0];
-  console.log(education[year]);
-  console.log(gdp[year]);
-  console.log(gini[year]);
+  console.log(education.value);
+  console.log(gdp.value);
+  console.log(gini.value);
   return {
     "radar" : [
     {
       className: name, // optional can be used for styling
       axes: [
-        {axis: "education", value: education[year] *100},
-        {axis: "gdp", value: (gdp[year] / 126655.598081739) * 100},
-        {axis: "gini", value: 100 - gini[year]}
+        {axis: "education", value: education.value *100},
+        {axis: "gdp", value: (gdp.value / 126655.598081739) * 100},
+        {axis: "gini", value: 100 - gini.value}
       ]
     },
     {
@@ -56,7 +56,7 @@ const build_render_date = (dataObject) => {
         {axis: "gini", value: 100 - 50.0}
       ]
     }],
-    "bar": [{"name": name, "homicide": homicide[year]}, {"name": "Europe", "homicide": 11.4}]
+    "bar": [{"name": name, "homicide": homicide.value}, {"name": "Europe", "homicide": 11.4}]
   }
 
   // return [

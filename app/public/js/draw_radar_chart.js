@@ -45,14 +45,13 @@ const drawRadarChart = (id, data) => {
 }
 
 const drawBarChart = (svg, cfg, data) => {
-  // data = [{"name": "name", "homicide": 22}, {"name": "Test", "homicide": 11.4}]
 
   var width = cfg.w;
   var height = cfg.h * 1.5;
 
   var chart = svg
     .append("g")
-      .attr("transform", "translate(" + cfg.w * 2.5 + "," + cfg.h * 0.4 + ")");
+      .attr("transform", "translate(" + cfg.w * 2.5 + "," + cfg.h * 0.4  + ")");
 
   ///////////////////////
   // Scales
