@@ -1,5 +1,4 @@
 const draw = (id, countries) => {
-
   dataObject = null;
   getData(countries).then(function(data) {
     dataObject.assault = data[0];
@@ -8,7 +7,7 @@ const draw = (id, countries) => {
     dataObject.gdp = data[3];
     dataObject.gini = data[4];
     render_data = build_render_date(dataObject);
-    drawRadarChart(id, default_data);
+    drawRadarChart(id, render_data);
   })
 
 
@@ -29,28 +28,38 @@ const getData = (countries) => {
 }
 
 const build_render_date = (dataObject) => {
-  console.log(dataObject);
-  year = 2005;
+  year = 2006;
+  name = dataObject.assault[0].country;
   assault = dataObject.assault[0];
   homicide = dataObject.homicide[0];
   education = dataObject.education[0];
   gdp = dataObject.gdp[0];
   gini = dataObject.gini[0];
 
-  console.log(assault[year]);
-
   return [
     {
-      className: 'Germany', // optional can be used for styling
+      className: name, // optional can be used for styling
       axes: [
-        {axis: "assault", value: homicide[year]},
-        {axis: "homicide", value: homicide[year]},
-        {axis: "education", value: education[year]},
-        {axis: "gdp", value: gdp[year]},
-        {axis: "gini", value: gini[year]}
+        {axis: "assault", value: 13},
+        {axis: "homicide", value: 6},
+        {axis: "education", value: 5},
+        {axis: "gdp", value: 9},
+        {axis: "gini", value: 2}
       ]
     }
   ]
+  // return [
+  //   {
+  //     className: dataObject.country, // optional can be used for styling
+  //     axes: [
+  //       {axis: "assault", value: homicide[year]},
+  //       {axis: "homicide", value: homicide[year]},
+  //       {axis: "education", value: education[year]},
+  //       {axis: "gdp", value: gdp[year]},
+  //       {axis: "gini", value: gini[year]}
+  //     ]
+  //   }
+  // ]
 }
 const default_data = [
   {

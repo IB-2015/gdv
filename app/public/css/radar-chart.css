@@ -11,3 +11,7 @@
   fill: #ADD8E6;
   stroke: none;
 }
+.area.France, .France .circle {
+  fill: blue;
+  stroke: none;
+}
