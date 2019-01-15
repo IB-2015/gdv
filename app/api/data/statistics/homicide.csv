@@ -23,7 +23,7 @@ Angola,AGO,4.6
 Cameroon,CMR,4.75
 Central African Republic,CAF,0
 Chad,TCD,9.7
-Congo,,9.9
+Congo,COG,9.9
 Democratic Republic of the Congo,COD,14.3
 Equatorial Guinea,GNQ,2.6
 Gabon,GAB,8.7
@@ -41,12 +41,12 @@ South Africa,ZAF,32.65
 Swaziland,SWZ,16.675
 Benin,BEN,6.6
 Burkina Faso,BFA,0.625
-Cabo Verde,,9.471428571428572
-C�te d'Ivoire,,12.6
+Cabo Verde,CPV,9.471428571428572
+C�te d'Ivoire,CIV,12.6
 Gambia,GMB,9.8
 Ghana,GHA,1.7600000000000002
 Guinea,GIN,9.4
-Guinea-Bissau,,10.5
+Guinea-Bissau,GNB,10.5
 Liberia,LBR,3.5799999999999996
 Mali,MLI,12.2
 Mauritania,MRT,10.9
@@ -59,12 +59,12 @@ Togo,TGO,9.6
 Anguilla,AIA,21.68
 Antigua and Barbuda,ATG,13.920000000000002
 Aruba,ABW,4.05
-Bahamas,,27.800000000000004
+Bahamas,BHS,27.800000000000004
 Barbados,BRB,8.75
 British Virgin Islands,VGB,0
 Cayman Islands,CYM,9.9
 Cuba,CUB,5.066666666666667
-Cura�ao,,19.2
+Cura�ao,CUW,19.2
 Dominica,DMA,11.6
 Dominican Republic,DOM,22.185714285714287
 Grenada,GRD,9.075000000000001
@@ -94,7 +94,7 @@ Greenland,GRL,12.587499999999999
 Saint Pierre and Miquelon,SPM,15.9
 United States of America,USA,4.8999999999999995
 Argentina,ARG,7.5
-Bolivia (Plurinational State of),,10.157142857142857
+Bolivia (Plurinational State of),BOL,10.157142857142857
 Brazil,BRA,24.583333333333332
 Chile,CHL,3.3875
 Colombia,COL,34.199999999999996
@@ -105,36 +105,36 @@ Paraguay,PRY,11.362499999999999
 Peru,PER,6.3
 Suriname,SUR,8.55
 Uruguay,URY,6.799999999999999
-Venezuela (Bolivarian Republic of),,50.97142857142857
+Venezuela (Bolivarian Republic of),VEN,50.97142857142857
 Kazakhstan,KAZ,8.342857142857143
 Kyrgyzstan,KGZ,8.1
 Tajikistan,TJK,1.7
 Turkmenistan,TKM,0
 Uzbekistan,UZB,0
 China,CHN,0.9428571428571428
-China. Hong Kong Special Administrative Region,,0.4875
+China. Hong Kong Special Administrative Region,HKG,0.4875
 China. Macao Special Administrative Region,,0.7285714285714286
 China. Taiwan Province of China,,0.7833333333333333
-Democratic People's Republic of Korea,,4.8
+Democratic People's Republic of Korea,PRK,4.8
 Japan,JPN,0.36249999999999993
 Mongolia,MNG,8.4375
-Republic of Korea,,0.7750000000000001
-Brunei Darussalam,,0.5
+Republic of Korea,KOR,0.7750000000000001
+Brunei Darussalam,BRM,0.5
 Cambodia,KHM,2.34
 Indonesia,IDN,0.5285714285714286
-Lao People's Democratic Republic,,0
+Lao People's Democratic Republic,LAO,0
 Malaysia,MYS,2.1
 Myanmar,MMR,2.025
 Philippines,PHL,8.675
 Singapore,SGP,0.36249999999999993
 Thailand,THA,5.071428571428571
-Timor-Leste,,3.85
-Viet Nam,,1.42
+Timor-Leste,TLS,3.85
+Vietnam,VNM,1.42
 Afghanistan,AFG,4.6000000000000005
 Bangladesh,BGD,2.6999999999999997
 Bhutan,BTN,3.1333333333333333
 India,IND,3.7625
-Iran (Islamic Republic of),,2.55
+Iran (Islamic Republic of),IRN,2.55
 Maldives,MDV,1.4000000000000001
 Nepal,NPL,2.7199999999999998
 Pakistan,PAK,7.4142857142857155
@@ -155,21 +155,21 @@ Oman,OMN,1.4374999999999998
 Qatar,QAT,0.4625
 Saudi Arabia,SAU,0
 State of Palestine,,0.7999999999999999
-Syrian Arab Republic,,2.45
+Syrian Arab Republic,SYR,2.45
 Turkey,TUR,4.616666666666666
 United Arab Emirates,ARE,0.7
 Yemen,YEM,5.1000000000000005
 Belarus,BLR,4.55
 Bulgaria,BGR,1.883333333333333
-Czechia,,0.9333333333333332
+Czechia,CZE,0.9333333333333332
 Hungary,HUN,1.5
 Poland,POL,1.1
-Republic of Moldova,,5.42857142857143
+Republic of Moldova,MDA,5.42857142857143
 Romania,ROU,1.833333333333333
-Russian Federation,,15.125
+Russian Federation,RUS,15.125
 Slovakia,SVK,1.425
 Ukraine,UKR,5.283333333333333
-Channel Islands,,0.6
+Channel Islands,CHI,0.6
 Denmark,DNK,0.8857142857142858
 Estonia,EST,5.0874999999999995
 Finland,FIN,2.0142857142857142
@@ -192,15 +192,15 @@ Gibraltar,GIB,0
 Greece,GRC,1.3250000000000002
 Holy See,,0
 Italy,ITA,0.8999999999999999
-Kosovo under UNSCR 1244,,3.72
+Kosovo under UNSCR 1244,XKX,3.72
 Malta,MLT,1.64
 Montenegro,MNE,2.8125
 Portugal,PRT,1.2375
 San Marino,SMR,0
-Serbia,,1.525
+Serbia,SRB,1.525
 Slovenia,SVN,0.7374999999999999
 Spain,ESP,0.8374999999999999
-The former Yugoslav Republic of Macedonia,,1.5714285714285714
+The former Yugoslav Republic of Macedonia,MKD,1.5714285714285714
 Austria,AUT,0.6875
 Belgium,BEL,1.8142857142857145
 France,FRA,1.3499999999999996
@@ -219,7 +219,7 @@ Solomon Islands,SLB,4.55
 Vanuatu,VUT,2.3
 Guam,GUM,1.7399999999999998
 Kiribati,KIR,7.25
-Micronesia (Federated States of),,4.5
+Micronesia (Federated States of),FSM,4.5
 Nauru,NRU,0
 Palau,PLW,3.1
 American Samoa,ASM,4.166666666666667
