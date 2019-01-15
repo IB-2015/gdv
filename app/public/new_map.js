@@ -20,7 +20,7 @@ var height = window.innerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeight;
 
-var max_homicide_country;
+var max_homicide_country = null;
 var max_homicide_sub_region;
 var max_homicide_region;
 
@@ -315,8 +315,9 @@ function drawMap(geojson, sub_regions, continents) {
 
       pathTransition = path.transition()
       if (selected) {
-        pathTransition.style("fill", "red").duration(1000);
-        pathTransition.style("stroke", "blue").duration(500);
+        // pathTransition.style("fill", "red").duration(1000);
+        pathTransition.style("stroke", "yellow").duration(500);
+        pathTransition.style("stroke-width", 5);
       } else {
         pathTransition.style("fill", color_config[category].fill).duration(1000);
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
@@ -344,7 +345,7 @@ function drawMap(geojson, sub_regions, continents) {
       dblclick(d)
     });
 
-    setAllMaxHomicideValues();
+    // colorByHomicide();
     for (i = 0; i < geojson.features.length; i++) {
       var country = map_svg.append('g')
       .attr("category", "country")
@@ -364,7 +365,7 @@ function drawMap(geojson, sub_regions, continents) {
         .style("fill", color_config.country.fill)//function(d) {return d.homicide != undefined ? "rgb(" + (isNaN(d.homicide[year]) ? 0 : d.homicide[year] /50*255)+",0,0)" : })
         .style("stroke", color_config.country.stroke)
         .style("opacity", 0.5)
-        .call(map_element_cc);
+        // .call(map_element_cc);
 
         path.node().parentNode.setAttribute("region", path.attr("region"));
         path.node().parentNode.setAttribute("sub_region", path.attr("sub_region"));
@@ -389,7 +390,7 @@ function drawMap(geojson, sub_regions, continents) {
         .style("fill", color_config.sub_region.fill)
         .style("stroke", color_config.sub_region.stroke)
         .style("opacity", 0.5)
-        .call(map_element_cc);;
+        // .call(map_element_cc);;
 
         path.node().parentNode.setAttribute("region", path.attr("region"));
         path.node().parentNode.setAttribute("name", path.attr("id"));
@@ -412,10 +413,12 @@ function drawMap(geojson, sub_regions, continents) {
         .style("fill", color_config.region.fill)
         .style("stroke", color_config.region.stroke)
         .style("opacity", 1.0)
-        .call(map_element_cc);
+        // .call(map_element_cc);
 
         path.node().parentNode.setAttribute("name", path.attr("id"));
       }
+
+      colorByHomicide(map_element_cc)
 
       gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
 
@@ -464,7 +467,33 @@ function getCountriesForName(name) {
   return countries;
 }
 
-function setAllMaxHomicideValues() {
+// function homicideCountry() {
+//   all_countries = []
+//   geojson_countries.features
+//   .forEach(function(d) {
+//     if (d.properties.sub_region != undefined) {
+//         for (key in geojson_schemes)
+//           if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
+//             all_sub_regions[key].push(d.id)
+//           }
+//         for (key in geojson_continents)
+//           if (key == d.properties.region) {
+//             all_regions[key].push(d.id)
+//           }
+//         }
+//     all_countries.push(d.id)
+//   });
+//
+//   pr_c = []
+//   all_countries.forEach(function(d) {
+//     pr_c.push(getHomicideData([d]))
+//   })
+//
+//   return Promise.all(pr_c)
+//
+// }
+
+function colorByHomicide(map_element_cc) {
 
   all_countries = []
   all_sub_regions = {}
@@ -495,13 +524,26 @@ function setAllMaxHomicideValues() {
   })
 
   Promise.all(pr_c).then(data => {
+    countries = {}
     values = []
+    i = 0
     data.forEach(function(d) {
       val = d[0] != undefined ? d[0].value : null
       values.push(val)
+      countries[all_countries[i++]] = val
     })
     max_homicide_country=Math.max(...values);
     console.log("Country Max: " + max_homicide_country);
+    map_svg.selectAll('g[category=country]').select('path').each(function(d) {
+      d3.select(this).transition().style("fill", function(d) {
+        red = countries[d.getAttribute('name')] /max_homicide_country
+        red_value = red * 255
+        console.log(d.getAttribute('name'));
+        console.log(countries[d.getAttribute('name')]);
+        console.log(red);
+        return `rgb(${red_value}, 0, 0)`;
+      }).duration(2000)
+    })
   })
 
   pr_sr = []
@@ -509,12 +551,25 @@ function setAllMaxHomicideValues() {
     pr_sr.push(getHomicideData(all_sub_regions[key]));
   Promise.all(pr_sr).then(data => {
     values = []
+    i = 0
+    keys = Object.keys(all_sub_regions);
     data.forEach(function(d) {
       val = d[0] != undefined ? d[0].value : null
       values.push(val)
+      all_sub_regions[keys[i++]] = val
     })
     max_homicide_sub_region=Math.max(...values);
     console.log("Sub Region Max: " + max_homicide_sub_region);
+    map_svg.selectAll('g[category=sub_region]').select('path').each(function(d) {
+      d3.select(this).transition().style("fill", function(d) {
+        red = all_sub_regions[d.getAttribute('name')] /max_homicide_sub_region
+        red_value = red * 255
+        console.log(d.getAttribute('name'));
+        console.log(all_sub_regions[d.getAttribute('name')]);
+        console.log(red);
+        return `rgb(${red_value}, 0, 0)`;
+      }).duration(2000)
+    })
   })
 
   pr_r = []
@@ -522,12 +577,36 @@ function setAllMaxHomicideValues() {
     pr_r.push(getHomicideData(all_regions[key]));
   Promise.all(pr_r).then(data => {
     values = []
+    i = 0
+    keys = Object.keys(all_regions);
     data.forEach(function(d) {
       val = d[0] != undefined ? d[0].value : null
       values.push(val)
+      all_regions[keys[i++]] = val
     })
     max_homicide_region=Math.max(...values);
     console.log("Region Max: " + max_homicide_region);
+    map_svg.selectAll('g[category=region]').select('path').each(function(d) {
+      d3.select(this).transition().style("fill", function(d) {
+        red = all_regions[d.getAttribute('name')] /max_homicide_region
+        red_value = red * 255
+        console.log(d.getAttribute('name'));
+        console.log(all_regions[d.getAttribute('name')]);
+        console.log(red);
+        return `rgb(${red_value}, 0, 0)`;
+      }).duration(2000)
+    })
+
+    console.log(Object.keys(all_regions));
+    // for (key in all_regions) {
+    //   console.log(key);
+    //   console.log(all_regions[key]);
+    //   getHomicideData(all_regions[key]).then(function(d) {
+    //     console.log(key + ": " + d[0].value);
+    //   });
+    // }
+
+    map_svg.selectAll('path').call(map_element_cc)
   })
 
 }
