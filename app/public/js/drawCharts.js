@@ -1,13 +1,19 @@
-const draw = (id, name, countries) => {
-  dataObject = null;
-  getData(countries).then(function(data) {
+const draw = (id, name, countries, upper_name, upper_layer_countries) => {
+  dataObject = {};
+  dataObjectUpper = {};
+  promises = [getData(countries), getData(upper_layer_countries)]
+  Promise.all(promises).then(function(data) {
     // console.log(data);
     // dataObject.assault = data[0];
-    dataObject.homicide = data[0];
-    dataObject.education = data[1];
-    dataObject.gdp = data[2];
-    dataObject.gini = data[3];
-    render_data = build_render_date(id, name, dataObject);
+    dataObject.homicide = data[0][0];
+    dataObject.education = data[0][1];
+    dataObject.gdp = data[0][2];
+    dataObject.gini = data[0][3];
+    dataObjectUpper.homicide = data[1][0];
+    dataObjectUpper.education = data[1][1];
+    dataObjectUpper.gdp = data[1][2];
+    dataObjectUpper.gini = data[1][3];
+    render_data = build_render_date(id, name, dataObject, upper_name, dataObjectUpper);
     drawRadarChart(id, render_data);
   })
 
@@ -28,16 +34,21 @@ const getData = (countries) => {
   return Promise.all(promises);
 }
 
-const build_render_date = (id, name, dataObject) => {
+const build_render_date = (id, name, dataObject, upper_name, dataObjectUpper) => {
   // console.log(dataObject);
   name = dataObject.gini[0].country == undefined ? name : dataObject.gini[0].country;
+  name = name.replace(new RegExp("_", "g"), " ")
   homicide = dataObject.homicide[0];
   education = dataObject.education[0];
   gdp = dataObject.gdp[0];
   gini = dataObject.gini[0];
-  // console.log(education.value);
-  // console.log(gdp.value);
-  // console.log(gini.value);
+
+  upper_name = upper_name.replace(new RegExp("_", "g"), " ")
+  upper_homicide = dataObjectUpper.homicide[0];
+  upper_education = dataObjectUpper.education[0];
+  upper_gdp = dataObjectUpper.gdp[0];
+  upper_gini = dataObjectUpper.gini[0];
+
   return {
     "radar" : [
     {
@@ -57,7 +68,7 @@ const build_render_date = (id, name, dataObject) => {
         {axis: "gini", value: 100 - 50.0}
       ]
     }],
-    "bar": [{"name": name, "homicide": homicide.value}, {"name": "Europe", "homicide": 11.4}]
+    "bar": [{"name": name, "homicide": homicide.value}, {"name": upper_name, "homicide": upper_homicide.value}]
   }
 
   // return [

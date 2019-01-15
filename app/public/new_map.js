@@ -176,6 +176,11 @@ function drawMap(geojson, sub_regions, continents) {
     show(layer[layer_index % layer.length]);
   }
 
+  function getPreviousLayer() {
+    return layer_index % 3 - 1 < 0 ? "world" : layer[layer_index % 3 - 1]
+  }
+
+
   function getSecondLayer() {
     return layer[(layer_index+1) % 3];
   }
@@ -252,16 +257,37 @@ function drawMap(geojson, sub_regions, continents) {
     var map_element_cc = clickcancel();
     map_element_cc.on('click', function(d, index) {
       name = ""
-      if (d.properties != undefined)
+      sub_region = ""
+      region = ""
+      category = ""
+      if (d.properties != undefined) {
         name = d.properties.name
-      else
+        sub_region = d.properties.sub_region
+        region = d.properties.region
+      } else {
         name = d.getAttribute('name')
+        sub_region = d.getAttribute('sub_region')
+        region = d.getAttribute('region')
+        category = d.getAttribute('category')
+      }
+
+      upper_name = d.getAttribute(getPreviousLayer());
+
+      upper_layer_countries = null;
+
+      upper_layer_countries = getCountriesForName(upper_name);
 
       selected_countries = getCountriesForName(name)
       value = {
         "category": d3.select(`[name=${name}]`).attr('category'),
         "name": name,
         "countries": selected_countries
+      }
+
+      upper_layer_value = {
+        "category": d3.select(`[name=${upper_name}]`).attr('category'),
+        "name": upper_name,
+        "countries": upper_layer_countries
       }
 
       selection1 = selected_objects[0]
@@ -337,11 +363,11 @@ function drawMap(geojson, sub_regions, continents) {
 
       if (drawLeft) {
         d3.select("#country1").selectAll("*").remove();
-        draw("#country1", selected_objects[0].name, value.countries)
+        draw("#country1", selected_objects[0].name, value.countries, upper_name, upper_layer_value.countries)
       }
       if (drawRight) {
         d3.select("#country2").selectAll("*").remove();
-        draw("#country2", selected_objects[1].name, value.countries)
+        draw("#country2", selected_objects[1].name, value.countries, upper_name, upper_layer_value.countries)
       }
 
     });

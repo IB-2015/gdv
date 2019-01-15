@@ -45,7 +45,6 @@ const drawRadarChart = (id, data) => {
 }
 
 const drawBarChart = (svg, cfg, data, className) => {
-  console.log(className);
   var width = cfg.w;
   var height = cfg.h * 1.5;
 
