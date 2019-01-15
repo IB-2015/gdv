@@ -220,7 +220,7 @@ function drawMap(geojson, sub_regions, continents) {
         .each(function(d) {
           d3.select(this)
           .transition()
-          .style("opacity", 1.0)
+          .style("opacity", 1)
           .duration(1000)
         })
 
@@ -304,8 +304,7 @@ function drawMap(geojson, sub_regions, continents) {
         deselected_name = selected_objects[index].name
         selected_objects[index] = value
       }
-
-      console.log(selected_objects);
+      // console.log(selected_objects);
 
       category = d3.select(`[name=${name}]`).attr('category');
       path = d3.select(`[name=${name}]`).select('path');
@@ -316,9 +315,9 @@ function drawMap(geojson, sub_regions, continents) {
       pathTransition = path.transition()
       if (selected) {
         if (drawLeft)
-          pathTransition.style("stroke", "green").duration(1000);
+          pathTransition.style("stroke", "#083D77").duration(1000);
         if (drawRight)
-          pathTransition.style("stroke", "yellow").duration(1000);
+          pathTransition.style("stroke", "#26532B").duration(1000);
         pathTransition.style("stroke-width", 5).duration(1000);
       } else {
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
@@ -337,10 +336,13 @@ function drawMap(geojson, sub_regions, continents) {
       }
 
       if (drawLeft) {
-        draw("#country1", value.countries)
+        d3.select("#country1").selectAll("*").remove();
+        draw("#country1", selected_objects[0].name, value.countries)
       }
-      if (drawRight)
-        draw("#country2", value.countries)
+      if (drawRight) {
+        d3.select("#country2").selectAll("*").remove();
+        draw("#country2", selected_objects[1].name, value.countries)
+      }
 
     });
     map_element_cc.on('dblclick', function(d, index) {
@@ -354,7 +356,6 @@ function drawMap(geojson, sub_regions, continents) {
       .attr("selected", false)
       .selectAll('path')
       .data([geojson.features[i]]);
-      year = 2006
       var path = country.enter()
         .append('path')
         .attr("region", function(d) { return (d.scheme == undefined ? "none" : d.scheme["Region Name"].replace(new RegExp(" ", "g"), "_"));})
@@ -414,7 +415,7 @@ function drawMap(geojson, sub_regions, continents) {
         .on('mouseout', enable_map_dblclick)
         .style("fill", color_config.region.fill)
         .style("stroke", color_config.region.stroke)
-        .style("opacity", 1.0)
+        .style("opacity", 1)
         .style("stroke-width", 1)
         // .call(map_element_cc);
 
@@ -600,7 +601,7 @@ function colorByHomicide(map_element_cc) {
       }).duration(2000)
     })
 
-    console.log(Object.keys(all_regions));
+    // console.log(Object.keys(all_regions));
     // for (key in all_regions) {
     //   console.log(key);
     //   console.log(all_regions[key]);

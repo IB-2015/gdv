@@ -5,7 +5,7 @@ const drawRadarChart = (id, data) => {
   RadarChart.defaultConfig.h = d3v3.select(id).node().offsetHeight;
 
   radar_data = data.radar
-  console.log(radar_data[0].className);
+  // console.log(radar_data[0].className);
   var chart = RadarChart.chart();
   var cfg = chart.config(); // retrieve default config
   var svg = d3v3.select(id).append('svg')
@@ -40,12 +40,12 @@ const drawRadarChart = (id, data) => {
   //   // setTimeout(render, 1000);
   // }
   // render();
-
-  drawBarChart(svg, cfg, data.bar)
+  className = id.split('#')[1]
+  drawBarChart(svg, cfg, data.bar, className)
 }
 
-const drawBarChart = (svg, cfg, data) => {
-
+const drawBarChart = (svg, cfg, data, className) => {
+  console.log(className);
   var width = cfg.w;
   var height = cfg.h * 1.5;
 
@@ -94,8 +94,22 @@ const drawBarChart = (svg, cfg, data) => {
 
   ///////////////////////
   // Bars
+  var bar0 = chart.selectAll(".bar")
+      .data([data[0]])
+    .enter().append("rect")
+      .attr("class", className)
+      .attr("x", function(d) { return x(d['name']); })
+      .attr("y", height)
+      .attr("width", x.rangeBand())
+      .attr("height", 0);
+
+  bar0.transition()
+      .duration(1500)
+      .ease("elastic")
+      .attr("y", function(d) { return y(d['homicide']); })
+      .attr("height", function(d) { return height - y(d['homicide']); })
   var bar = chart.selectAll(".bar")
-      .data(data)
+      .data([data[1]])
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d['name']); })

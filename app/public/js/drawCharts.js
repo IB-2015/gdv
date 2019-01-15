@@ -1,19 +1,19 @@
-const draw = (id, countries) => {
+const draw = (id, name, countries) => {
   dataObject = null;
   getData(countries).then(function(data) {
-    console.log(data);
+    // console.log(data);
     // dataObject.assault = data[0];
     dataObject.homicide = data[0];
     dataObject.education = data[1];
     dataObject.gdp = data[2];
     dataObject.gini = data[3];
-    render_data = build_render_date(id, dataObject);
+    render_data = build_render_date(id, name, dataObject);
     drawRadarChart(id, render_data);
   })
 
 
-  console.log("LINE 207 um text position zu ändern !!!!");
-  console.log("LINE 83 bzw 216 um skalierung zu ändern !!!!");
+  // console.log("LINE 207 um text position zu ändern !!!!");
+  // console.log("LINE 83 bzw 216 um skalierung zu ändern !!!!");
 
 }
 
@@ -28,21 +28,21 @@ const getData = (countries) => {
   return Promise.all(promises);
 }
 
-const build_render_date = (id, dataObject) => {
-  year = 2006;
-  name = dataObject.homicide[0].country;
+const build_render_date = (id, name, dataObject) => {
+  // console.log(dataObject);
+  name = dataObject.gini[0].country == undefined ? name : dataObject.gini[0].country;
   homicide = dataObject.homicide[0];
   education = dataObject.education[0];
   gdp = dataObject.gdp[0];
   gini = dataObject.gini[0];
-  console.log(education.value);
-  console.log(gdp.value);
-  console.log(gini.value);
+  // console.log(education.value);
+  // console.log(gdp.value);
+  // console.log(gini.value);
   return {
     "radar" : [
     {
       className: id.split('#')[1], // optional can be used for styling
-      name: name,
+      name: name.replace(new RegExp("_", "g"), " "),
       axes: [
         {axis: "education", value: education.value *100},
         {axis: "gdp", value: (gdp.value / 126655.598081739) * 100},
