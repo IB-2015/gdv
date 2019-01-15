@@ -1,5 +1,11 @@
 .bar {
-  fill: steelblue;
+  fill: #C8C8C8;
+}
+.country1 {
+  fill: #083D77;
+}
+.country2 {
+  fill: #26532B;
 }
 
 .bar:hover {
