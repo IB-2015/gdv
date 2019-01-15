@@ -20,7 +20,7 @@ Burkina Faso,BFA,37.55
 Bangladesh,BGD,32.25
 Bulgaria,BGR,35.4375
 Bahrain,BHR,0
-|Bahamas, The|,BHS,0
+Bahamas,BHS,0
 Bosnia and Herzegovina,BIH,32.93333333333333
 Belarus,BLR,27.49
 Belize,BLZ,0
@@ -40,8 +40,8 @@ Chile,CHL,47.89999999999999
 China,CHN,42.5
 Cote d'Ivoire,CIV,42.35
 Cameroon,CMR,44.7
-|Congo, Dem. Rep.|,COD,42.1
-|Congo, Rep.|,COG,48.9
+Democratic Republic of the Congo,COD,42.1
+Congo,COG,48.9
 Colombia,COL,53.2
 Comoros,COM,45.3
 Cabo Verde,CPV,47.2
@@ -64,7 +64,7 @@ East Asia & Pacific,EAS,0
 Europe & Central Asia (excluding high income),ECA,0
 Europe & Central Asia,ECS,0
 Ecuador,ECU,47.5
-|Egypt, Arab Rep.|,EGY,31.05
+Egypt,EGY,31.05
 Euro area,EMU,0
 Eritrea,ERI,0
 Spain,ESP,35.33333333333334
@@ -76,14 +76,14 @@ Finland,FIN,27.455555555555556
 Fiji,FJI,38.55
 France,FRA,32.855555555555554
 Faroe Islands,FRO,0
-|Micronesia, Fed. Sts.|,FSM,40.1
+Micronesia,FSM,40.1
 Gabon,GAB,38.0
 United Kingdom,GBR,33.82222222222222
 Georgia,GEO,38.16
 Ghana,GHA,42.4
 Gibraltar,GIB,0
 Guinea,GIN,36.55
-|Gambia, The|,GMB,39.75
+Gambia,GMB,39.75
 Guinea-Bissau,GNB,50.7
 Equatorial Guinea,GNQ,0
 Greece,GRC,34.911111111111104
@@ -93,7 +93,7 @@ Guatemala,GTM,48.3
 Guam,GUM,0
 Guyana,GUY,0
 High income,HIC,0
-|Hong Kong SAR, China|,HKG,0
+Hong Kong China,HKG,0
 Honduras,HND,53.06
 Heavily indebted poor countries (HIPC),HPC,0
 Croatia,HRV,32.142857142857146
@@ -109,7 +109,7 @@ Isle of Man,IMN,0
 India,IND,35.1
 Not classified,INX,0
 Ireland,IRL,32.34444444444444
-|Iran, Islamic Rep.|,IRN,39.43333333333333
+Islamic Republic of Iran,IRN,39.43333333333333
 Iraq,IRQ,29.5
 Iceland,ISL,27.875000000000004
 Israel,ISR,41.666666666666664
@@ -123,7 +123,7 @@ Kyrgyz Republic,KGZ,29.200000000000006
 Cambodia,KHM,0
 Kiribati,KIR,0
 St. Kitts and Nevis,KNA,0
-|Korea, Rep.|,KOR,31.96666666666667
+Republic of Korea,KOR,31.96666666666667
 Kuwait,KWT,0
 Latin America & Caribbean (excluding high income),LAC,0
 Lao PDR,LAO,35.9
@@ -143,7 +143,7 @@ Late-demographic dividend,LTE,0
 Lithuania,LTU,35.477777777777774
 Luxembourg,LUX,32.08888888888889
 Latvia,LVA,35.71111111111111
-|Macao SAR, China|,MAC,0
+Macao,MAC,0
 St. Martin (French part),MAF,0
 Morocco,MAR,39.5
 Monaco,MCO,0
@@ -154,7 +154,7 @@ Middle East & North Africa,MEA,0
 Mexico,MEX,44.900000000000006
 Marshall Islands,MHL,0
 Middle income,MIC,0
-|Macedonia, FYR|,MKD,39.016666666666666
+The former Yugoslav Republic of Macedonia,MKD,39.016666666666666
 Mali,MLI,33.0
 Malta,MLT,29.233333333333334
 Myanmar,MMR,38.1
@@ -190,7 +190,7 @@ Papua New Guinea,PNG,41.9
 Poland,POL,0
 Pre-demographic dividend,PRE,0
 Puerto Rico,PRI,0
-|Korea, Dem. People’s Rep.|,PRK,0
+Democratic People's Republic of Korea,PRK,0
 Portugal,PRT,35.955555555555556
 Paraguay,PRY,49.78
 West Bank and Gaza,PSE,34.7
@@ -251,7 +251,7 @@ Uruguay,URY,42.42
 United States,USA,41.0
 Uzbekistan,UZB,0
 St. Vincent and the Grenadines,VCT,0
-|Venezuela, RB|,VEN,0
+Venezuela,VEN,0
 British Virgin Islands,VGB,0
 Virgin Islands (U.S.),VIR,0
 Vietnam,VNM,36.120000000000005
@@ -259,7 +259,7 @@ Vanuatu,VUT,37.6
 World,WLD,0
 Samoa,WSM,42.0
 Kosovo,XKX,28.55
-|Yemen, Rep.|,YEM,36.7
+Yemen,YEM,36.7
 South Africa,ZAF,63.13333333333333
 Zambia,ZMB,56.35
 Zimbabwe,ZWE,43.2

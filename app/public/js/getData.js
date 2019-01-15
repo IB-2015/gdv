@@ -53,6 +53,7 @@ const getGINIData = (countryList) => {
     });
 }
 
+
 let populationData;
 getPopulationData().then(data => populationData = data);
 
@@ -74,7 +75,7 @@ const selectData = (data, countryList) => {
         return new Error("No country selected")
     }
     //More than 1 country selected -> return average data for given list of countries
-    if(countryList.length > 1){
+    else if(countryList.length > 1){
       let averageCountries = {
           'name': 'averageOfCountries',
           'value': 0.0
@@ -96,6 +97,7 @@ const selectData = (data, countryList) => {
       return [averageCountries]; 
     } else {
         //Only 1 country selected
+        
         return countryData;
     }
 }

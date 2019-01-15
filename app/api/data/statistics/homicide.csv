@@ -113,7 +113,7 @@ Turkmenistan,TKM,0
 Uzbekistan,UZB,0
 China,CHN,0.9428571428571428
 China. Hong Kong Special Administrative Region,HKG,0.4875
-China. Macao Special Administrative Region,,0.7285714285714286
+Macao,MAC,0.7285714285714286
 China. Taiwan Province of China,,0.7833333333333333
 Democratic People's Republic of Korea,PRK,4.8
 Japan,JPN,0.36249999999999993
@@ -134,7 +134,7 @@ Afghanistan,AFG,4.6000000000000005
 Bangladesh,BGD,2.6999999999999997
 Bhutan,BTN,3.1333333333333333
 India,IND,3.7625
-Iran (Islamic Republic of),IRN,2.55
+Islamic Republic of Iran,IRN,2.55
 Maldives,MDV,1.4000000000000001
 Nepal,NPL,2.7199999999999998
 Pakistan,PAK,7.4142857142857155
