@@ -106,7 +106,7 @@ Peru,PER,6.3
 Suriname,SUR,8.55
 Uruguay,URY,6.799999999999999
 Venezuela (Bolivarian Republic of),,50.97142857142857
-Kazakhstan*,,8.342857142857143
+Kazakhstan,KAZ,8.342857142857143
 Kyrgyzstan,KGZ,8.1
 Tajikistan,TJK,1.7
 Turkmenistan,TKM,0
@@ -115,7 +115,7 @@ China,CHN,0.9428571428571428
 China. Hong Kong Special Administrative Region,,0.4875
 China. Macao Special Administrative Region,,0.7285714285714286
 China. Taiwan Province of China,,0.7833333333333333
-Democratic People's Republic of Korea###,,4.8
+Democratic People's Republic of Korea,,4.8
 Japan,JPN,0.36249999999999993
 Mongolia,MNG,8.4375
 Republic of Korea,,0.7750000000000001
@@ -125,7 +125,7 @@ Indonesia,IDN,0.5285714285714286
 Lao People's Democratic Republic,,0
 Malaysia,MYS,2.1
 Myanmar,MMR,2.025
-Philippines*,,8.675
+Philippines,PHL,8.675
 Singapore,SGP,0.36249999999999993
 Thailand,THA,5.071428571428571
 Timor-Leste,,3.85
@@ -138,15 +138,15 @@ Iran (Islamic Republic of),,2.55
 Maldives,MDV,1.4000000000000001
 Nepal,NPL,2.7199999999999998
 Pakistan,PAK,7.4142857142857155
-Sri Lanka*,,3.78
+Sri Lanka,LKA,3.78
 Armenia,ARM,2.5875
 Azerbaijan,AZE,2.3000000000000003
 Bahrain,BHR,0.575
 Cyprus,CYP,1.1833333333333333
 Georgia,GEO,5.119999999999999
-Iraq**,,9.9
-Iraq (Central Iraq)**,,10.985714285714284
-Iraq (Kurdistan Region)**,,2.46
+Iraq,IRQ,9.9
+Iraq (Central Iraq),,10.985714285714284
+Iraq (Kurdistan Region),,2.46
 Israel,ISR,1.7399999999999998
 Jordan,JOR,1.7166666666666666
 Kuwait,KWT,1.8199999999999998
@@ -163,10 +163,10 @@ Belarus,BLR,4.55
 Bulgaria,BGR,1.883333333333333
 Czechia,,0.9333333333333332
 Hungary,HUN,1.5
-Poland#,,1.1
+Poland,POL,1.1
 Republic of Moldova,,5.42857142857143
-Romania#,,1.833333333333333
-Russian Federation##,,15.125
+Romania,ROU,1.833333333333333
+Russian Federation,,15.125
 Slovakia,SVK,1.425
 Ukraine,UKR,5.283333333333333
 Channel Islands,,0.6
@@ -180,9 +180,9 @@ Latvia,LVA,3.514285714285714
 Lithuania,LTU,7.233333333333333
 Norway,NOR,0.8375
 Sweden,SWE,0.9166666666666669
-United Kingdom (England and Wales),,1.0571428571428574
-United Kingdom (Northern Ireland),,1.275
-United Kingdom (Scotland),,1.6249999999999998
+United Kingdom,GBR,1.0571428571428574
+United Kingdom,GBR,1.275
+United Kingdom,GBR,1.6249999999999998
 United Kingdom of Great Britain and Northern Ireland,,1.1166666666666667
 Albania,ALB,4.042857142857143
 Andorra,AND,1.2
@@ -202,7 +202,7 @@ Slovenia,SVN,0.7374999999999999
 Spain,ESP,0.8374999999999999
 The former Yugoslav Republic of Macedonia,,1.5714285714285714
 Austria,AUT,0.6875
-Belgium#,,1.8142857142857145
+Belgium,BEL,1.8142857142857145
 France,FRA,1.3499999999999996
 Germany,DEU,0.8666666666666667
 Liechtenstein,LIE,2.766666666666667
@@ -211,7 +211,7 @@ Monaco,MCO,0
 Netherlands,NLD,0.8500000000000001
 Switzerland,CHE,0.65
 Australia,AUS,1.1499999999999997
-New Zealand#,,1.12
+New Zealand,NZL,1.12
 Fiji,FJI,2.4714285714285715
 New Caledonia,NCL,3.85
 Papua New Guinea,PNG,7.8
