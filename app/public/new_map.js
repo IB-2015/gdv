@@ -315,7 +315,10 @@ function drawMap(geojson, sub_regions, continents) {
 
       pathTransition = path.transition()
       if (selected) {
-        pathTransition.style("stroke", "green").duration(500);
+        if (drawLeft)
+          pathTransition.style("stroke", "green").duration(500);
+        if (drawRight)
+          pathTransition.style("stroke", "yellow").duration(500);
         pathTransition.style("stroke-width", 5).duration(500);
       } else {
         pathTransition.style("stroke", color_config[category].stroke).duration(500);
