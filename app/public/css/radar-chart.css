@@ -11,6 +11,10 @@
   fill: #083D77;
   stroke: none;
 }
+.area.upper, .upper .circle {
+  fill: #C8C8C8;
+  stroke: black;
+}
 .area.country2, .country2 .circle {
   fill: #26532B;
   stroke: none;

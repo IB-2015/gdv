@@ -53,7 +53,7 @@ const build_render_date = (id, name, dataObject, upper_name, dataObjectUpper) =>
     "radar" : [
     {
       className: id.split('#')[1], // optional can be used for styling
-      name: name.replace(new RegExp("_", "g"), " "),
+      name: name,
       axes: [
         {axis: "education", value: education.value *100},
         {axis: "gdp", value: (gdp.value / 126655.598081739) * 100},
@@ -61,11 +61,12 @@ const build_render_date = (id, name, dataObject, upper_name, dataObjectUpper) =>
       ]
     },
     {
-      className: "Test", // optional can be used for styling
+      className: "upper", // optional can be used for styling
+      name: upper_name,
       axes: [
-        {axis: "education", value: 0.25 *100},
-        {axis: "gdp", value: (12568 / 126655.598081739) * 100},
-        {axis: "gini", value: 100 - 50.0}
+        {axis: "education", value: upper_education.value *100},
+        {axis: "gdp", value: (upper_gdp.value / 126655.598081739) * 100},
+        {axis: "gini", value: 100 - upper_gini.value}
       ]
     }],
     "bar": [{"name": name, "homicide": homicide.value}, {"name": upper_name, "homicide": upper_homicide.value}]
