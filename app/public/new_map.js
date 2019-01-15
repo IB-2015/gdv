@@ -275,17 +275,25 @@ function drawMap(geojson, sub_regions, continents) {
 
       upper_layer_countries = null;
 
-      upper_layer_countries = getCountriesForName(upper_name);
+      if (getPreviousLayer() == 'world') {
+        upper_name = 'World'
+        upper_layer_countries = [];
+        geojson_countries.features.forEach(function(d) {
+          upper_layer_countries.push(d.id);
+        })
+      } else {
+        upper_layer_countries = getCountriesForName(upper_name);
+      }
 
       selected_countries = getCountriesForName(name)
       value = {
-        "category": d3.select(`[name=${name}]`).attr('category'),
+        // "category": d3.select(`[name=${name}]`).attr('category'),
         "name": name,
         "countries": selected_countries
       }
 
       upper_layer_value = {
-        "category": d3.select(`[name=${upper_name}]`).attr('category'),
+        // "category": d3.select(`[name=${upper_name}]`).attr('category'),
         "name": upper_name,
         "countries": upper_layer_countries
       }
