@@ -1,5 +1,13 @@
 const years = ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016']
 
+const getPopulationData = () => {
+    return fetch('/api/data/statistics/population')
+    .then(res => {return res.json()})
+    .then(populationData => { 
+        let rawData = d3.csvParse(populationData);
+        return rawData;
+      });
+}
 const getAssaultData = (countryList) => {
     return fetch('/api/data/statistics/assault')
   .then(res => {return res.json()})
@@ -45,6 +53,9 @@ const getGINIData = (countryList) => {
     });
 }
 
+let populationData;
+getPopulationData().then(data => populationData = data);
+
 //Selects data for a given list ofcountries from given dataset
 //If more than 1 country is in the list, an average for all countries in the list is processed
 const selectData = (data, countryList) => {
@@ -69,14 +80,20 @@ const selectData = (data, countryList) => {
           'value': 0.0
       };
 
+      let populationTotal = 0;
       countryData.forEach(country => {
-          //Iterate over each objects and sum up value
-          averageCountries['value'] += country['value'];
+          populationData.forEach(popData => {
+              if(country.ISO_A3 === popData.ISO_A3){
+                  averageCountries['value'] += (country.value * parseFloat(popData.value));
+                  populationTotal += parseFloat(popData.value);
+              }
+          })
+
       })
       
       //Divide by total number of found countries to get the average
-      averageCountries['value'] = averageCountries['value']/countryList.length;
-      return [averageCountries];
+      averageCountries['value'] = averageCountries['value']/populationTotal;
+      return [averageCountries]; 
     } else {
         //Only 1 country selected
         return countryData;

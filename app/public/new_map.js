@@ -536,14 +536,14 @@ function colorByHomicide(map_element_cc) {
       countries[all_countries[i++]] = val
     })
     max_homicide_country=Math.max(...values);
-    console.log("Country Max: " + max_homicide_country);
+    //console.log("Country Max: " + max_homicide_country);
     map_svg.selectAll('g[category=country]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = countries[d.getAttribute('name')] /max_homicide_country
         red_value = 255 - red * 255
-        console.log(d.getAttribute('name'));
-        console.log(countries[d.getAttribute('name')]);
-        console.log(red);
+       // console.log(d.getAttribute('name'));
+       // console.log(countries[d.getAttribute('name')]);
+        //console.log(red);
         return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
@@ -562,14 +562,14 @@ function colorByHomicide(map_element_cc) {
       all_sub_regions[keys[i++]] = val
     })
     max_homicide_sub_region=Math.max(...values);
-    console.log("Sub Region Max: " + max_homicide_sub_region);
+    //console.log("Sub Region Max: " + max_homicide_sub_region);
     map_svg.selectAll('g[category=sub_region]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = all_sub_regions[d.getAttribute('name')] /max_homicide_sub_region
         red_value = 255 - red * 255
-        console.log(d.getAttribute('name'));
-        console.log(all_sub_regions[d.getAttribute('name')]);
-        console.log(red);
+        //console.log(d.getAttribute('name'));
+        //console.log(all_sub_regions[d.getAttribute('name')]);
+        //console.log(red);
         return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
@@ -588,14 +588,14 @@ function colorByHomicide(map_element_cc) {
       all_regions[keys[i++]] = val
     })
     max_homicide_region=Math.max(...values);
-    console.log("Region Max: " + max_homicide_region);
+    //console.log("Region Max: " + max_homicide_region);
     map_svg.selectAll('g[category=region]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = all_regions[d.getAttribute('name')] /max_homicide_region
         red_value = 255 - red * 255
-        console.log(d.getAttribute('name'));
-        console.log(all_regions[d.getAttribute('name')]);
-        console.log(red);
+        //console.log(d.getAttribute('name'));
+        //console.log(all_regions[d.getAttribute('name')]);
+        //console.log(red);
         return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
@@ -615,7 +615,7 @@ function colorByHomicide(map_element_cc) {
 }
 
 function printStuff() {
-  console.log("print stuff");
+  //console.log("print stuff");
   allCountryPaths = d3.selectAll("path")
   .filter(function(d, i) {
     return this.parentNode.getAttribute('category') == 'country' && this.parentNode.getAttribute('region') == 'Africa';
@@ -627,13 +627,13 @@ function printStuff() {
     "features": []
   }
   allCountryPaths.each(function(d, i) {
-    console.log(this.parentNode.getAttribute('name'));
+    //console.log(this.parentNode.getAttribute('name'));
     e = d3.select(this)['_groups'][0][0]['__data__']
     delete e['scheme']
     collection.features.push(e);
     ii++;
   })
-  console.log(JSON.stringify(collection));
+  //console.log(JSON.stringify(collection));
 }
 
 function clickcancel() {

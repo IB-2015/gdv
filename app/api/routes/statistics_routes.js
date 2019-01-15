@@ -17,4 +17,6 @@ router.get('/gdp', statisticsController.getGDPData);
 
 router.get('/gini', statisticsController.getGINIData);
 
+router.get('/population', statisticsController.getPopulationData);
+
 

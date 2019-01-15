@@ -48,4 +48,8 @@ exports.getGINIData = (req, res, next) => {
     fs.readFile(DATA_PATH+'gini.csv', "utf8").then(data => res.status(200).json(data))
 }
 
+exports.getPopulationData = (req, res, next) => {
+    fs.readFile(DATA_PATH+'population.csv', "utf8").then(data => res.status(200).json(data))
+}
+
 
