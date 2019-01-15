@@ -5,7 +5,7 @@ const drawRadarChart = (id, data) => {
   RadarChart.defaultConfig.h = d3v3.select(id).node().offsetHeight;
 
   radar_data = data.radar
-  console.log(radar_data[0].className);
+  // console.log(radar_data[0].className);
   var chart = RadarChart.chart();
   var cfg = chart.config(); // retrieve default config
   var svg = d3v3.select(id).append('svg')
