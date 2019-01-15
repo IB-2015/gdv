@@ -37,12 +37,12 @@ var map_svg = d3.select('#content').append('svg')
 
 var color_config = {
   "region": {
-    "fill": "black",
-    "stroke": "DarkGray"
+    "fill": "white",
+    "stroke": "gray"
   },
   "sub_region": {
     "fill": "gray",
-    "stroke": "black"
+    "stroke": "gray"
   },
   "country": {
     "fill": "white",
@@ -315,7 +315,7 @@ function drawMap(geojson, sub_regions, continents) {
 
       pathTransition = path.transition()
       if (selected) {
-        pathTransition.style("stroke", "yellow").duration(500);
+        pathTransition.style("stroke", "green").duration(500);
         pathTransition.style("stroke-width", 5).duration(500);
       } else {
         pathTransition.style("stroke", color_config[category].stroke).duration(500);
@@ -537,11 +537,11 @@ function colorByHomicide(map_element_cc) {
     map_svg.selectAll('g[category=country]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = countries[d.getAttribute('name')] /max_homicide_country
-        red_value = red * 255
+        red_value = 255 - red * 255
         console.log(d.getAttribute('name'));
         console.log(countries[d.getAttribute('name')]);
         console.log(red);
-        return `rgb(${red_value}, 0, 0)`;
+        return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
   })
@@ -563,11 +563,11 @@ function colorByHomicide(map_element_cc) {
     map_svg.selectAll('g[category=sub_region]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = all_sub_regions[d.getAttribute('name')] /max_homicide_sub_region
-        red_value = red * 255
+        red_value = 255 - red * 255
         console.log(d.getAttribute('name'));
         console.log(all_sub_regions[d.getAttribute('name')]);
         console.log(red);
-        return `rgb(${red_value}, 0, 0)`;
+        return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
   })
@@ -589,11 +589,11 @@ function colorByHomicide(map_element_cc) {
     map_svg.selectAll('g[category=region]').select('path').each(function(d) {
       d3.select(this).transition().style("fill", function(d) {
         red = all_regions[d.getAttribute('name')] /max_homicide_region
-        red_value = red * 255
+        red_value = 255 - red * 255
         console.log(d.getAttribute('name'));
         console.log(all_regions[d.getAttribute('name')]);
         console.log(red);
-        return `rgb(${red_value}, 0, 0)`;
+        return `rgb(255, ${red_value}, ${red_value})`;
       }).duration(2000)
     })
 
