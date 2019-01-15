@@ -315,12 +315,11 @@ function drawMap(geojson, sub_regions, continents) {
 
       pathTransition = path.transition()
       if (selected) {
-        // pathTransition.style("fill", "red").duration(1000);
         pathTransition.style("stroke", "yellow").duration(500);
-        pathTransition.style("stroke-width", 5);
+        pathTransition.style("stroke-width", 5).duration(500);
       } else {
-        pathTransition.style("fill", color_config[category].fill).duration(1000);
-        pathTransition.style("stroke", color_config[category].stroke).duration(1000);
+        pathTransition.style("stroke", color_config[category].stroke).duration(500);
+        pathTransition.style("stroke-width", 1);
       }
 
       if (deselected_name != null) {
@@ -413,6 +412,7 @@ function drawMap(geojson, sub_regions, continents) {
         .style("fill", color_config.region.fill)
         .style("stroke", color_config.region.stroke)
         .style("opacity", 1.0)
+        .style("stroke-width", 1)
         // .call(map_element_cc);
 
         path.node().parentNode.setAttribute("name", path.attr("id"));
