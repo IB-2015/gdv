@@ -9,6 +9,7 @@
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+    overflow-y: hidden;
   }
 
   body div {
@@ -17,13 +18,29 @@
   }
 
   body div.mapRow {
-    height: 60%;
+    height: 55%;
   }
 
   body div.countryRow {
-    height: 40%;
+    height: 35%;
   }
 
+  .navbar-brand-centered {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: #eee;
+}
+.navbar {
+  margin-bottom: 0px; 
+  align-content: center;
+}
+.navbar>.container .navbar-brand-centered, 
+.navbar>.container-fluid .navbar-brand-centered {
+    margin-left: -80px;
+}
   #content {
     position: relative;
   }
