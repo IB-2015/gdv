@@ -5,23 +5,27 @@ const drawRadarChart = (id, data) => {
   RadarChart.defaultConfig.h = d3v3.select(id).node().offsetHeight;
 
   radar_data = data.radar
+  let elemId
+  if(id === '#country1'){elemId = 'country1'}
+  else{elemId = 'country2'}
   // console.log(radar_data[0].className);
   var chart = RadarChart.chart();
   var cfg = chart.config(); // retrieve default config
   var svg = d3v3.select(id).append('svg')
-    .attr('width', cfg.w + cfg.w + 0)
-    .attr('height', cfg.h + cfg.h / 4);
+  .attr('id', elemId+'chart')
+  .attr('width', cfg.w + cfg.w + 0)
+  .attr('height', cfg.h + cfg.h / 4);
     svg.append("text")
           .style("font-size", "1.5em")
           .style("font-weight", "bold")
           .attr("x", cfg.w )
-          .attr("y", cfg.h/10)
+          .attr("y", cfg.h/12)
           .attr("text-anchor", "middle")
           .style("text-decoration", "underline")
           .text(radar_data[0].name);
   var main_g = svg.append('g').classed('single', 1).datum(radar_data).call(chart);
   main_g
-    .attr('transform', 'translate('+0+','+ (cfg.h * 0.2) +')')
+    .attr('transform', 'translate('+0+','+ (cfg.h * 0.15) +')')
 
   // many radars
   chart.config({w: cfg.w / 2, h: cfg.h / 2, axisText: true, levels: 0, circles: false});
@@ -52,7 +56,7 @@ const drawBarChart = (svg, cfg, data, className, max) => {
 
   var chart = svg
     .append("g")
-      .attr("transform", "translate(" + cfg.w * 2.5 + "," + cfg.h * 0.4  + ")");
+      .attr("transform", "translate(" + cfg.w * 2.5 + "," + cfg.h * 0.35  + ")");
 
   ///////////////////////
   // Scales

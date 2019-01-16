@@ -97,7 +97,6 @@ const selectData = (data, countryList) => {
       return [averageCountries]; 
     } else {
         //Only 1 country selected
-        
         return countryData;
     }
 }

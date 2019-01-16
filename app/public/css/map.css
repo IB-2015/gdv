@@ -8,6 +8,7 @@
     font-size: 14px;
     margin: 0px;
     padding: 0px;
+    overflow-x: hidden;
   }
 
   body div {
@@ -41,6 +42,22 @@
     /* stroke: gray; */
     margin: 0px;
     padding: 0px;
+  }
+
+  #country1chart {
+    position: absolute;
+    margin: auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+  }
+
+  #country2chart {
+    position: absolute;
+    margin: auto;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
   }
 
   g {
