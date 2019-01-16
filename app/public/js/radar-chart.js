@@ -83,6 +83,7 @@ var RadarChart = {
           return d3v3.max(d.axes, function(o){ return o.value; });
         }));
         maxValue -= cfg.minValue;
+        maxValue = 100
 
         var allAxis = data[0].axes.map(function(i, j){ return {name: i.axis, xOffset: (i.xOffset)?i.xOffset:0, yOffset: (i.yOffset)?i.yOffset:0}; });
         var total = allAxis.length;
@@ -205,8 +206,28 @@ var RadarChart = {
               return ((p < 0.1) ? '1em' : ((p > 0.9) ? '0' : '0.5em'));
             })
             .text(function(d) { return d.name; })
-            .attr('x', function(d, i){ return d.xOffset+ (cfg.w/2-radius2)+getHorizontalPosition(i, radius2, cfg.factorLegend); })
-            .attr('y', function(d, i){ return d.yOffset+ (cfg.h/2-radius2)+getVerticalPosition(i, radius2, cfg.factorLegend); });
+            .style("font-size","1em")
+            .style("font-weight", "bold")
+            .attr('x', function(d, i){
+              x = 0;
+              if (i == 0) {
+                x = 0;
+              } else if (i == 1) {
+                x = -10
+              } else if (i == 2) {
+                x = 10;
+              }
+              return x +  d.xOffset+ (cfg.w/2-radius2)+getHorizontalPosition(i, radius2, cfg.factorLegend); })
+            .attr('y', function(d, i){
+              y = 0;
+              if (i == 0) {
+                y = -10;
+              } else if (i == 1) {
+                y = 10
+              } else if (i == 2) {
+                y = 10;
+              }
+              return y + d.yOffset+ (cfg.h/2-radius2)+getVerticalPosition(i, radius2, cfg.factorLegend); });
           }
         }
 

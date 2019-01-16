@@ -8,12 +8,12 @@
   fill-opacity: 0.9;
 }
 .area.country1, .country1 .circle {
-  fill: #083D77;
+  fill: #533A71;
   stroke: none;
 }
 .area.upper, .upper .circle {
-  fill: #C8C8C8;
-  stroke: black;
+  fill: #FF7B07;
+  stroke: none;
 }
 .area.country2, .country2 .circle {
   fill: #26532B;

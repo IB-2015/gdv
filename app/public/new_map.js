@@ -349,7 +349,7 @@ function drawMap(geojson, sub_regions, continents) {
       pathTransition = path.transition()
       if (selected) {
         if (drawLeft)
-          pathTransition.style("stroke", "#083D77").duration(1000);
+          pathTransition.style("stroke", "#533A71").duration(1000);
         if (drawRight)
           pathTransition.style("stroke", "#26532B").duration(1000);
         pathTransition.style("stroke-width", 5).duration(1000);
@@ -369,14 +369,22 @@ function drawMap(geojson, sub_regions, continents) {
         deselected_pathTransition.style("stroke-width", 1).duration(1000);
       }
 
+
       if (drawLeft) {
-        d3.select("#country1").selectAll("*").remove();
-        draw("#country1", selected_objects[0].name, value.countries, upper_name, upper_layer_value.countries)
+        selected_objects[0].upper_name = upper_name;
+        selected_objects[0].upper_countries = upper_layer_value.countries;
+        console.log(selected_objects);
       }
       if (drawRight) {
-        d3.select("#country2").selectAll("*").remove();
-        draw("#country2", selected_objects[1].name, value.countries, upper_name, upper_layer_value.countries)
+        // d3.select("#country2").selectAll("*").remove();
+        selected_objects[1].upper_name = upper_name;
+        selected_objects[1].upper_countries = upper_layer_value.countries;
+        // draw("#country2", selected_objects[1].name, value.countries, upper_name, upper_layer_value.countries)
       }
+
+      d3.select("#country1").selectAll("*").remove();
+      d3.select("#country2").selectAll("*").remove();
+      draw(selected_objects[0], selected_objects[1])
 
     });
     map_element_cc.on('dblclick', function(d, index) {

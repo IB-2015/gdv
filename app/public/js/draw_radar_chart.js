@@ -12,10 +12,11 @@ const drawRadarChart = (id, data) => {
     .attr('width', cfg.w + cfg.w + 0)
     .attr('height', cfg.h + cfg.h / 4);
     svg.append("text")
+          .style("font-size", "1.5em")
+          .style("font-weight", "bold")
           .attr("x", cfg.w )
           .attr("y", cfg.h/10)
           .attr("text-anchor", "middle")
-          .style("font-size", "16px")
           .style("text-decoration", "underline")
           .text(radar_data[0].name);
   var main_g = svg.append('g').classed('single', 1).datum(radar_data).call(chart);
@@ -41,10 +42,11 @@ const drawRadarChart = (id, data) => {
   // }
   // render();
   className = id.split('#')[1]
-  drawBarChart(svg, cfg, data.bar, className)
+  max = data.barMax;
+  drawBarChart(svg, cfg, data.bar, className, max)
 }
 
-const drawBarChart = (svg, cfg, data, className) => {
+const drawBarChart = (svg, cfg, data, className, max) => {
   var width = cfg.w;
   var height = cfg.h * 1.5;
 
@@ -59,7 +61,7 @@ const drawBarChart = (svg, cfg, data, className) => {
       .rangeRoundBands([0, width], .1);
 
   var y = d3v3.scale.linear()
-      .domain([0, d3v3.max(data, function(d) { return d['homicide']; }) * 1.1])
+      .domain([0, max])
       .range([height, 0]);
 
   chart.append("text")

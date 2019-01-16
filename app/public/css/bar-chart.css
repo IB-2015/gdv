@@ -1,16 +1,13 @@
 .bar {
-  fill: #C8C8C8;
+  fill: #FF7B07;
 }
 .country1 {
-  fill: #083D77;
+  fill: #533A71 ;
 }
 .country2 {
   fill: #26532B;
 }
 
-.bar:hover {
-  fill: lightblue;
-}
 
 .axis text {
   font: 10px sans-serif;

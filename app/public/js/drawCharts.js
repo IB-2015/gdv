@@ -1,20 +1,49 @@
-const draw = (id, name, countries, upper_name, upper_layer_countries) => {
-  dataObject = {};
-  dataObjectUpper = {};
-  promises = [getData(countries), getData(upper_layer_countries)]
+const draw = (left, right) => {
+  lname = left.name
+  lcountries = left.countries
+  lupper_name = left.upper_name
+  lupper_layer_countries = left.upper_countries
+  ldataObject = {};
+  ldataObjectUpper = {};
+  rname = right != null ? right.name : "";
+  rcountries = right != null ? right.countries : []
+  rupper_name = right != null ? right.upper_name : ""
+  rupper_layer_countries = right != null ? right.upper_countries : []
+  rdataObject = {};
+  rdataObjectUpper = {};
+  promises = [getData(lcountries), getData(lupper_layer_countries), getData(rcountries), getData(rupper_layer_countries)]
   Promise.all(promises).then(function(data) {
     // console.log(data);
     // dataObject.assault = data[0];
-    dataObject.homicide = data[0][0];
-    dataObject.education = data[0][1];
-    dataObject.gdp = data[0][2];
-    dataObject.gini = data[0][3];
-    dataObjectUpper.homicide = data[1][0];
-    dataObjectUpper.education = data[1][1];
-    dataObjectUpper.gdp = data[1][2];
-    dataObjectUpper.gini = data[1][3];
-    render_data = build_render_date(id, name, dataObject, upper_name, dataObjectUpper);
-    drawRadarChart(id, render_data);
+    ldataObject.homicide = data[0][0];
+    ldataObject.education = data[0][1];
+    ldataObject.gdp = data[0][2];
+    ldataObject.gini = data[0][3];
+    ldataObjectUpper.homicide = data[1][0];
+    ldataObjectUpper.education = data[1][1];
+    ldataObjectUpper.gdp = data[1][2];
+    ldataObjectUpper.gini = data[1][3];
+    // console.log(Array.isArray(ldataObjectUpper.gini));
+
+    // dataObject.assault = data[0];
+    rdataObject.homicide = data[2][0];
+    rdataObject.education = data[2][1];
+    rdataObject.gdp = data[2][2];
+    rdataObject.gini = data[2][3];
+    rdataObjectUpper.homicide = data[3][0];
+    rdataObjectUpper.education = data[3][1];
+    rdataObjectUpper.gdp = data[3][2];
+    rdataObjectUpper.gini = data[3][3];
+    // console.log(Array.isArray(rdataObjectUpper.gini));
+    lrender_data = build_render_date("#country1", lname, ldataObject, lupper_name, ldataObjectUpper, Array.isArray(ldataObjectUpper.gini));
+    rrender_data = build_render_date("#country2", rname, rdataObject, rupper_name, rdataObjectUpper, Array.isArray(rdataObjectUpper.gini));
+
+    lrender_data.barMax = Math.max(lrender_data.bar[0].homicide, lrender_data.bar[1].homicide, rrender_data.bar[0].homicide, rrender_data.bar[1].homicide);
+    rrender_data.barMax = Math.max(lrender_data.bar[0].homicide, lrender_data.bar[1].homicide, rrender_data.bar[0].homicide, rrender_data.bar[1].homicide);
+    if (lrender_data.bar[0].name != "none")
+      drawRadarChart("#country1", lrender_data);
+    if (rrender_data.bar[0].name != "none")
+      drawRadarChart("#country2", rrender_data);
   })
 
 
@@ -34,42 +63,67 @@ const getData = (countries) => {
   return Promise.all(promises);
 }
 
-const build_render_date = (id, name, dataObject, upper_name, dataObjectUpper) => {
+const build_render_date = (id, name, dataObject, upper_name, dataObjectUpper, build) => {
   // console.log(dataObject);
-  name = dataObject.gini[0].country == undefined ? name : dataObject.gini[0].country;
-  name = name.replace(new RegExp("_", "g"), " ")
-  homicide = dataObject.homicide[0];
-  education = dataObject.education[0];
-  gdp = dataObject.gdp[0];
-  gini = dataObject.gini[0];
+  if (build) {
+    name = dataObject.gini[0].country == undefined ? name : dataObject.gini[0].country;
+    name = name.replace(new RegExp("_", "g"), " ")
+    homicide = dataObject.homicide[0];
+    education = dataObject.education[0];
+    gdp = dataObject.gdp[0];
+    gini = dataObject.gini[0];
 
-  upper_name = upper_name.replace(new RegExp("_", "g"), " ")
-  upper_homicide = dataObjectUpper.homicide[0];
-  upper_education = dataObjectUpper.education[0];
-  upper_gdp = dataObjectUpper.gdp[0];
-  upper_gini = dataObjectUpper.gini[0];
+    upper_name = upper_name.replace(new RegExp("_", "g"), " ")
+    upper_homicide = dataObjectUpper.homicide[0];
+    upper_education = dataObjectUpper.education[0];
+    upper_gdp = dataObjectUpper.gdp[0];
+    upper_gini = dataObjectUpper.gini[0];
 
-  return {
-    "radar" : [
-    {
-      className: id.split('#')[1], // optional can be used for styling
-      name: name,
-      axes: [
-        {axis: "education", value: education.value *100},
-        {axis: "gdp", value: (gdp.value / 126655.598081739) * 100},
-        {axis: "gini", value: 100 - gini.value}
-      ]
-    },
-    {
-      className: "upper", // optional can be used for styling
-      name: upper_name,
-      axes: [
-        {axis: "education", value: upper_education.value *100},
-        {axis: "gdp", value: (upper_gdp.value / 126655.598081739) * 100},
-        {axis: "gini", value: 100 - upper_gini.value}
-      ]
-    }],
-    "bar": [{"name": name, "homicide": homicide.value}, {"name": upper_name, "homicide": upper_homicide.value}]
+    return {
+      "radar" : [
+      {
+        className: id.split('#')[1], // optional can be used for styling
+        name: name,
+        axes: [
+          {axis: "Education", value: education.value *100},
+          {axis: "Wealth", value: (gdp.value / 126655.598081739) * 100},
+          {axis: "Distribution of Wealth", value: 100 - gini.value}
+        ]
+      },
+      {
+        className: "upper", // optional can be used for styling
+        name: upper_name,
+        axes: [
+          {axis: "education", value: upper_education.value *100},
+          {axis: "gdp", value: (upper_gdp.value / 126655.598081739) * 100},
+          {axis: "gini", value: 100 - upper_gini.value}
+        ]
+      }],
+      "bar": [{"name": name, "homicide": homicide.value}, {"name": upper_name, "homicide": upper_homicide.value}]
+    }
+  } else {
+    return {
+      "radar" : [
+      {
+        className: "none", // optional can be used for styling
+        name: "none",
+        axes: [
+          {axis: "education", value: 0},
+          {axis: "gdp", value: 0},
+          {axis: "gini", value: 0}
+        ]
+      },
+      {
+        className: "none", // optional can be used for styling
+        name: "none",
+        axes: [
+          {axis: "education", value: 0},
+          {axis: "gdp", value: 0},
+          {axis: "gini", value: 0}
+        ]
+      }],
+      "bar": [{"name": "none", "homicide": 0}, {"name": "none", "homicide": 0}]
+    }
   }
 
   // return [
