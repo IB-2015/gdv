@@ -48,6 +48,36 @@ const drawRadarChart = (id, data) => {
   className = id.split('#')[1]
   max = data.barMax;
   drawBarChart(svg, cfg, data.bar, className, max)
+  addLegend(svg, data.bar, className);
+}
+
+const addLegend = (svg, data, className) => {
+  c = ""
+  if (className == "country1") {
+    c = "#533A71"
+  } else {
+    c = "#26532B"
+  }
+  svg.append("text")
+    .attr("x", 30)
+    .attr("y", 60)
+    .attr("dy", ".35em")
+    .text(data[0].name);
+  svg.append("circle")
+    .attr("cx", 10)
+    .attr("cy", 60)
+    .attr("r", 5)
+    .style("fill", c)
+  svg.append("text")
+      .attr("x", 30)
+      .attr("y", 80)
+      .attr("dy", ".35em")
+      .text(data[1].name);
+  svg.append("circle")
+    .attr("cx", 10)
+    .attr("cy", 80)
+    .attr("r", 5)
+    .style("fill", "#FF7B07")
 }
 
 const drawBarChart = (svg, cfg, data, className, max) => {
