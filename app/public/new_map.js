@@ -466,6 +466,8 @@ function drawMap(geojson, sub_regions, continents) {
 
       colorByHomicide(map_element_cc)
 
+      allData()
+
       gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
 
       function sortGAfterIndex() {
@@ -513,31 +515,49 @@ function getCountriesForName(name) {
   return countries;
 }
 
-// function homicideCountry() {
-//   all_countries = []
-//   geojson_countries.features
-//   .forEach(function(d) {
-//     if (d.properties.sub_region != undefined) {
-//         for (key in geojson_schemes)
-//           if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
-//             all_sub_regions[key].push(d.id)
-//           }
-//         for (key in geojson_continents)
-//           if (key == d.properties.region) {
-//             all_regions[key].push(d.id)
-//           }
-//         }
-//     all_countries.push(d.id)
-//   });
-//
-//   pr_c = []
-//   all_countries.forEach(function(d) {
-//     pr_c.push(getHomicideData([d]))
-//   })
-//
-//   return Promise.all(pr_c)
-//
-// }
+function allData() {
+
+  all_countries = []
+  all_sub_regions = {}
+  all_regions = {}
+
+  for (key in geojson_schemes)
+    all_sub_regions[key] = []
+  for (key in geojson_continents)
+    all_regions[key] = []
+
+  geojson_countries.features
+  .forEach(function(d) {
+    if (d.properties.sub_region != undefined) {
+        for (key in geojson_schemes)
+          if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
+            all_sub_regions[key].push(d.id)
+          }
+        for (key in geojson_continents)
+          if (key == d.properties.region) {
+            all_regions[key].push(d.id)
+          }
+        }
+    all_countries.push(d.id)
+  });
+  pr_c = []
+  all_countries.forEach(function(d) {
+    pr_c.push(getData([d]))
+  })
+
+  for (key in all_sub_regions)
+    pr_c.push(getData(all_sub_regions[key]));
+
+  for (key in all_regions)
+    pr_c.push(getData(all_regions[key]));
+
+  Promise.all(pr_c).then(data => {
+    setData(data)
+    logData()
+    drawDotPlot()
+
+  })
+}
 
 function colorByHomicide(map_element_cc) {
 

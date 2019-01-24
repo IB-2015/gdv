@@ -52,14 +52,14 @@ const draw = (left, right) => {
 
 }
 
-const getData = (countries) => {
+const getData = (countries, name) => {
   dataObject = {}
   promises = []
   // promises.push(getAssaultData(countries));
-  promises.push(getHomicideData(countries));
-  promises.push(getEducationData(countries));
-  promises.push(getGDPData(countries));
-  promises.push(getGINIData(countries));
+  promises.push(getHomicideData(countries, name));
+  promises.push(getEducationData(countries, name));
+  promises.push(getGDPData(countries, name));
+  promises.push(getGINIData(countries, name));
   return Promise.all(promises);
 }
 
