@@ -15,8 +15,7 @@ external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
 
 ---
 
-## Abstract
- Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten, der Bildungsqualität, des Bruttoinlandsproduktes und dem GINI-Index gehen wir der Frage nach, wie sich die Lebensumstände einzelner Individuen wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf Gewaltverbrechen auswirken können und ob es Gemeinsam-oder Auffälligkeiten bestimmter Regionen gibt
+Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten, der Bildungsqualität, des Bruttoinlandsproduktes und dem GINI-Index gehen wir der Frage nach, wie sich die Lebensumstände einzelner Individuen wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf Gewaltverbrechen auswirken können und ob es Gemeinsam-oder Auffälligkeiten bestimmter Regionen gibt
 
 ## Einführung / Konzept
 - Einführung: Was ist die Motivation hinter Ihrem Projekt? <br>
@@ -24,29 +23,31 @@ external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
 
 - Konzept: Was ist die Grundidee, Hauptfrage, wichtigste Hypothese? <br>
   Aus einer Reihe an konzeptionellen Fragestellungen führen die folgenden gemeinsam zum zentralen Thema der Lebensumstände und dessen Auswirkungen auf die Mordrate. <br>
-  -   Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Rate von Gewaltverbrechen und Morden?
+  - Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Rate von Gewaltverbrechen und Morden?
   - Führt eine große Kluft zwischen Arm und Reich zu mehr Gewaltverbrechen?
-  -  Führen schlechte Bildung und Armut zu einer erhöten Gewaltbereitschaft?
+  - Führen schlechte Bildung und Armut zu einer erhöten Gewaltbereitschaft?
 
 
 
 ## Daten / Auswertung
 Zu unseren Fragestellungen passend entschieden wir uns für folgende SDG´s als Indikatoren welche die Faktoren für Lebensumstände wiederspiegeln sollen.
-- 4 - Hochwertige Bildung
+- SDG 4 - Hochwertige Bildung
   - UN Human Development Reports
   - Education Index
   - Human Development Index
-- 8 - Menschenwürdige Arbeit und Wirtschaftswachstum
+- SDG 8 - Menschenwürdige Arbeit und Wirtschaftswachstum
   - 8.1.1 Annual growth rate of real GDP per capita
-- 10 - Weniger Ungleichheiten
+- SDG 10 - Weniger Ungleichheiten
   - OECD Income inequality
-- 16 - Frieden, Gerechtigkeit und starke Institutionen
+- SDG 16 - Frieden, Gerechtigkeit und starke Institutionen
   - 16.1.1 Number of victims of intentional homicide per 100.000 population
 
 <br>
 Auffällig war, dass es verhältnismäßig sehr viel Zeit in Anspruch nahm, ansatzweise vielfältige und vollständige Datensätze zu finden. Da es keine zentrale Erfassung bestimmter Daten gibt und diese von Land zu Land unterschiedlich gehandhabt werden sind zumeist viele Zusammenstellungen mit verschiedenen Werten vorzufinden. Insbesondere Datenlücken in bestimmten Zeitintervallen erschwerte eine so detailreiche Darstellung wie von uns geplant. Die vielversprechendste Lösung war die Bildung eines Mittelwerts über einen fest definierten Zeitraum.
 <br>
-![image-title-here](/images/image_files/Edu.jpg){:class="img-responsive"}
+![image-title-here](/images/Mordrate/TableauMordsVsBIP.JPG){:class="img-responsive"}
+![image-title-here](/images/Mordrate/TableauMordsVsEdu.JPG){:class="img-responsive"}
+![image-title-here](/images/Mordrate/TableauMordsVsGINI.JPG){:class="img-responsive"}
 <br>
 
 Was sich auch in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll erwies.
@@ -55,26 +56,32 @@ Was sich auch in einem ersten prototypischen Visualisierungsexperiment als Sinnv
 
 
 ### Prozess
-Sinnvolle Auswahl relevanter Experimente.<br>
+
 Während der Datenrecherche stießen wir neben
 dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten
 mit Visualisierungsexperimenten die wir zur Inspiration nahmen und im
 Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
- <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder -</a> <br>
-![image-title-here](/images/image_files/MGINI.jpg){:class="img-responsive"}
-<br>
-<a href="https://homicide.igarape.org.br/">Homicide Monitor -</a> <br>
-![image-title-here](/images/image_files/Edu.jpg){:class="img-responsive"} <br>
-<a href="http://apps.who.int/violence-info/homicide/">WHO Global Health Estimates - </a> <br>
-![image-title-here](/images/image_files/BIP.jpg){:class="img-responsive"} <br>
-<a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide - </a> <br>
 
 
-<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html"><img src="/images/verwandteArbeiten/GiniFactor.PNG" alt="drawing" style="width:200px;"/></a>
-<a href="https://homicide.igarape.org.br/"><img src="/images/verwandteArbeiten/hIgarape.PNG" alt="drawing" style="width:200px;"/></a>
-<a href="https://www.unodc.org/gsh/"><img src="/images/verwandteArbeiten/homicidePeryear.PNG" alt="drawing" style="width:200px;"/></a>
-<br>
+- <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder</a> <br>
+[BESCHREIBUNG]<br>
+Dieses Projekt untersucht den Einfluss der Einkommensungleichverteilung auf die Mordrate von Ländern, durch eine Visualisierung des Gini-Index im Vergleich zur Mordrage.<br>
+<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html"><img src="/images/Mordrate/GiniFactor.PNG" alt="drawing" style="width:400px;"/></a>
+
+- <a href="https://homicide.igarape.org.br/">Homicide Monitor</a> <br>
+[BESCHREIBUNG]<br>
+Der Homicide Monitor veranschaulicht weltweite Mordraten auf anschauliche Weise.<br>
+<a href="https://homicide.igarape.org.br/"><img src="/images/Mordrate/hIgarape.PNG" alt="drawing" style="width:400px;"/></a>
+
+- <a href="http://apps.who.int/violence-info/homicide/">WHO Global Health Estimates</a><br>
+[BESCHREIBUNG]<br>
+<a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/homicidePeryear.PNG" alt="drawing" style="width:400px;"/></a>
+
+- <a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide</a> <br>
+[BESCHREIBUNG]<br>
+<a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/UNODVGlobalStudyonHomicide.PNG" alt="drawing" style="width:400px;"/></a>
+
 
 
 
@@ -93,8 +100,7 @@ und dem im Paper unterscheidet gilt es noch zu klären.
 
 
 ### Implementierung
-Wie haben Sie die Visualisierung umgesetzt? Welche Tools haben Sie für welche Schritte eingesetzt?
-<br>
+
 Visualisiert wurde in einem interaktiven Screen
 dessen obere Hälfte eine Weltkarte und in dessen unterer Hälften jeweils 2 Diagramme
 passend zur oben getroffenen Auswahl liegen.
@@ -115,15 +121,13 @@ nächst höhere Ebene zum Vergleich darstellt.
 Technisch umgesetzt wurde der Prototyp mittels
 node.js im Backend mit express.js und im Frontend mit d3.js
 
-{% highlight javascript %}
-function setup() {
-  Data data = loadData();
-  doSomeVisualization(data);
-}
-{% endhighlight %}
-
-
 ## Fazit
-- Reflektion: Haben Sie erreicht, was sie wollten? Ist Ihr Ergebnis hilfreich?
-- Ausblick: Welche weiteren Ideen haben Sie? Was könnten interessante
-nächste Schritte sein?
+### Ergebnisse
+Generell haben wir unser Ziel einer visuellen Übersicht und einer Möglichkeit des Vergleichs erreicht. Dieser Prototyp ist durch die visuelle Kartendarstellung, die Vergleichsmöglichkeiten zwischen Kontinenten, UN-Geoscheme und einzelnen Staaten sowie der Darstellung von Lebensqualität beschreibenden Faktoren vor allem für einen Vergleich der weltweiten Mordrate geeignet.
+
+### Ausblick
+Ein möglicher nächster Schritt in der Aussagekraft ist die Erhöhung des Detailgrads an Informationen, sodass man von einer zunächst recht oberflächlichen und stark aggregierten Betrachtung die Möglichkeit hat spezifische Werte, Daten und auch Trends zeigen zu können.
+Für einen besseren Überblick könnten auch Details on Demand auf der Karten und den Diagrammen sorgen.
+Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen schließen zu können.
+Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können. 
+
