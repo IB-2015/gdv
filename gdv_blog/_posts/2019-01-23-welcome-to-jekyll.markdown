@@ -18,7 +18,7 @@ author: Sascha Betzwieser, Markus Klatt, Eugen Krizki, Felix Navas und Anusan Ra
 
 ## Einführung / Konzept
 - Einführung: Was ist die Motivation hinter Ihrem Projekt? <br>
-  Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper( XXX(Titel und quelle)), dass die Auswirkungen bestimmter Faktoren auf die Lebensumstände behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte.
+  Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper(Whats causes violent crime? - Pablo Fajnzylber, European Economic Review 2000), dass die Auswirkungen bestimmter Faktoren auf die Lebensumstände behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte.
 
 - Konzept: Was ist die Grundidee, Hauptfrage, wichtigste Hypothese? <br>
   Aus einer Reihe an konzeptionellen Fragestellungen führen die folgenden gemeinsam zum zentralen Thema der Lebensumstände und dessen Auswirkungen auf die Mordrate. <br>
@@ -44,7 +44,9 @@ Zu unseren Fragestellungen passend entschieden wir uns für folgende SDG´s als 
 <br>
 Auffällig war, dass es verhältnismäßig sehr viel Zeit in Anspruch nahm, ansatzweise vielfältige und vollständige Datensätze zu finden. Da es keine zentrale Erfassung bestimmter Daten gibt und diese von Land zu Land unterschiedlich gehandhabt werden sind zumeist viele Zusammenstellungen mit verschiedenen Werten vorzufinden. Insbesondere Datenlücken in bestimmten Zeitintervallen erschwerte eine so detailreiche Darstellung wie von uns geplant. Die vielversprechendste Lösung war die Bildung eines Mittelwerts über einen fest definierten Zeitraum.
 
-![image-title-here](/images/image_files/fjords.jpg){:class="img-responsive"}
+![image-title-here](/images/image_files/TableauMordsVsBIP.JPG)
+![image-title-here](/images/image_files/TableauMordsVsEdu.JPG)
+![image-title-here](/images/image_files/TableauMordsVsGINI.JPG)
 <br>
 Was sich auch in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll erwies.
 
