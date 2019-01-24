@@ -546,10 +546,10 @@ function allData() {
   })
 
   for (key in all_sub_regions)
-    pr_c.push(getData(all_sub_regions[key]));
+    pr_c.push(getData(all_sub_regions[key], key));
 
   for (key in all_regions)
-    pr_c.push(getData(all_regions[key]));
+    pr_c.push(getData(all_regions[key], key));
 
   Promise.all(pr_c).then(data => {
     setData(data)
