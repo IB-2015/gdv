@@ -13,9 +13,15 @@ const drawDotPlot = () => {
   var chart = RadarChart.chart();
   var cfg = chart.config();
 
+  let width1 = cfg.w;
+  let height1 = cfg.h + cfg.h / 4;
+
   var svg = d3v3.select('#selection2').append('svg')
-  .attr('width', cfg.w)
-  .attr('height', cfg.h + cfg.h / 4);
+  .attr('width', width1)
+  .attr('height', height1)
+  .attr('id', 'dotplot2')
+  .attr("viewBox", "0 0 " + cfg.w/2 + " " + cfg.h )
+  .attr("preserveAspectRatio", "xMinYMin meet");
     svg.append("text")
           .style("font-size", "1.5em")
           .style("font-weight", "bold")
