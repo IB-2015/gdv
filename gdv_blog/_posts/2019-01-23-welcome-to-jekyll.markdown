@@ -11,6 +11,7 @@ image:
     title: image_files/Edu.jpg
     caption: Teaser
 author: Sascha Betzwieser, Markus Klatt, Eugen Krizki, Felix Navas und Anusan Ranjan
+external_url: http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html
 ---
 
 ## Abstract
@@ -59,7 +60,9 @@ dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten
 mit Visualisierungsexperimenten die wir zur Inspiration nahmen und im
 Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
-World Income, Inequality and Murder - <a>http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html</a> <br>
+World Income, Inequality and Murder - 
+<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">GINI</a>
+ <br>
 ![image-title-here](/images/image_files/TableauMordsVsBIP.jpg){:class="img-responsive"}
 <br>
 Homicide Monitor - <a>https://homicide.igarape.org.br/</a> <br>
