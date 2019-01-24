@@ -86,9 +86,7 @@ und dem im Paper unterscheidet gilt es noch zu klären.
 
 
 ### Implementierung
-Wie haben Sie die Visualisierung umgesetzt? Welche Tools haben Sie für welche Schritte eingesetzt?
-<br>
-Visualisiert wurde in einem interaktiven Screen
+Die Visualisiert wurde in einem interaktiven Screen
 dessen obere Hälfte eine Weltkarte und in dessen unterer Hälften jeweils 2 Diagramme
 passend zur oben getroffenen Auswahl liegen.
 Die Karte ist eine sogenannte Choroplethenkarte
@@ -117,6 +115,11 @@ function setup() {
 
 
 ## Fazit
-- Reflektion: Haben Sie erreicht, was sie wollten? Ist Ihr Ergebnis hilfreich?
-- Ausblick: Welche weiteren Ideen haben Sie? Was könnten interessante
-nächste Schritte sein?
+### Reflektion
+Generell haben wir unser Ziel einer visuellen Übersicht und einer Möglichkeit des Vergleichs erreicht. Dieser Prototyp ist durch die visuelle Kartendarstellung, die Vergleichsmöglichkeiten zwischen Kontinenten, UN-Geoscheme und einzelnen Staaten sowie der Darstellung von Lebensqualität beschreibenden Faktoren vor allem für einen Vergleich der weltweiten Mordrate geeignet.
+
+### Ausblick
+Ein möglicher nächster Schritt in der Aussagekraft ist die Erhöhung des Detailgrads an Informationen, sodass man von einer zunächst recht oberflächlichen und stark aggregierten Betrachtung die Möglichkeit hat spezifische Werte, Daten und auch Trends zeigen zu können.
+Für einen besseren Überblick könnten auch Details on Demand auf der Karten und den Diagrammen sorgen.
+Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen schließen zu können.
+Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können. 
