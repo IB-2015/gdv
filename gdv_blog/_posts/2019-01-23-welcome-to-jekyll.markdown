@@ -71,9 +71,9 @@ Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 <a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide - </a> <br>
 
 
-<img src="/images/verwandteArbeiten/GiniFactor.PNG" alt="drawing" style="width:200px;"/>
-<img src="/images/verwandteArbeiten/hIgarape.PNG" alt="drawing" style="width:200px;"/>
-<img src="/images/verwandteArbeiten/homicidePeryear.PNG" alt="drawing" style="width:200px;"/>
+<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html"><img src="/images/verwandteArbeiten/GiniFactor.PNG" alt="drawing" style="width:200px;"/></a>
+<a href="https://homicide.igarape.org.br/"><img src="/images/verwandteArbeiten/hIgarape.PNG" alt="drawing" style="width:200px;"/></a>
+<a href="https://www.unodc.org/gsh/"><img src="/images/verwandteArbeiten/homicidePeryear.PNG" alt="drawing" style="width:200px;"/></a>
 <br>
 
 
