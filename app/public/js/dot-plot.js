@@ -9,7 +9,7 @@ const logData = () => {
 }
 
 const drawDotPlot = () => {
-  console.log(data);
+  // console.log(data);
   var chart = RadarChart.chart();
   var cfg = chart.config();
 
