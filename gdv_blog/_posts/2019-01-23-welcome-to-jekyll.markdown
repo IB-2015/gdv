@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title:  "Visualisierung der weltweiten Mordrate"
 subheadline: Wie wirken sich Lebensumstände auf Gewalt aus?
 teaser: "Dieses Markdown-Template zeigt einige Möglichkeiten für die Projektdokumentation"
