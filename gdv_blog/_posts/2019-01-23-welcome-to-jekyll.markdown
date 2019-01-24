@@ -11,7 +11,8 @@ image:
     title: image_files/Edu.jpg
     caption: Teaser
 author: Sascha Betzwieser, Markus Klatt, Eugen Krizki, Felix Navas und Anusan Ranjan
-external_url: http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html
+external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
+
 ---
 
 ## Abstract
@@ -45,7 +46,7 @@ Zu unseren Fragestellungen passend entschieden wir uns für folgende SDG´s als 
 <br>
 Auffällig war, dass es verhältnismäßig sehr viel Zeit in Anspruch nahm, ansatzweise vielfältige und vollständige Datensätze zu finden. Da es keine zentrale Erfassung bestimmter Daten gibt und diese von Land zu Land unterschiedlich gehandhabt werden sind zumeist viele Zusammenstellungen mit verschiedenen Werten vorzufinden. Insbesondere Datenlücken in bestimmten Zeitintervallen erschwerte eine so detailreiche Darstellung wie von uns geplant. Die vielversprechendste Lösung war die Bildung eines Mittelwerts über einen fest definierten Zeitraum.
 <br>
-![image-title-here](/images/image_files/TableauMordsVsBIP.jpg){:class="img-responsive"}
+![image-title-here](/images/image_files/Edu.jpg){:class="img-responsive"}
 <br>
 
 Was sich auch in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll erwies.
@@ -60,16 +61,14 @@ dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten
 mit Visualisierungsexperimenten die wir zur Inspiration nahmen und im
 Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
-World Income, Inequality and Murder - 
-<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">GINI</a>
- <br>
-![image-title-here](/images/image_files/TableauMordsVsBIP.jpg){:class="img-responsive"}
+ <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder -</a> <br>
+![image-title-here](/images/image_files/MGINI.jpg){:class="img-responsive"}
 <br>
-Homicide Monitor - <a>https://homicide.igarape.org.br/</a> <br>
-![image-title-here](/images/image_files/TableauMordsVsEdu.jpg){:class="img-responsive"} <br>
-WHO Global Health Estimates - <a>http://apps.who.int/violence-info/homicide/</a> <br>
-![image-title-here](/images/image_files/TableauMordsVsGINI.jpg){:class="img-responsive"} <br>
-UNODV Global Study on Homicide - <a>https://www.unodc.org/gsh/</a> <br>
+<a href="https://homicide.igarape.org.br/">Homicide Monitor -</a> <br>
+![image-title-here](/images/image_files/Edu.jpg){:class="img-responsive"} <br>
+<a href="http://apps.who.int/violence-info/homicide/">WHO Global Health Estimates - </a> <br>
+![image-title-here](/images/image_files/BIP.jpg){:class="img-responsive"} <br>
+<a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide - </a> <br>
 
 
 ## Prototyp / Ergebnisse
