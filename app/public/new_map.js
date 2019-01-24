@@ -553,7 +553,6 @@ function allData() {
 
   Promise.all(pr_c).then(data => {
     setData(data)
-    logData()
     drawDotPlot()
 
   })

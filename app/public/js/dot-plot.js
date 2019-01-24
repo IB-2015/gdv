@@ -5,7 +5,7 @@ const setData = (d) => {
 }
 
 const logData = () => {
-  // console.log(data);
+  console.log(data);
 }
 
 const drawDotPlot = () => {
@@ -73,6 +73,48 @@ const drawDotPlot = () => {
       .attr("class", "y axis")
       .call(yAxis);
 
+  ////////////////////////
+  all_data = []
+  // 0 hom, 1 edu, 2 gdp, 3 gini
+  for (i in data) {
+    d = {"x": data[i][3][0], "y": data[i][0][0]};
+    if (d.x != undefined && d.y != undefined) {
+      all_data.push(d);
+    }
+  }
+  var circleGroups = chart.selectAll(".anscombe-circle-group")
+			    .data(all_data)
+			  .enter().append("g")
+			    // .attr("class","anscombe-circle-group")
+			    .attr("transform",function(d) { return "translate(" + x(d.x.value) + "," + y(d.y.value) + ")" })
+  var circleTextGroups = chart.selectAll(".anscombe-circle-group")
+			    .data(all_data)
+			  .enter().append("g")
+			    // .attr("class","anscombe-circle-group")
+			    .attr("transform",function(d) { return "translate(" + x(d.x.value) + "," + y(d.y.value) + ")" })
+
+	circleGroups.append("circle")
+	   // .attr("class", "circles")
+     .attr("name", function(d) {return d.x.country})
+	   .attr("r", 4)
+	   .style("fill", 'red')
+	   .style("stroke", 'black')
+	   .on("mouseenter", function(d) {
+	    	chart.select("text[name="+this.getAttribute('name').replace(new RegExp(" ", "g"), "_")+"]")
+	    	  .style("fill", "#000");
+	   })
+	   .on("mouseleave", function() {
+	    	chart.select("text[name="+this.getAttribute('name').replace(new RegExp(" ", "g"), "_")+"]")
+	    	  .style("fill", "none");
+	   });
+
+   circleTextGroups.append("text")
+            .attr("name", function(d) {return d.x.country.replace(new RegExp(" ", "g"), "_")})
+  			    .attr("dx", 8)
+  			    .attr("dy", 12)
+  			    .text(function(d) { return d.x.country + ", " + d.y.value; })
+  			    .style("fill","none")
+  			    .style("font","10px sans-serif");
   ///////////////////////
 
   ///////////////////////
