@@ -15,17 +15,30 @@ external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
 
 ---
 
-Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten, der Bildungsqualität, des Bruttoinlandsproduktes und dem GINI-Index gehen wir der Frage nach, wie sich die Lebensumstände einzelner Individuen wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf Gewaltverbrechen auswirken können und ob es Gemeinsam-oder Auffälligkeiten bestimmter Regionen gibt
+Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten gehen wir der Frage nach, wie sich die Lebensumstände wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf die Mordrate eines Kontinentes, einer Region oder eines Staates auswirken können und ob es Gemeinsam- oder Auffälligkeiten bestimmter Regionen gibt.
 
-## Einführung / Konzept
-- Einführung: Was ist die Motivation hinter Ihrem Projekt? <br>
-  Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper( XXX(Titel und quelle)), dass die Auswirkungen bestimmter Faktoren auf die Lebensumstände behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte.
+## Konzeption
+Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt 3.2 Visualisierungsprozess.
 
-- Konzept: Was ist die Grundidee, Hauptfrage, wichtigste Hypothese? <br>
-  Aus einer Reihe an konzeptionellen Fragestellungen führen die folgenden gemeinsam zum zentralen Thema der Lebensumstände und dessen Auswirkungen auf die Mordrate. <br>
-  - Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Rate von Gewaltverbrechen und Morden?
-  - Führt eine große Kluft zwischen Arm und Reich zu mehr Gewaltverbrechen?
-  - Führen schlechte Bildung und Armut zu einer erhöten Gewaltbereitschaft?
+# 1.1 Einführung
+Ziel des Projektes war die Visualisierung der weltweiten Mordrate anhand spezifischer Daten. Im speziellen Daten, welche für bzw. aus den Zielen der Sustainable Development Goals von zentraler Bedeutung sind.
+
+# 1.2 Motivation
+Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper.
+
+
+> “Whats causes violent crime?”
+Pablo Fajnzylber, European Economic Review 2000 https://siteresources.worldbank.org/DEC/Resources/What_Causes_Crime.pdf”
+
+Welches die Auswirkungen bestimmter Lebensumstände auf die Mordrate eines Landes behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte. Weiterhin stießen wir auf Projekte die diverse Ähnlichkeiten aufwiesen wodurch die qualitative Anforderung entstand ggf. die Darstellungen existierender ähnlicher Ansätze falls möglich zu verbessern. Die interessantesten Ansätze finden Sie unter Punkt 3.1 Verwandte Arbeiten & Inspiration.
+
+# 1.3 Thesen oder Fragestellung
+Aus einer Reihe an konzeptionellen Fragestellungen führten uns die folgenden zur Kernthematik.
+Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Rate von Gewaltverbrechen und Morden?
+Führt eine große Kluft zwischen Arm und Reich zu mehr Gewaltverbrechen?
+Führen schlechte Bildung und Armut zu einer erhöhten Gewaltbereitschaft?
+
+> “Lebensumstände und dessen Auswirkungen auf die Mordrate.”
 
 
 
