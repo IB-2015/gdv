@@ -47,15 +47,15 @@ Im folgenden werden die für die visualisierung zugrunde liegenden Daten und der
 ## 2.1 Datenquellen
 Unser Themenschwerpunkt spiegelt sich vor allem in den vier folgenden SDG´s und deren Indikatoren wieder.
 - 4 - Hochwertige Bildung
--- (UN Human Development Reports, Education Index, Human Development Index)
+<br>(UN Human Development Reports, Education Index, Human Development Index)
 - 8 - Menschenwürdige Arbeit und Wirtschaftswachstum 
--- (8.1.1 Annual growth rate of real GDP per capita)
+<br>(8.1.1 Annual growth rate of real GDP per capita)
 - 10 - Weniger Ungleichheiten
--- (OECD Income inequality)
+<br>(OECD Income inequality)
 - 16 - Frieden, Gerechtigkeit und starke Institutionen
--- (16.1.1 Number of victims of intentional homicide per 100.000 population)
+<br>(16.1.1 Number of victims of intentional homicide per 100.000 population)
 - Worldbank
---...//TODO...
+<br>...//TODO...
 
 Nach Sichtung der oben genannten Daten und dem Vergleich mit unseren Anforderungen entschieden wir uns folgende Quellen für die geplante Visualisierung zu berücksichtigen.
 - UN Educationindex
@@ -73,9 +73,9 @@ Die vielversprechendste Lösung war die Idee der Bildung eines Mittelwerts über
 ...//TODO… (Wie haben wir die Datensätze modifiziert/angepasst bspw. Mittelwertbildung,... → scrrens der Datenstruktur/Csv.Datein,...) 
 
 Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll und praktikabel. Wodurch wir in unsere Datenbasis bestätigt wurden. Die Ergebnisse besagter Visualisierungsexperimente finden Sie unter Punkt 3.3 Visualisierungsexperimente.
-(3 Tableauscreens→ auch wenn wir  das in unserem Prototyp hinkriegen brauchen wir 3 einzelnen bilder in Punkt )
+<br>(3 Tableauscreens→ auch wenn wir  das in unserem Prototyp hinkriegen brauchen wir 3 einzelnen bilder in Punkt )
 
-# 3 ENTWICKLUNGSPROZESS
+# 3 Entwicklungsprozess
 ...//TODO...
 
 ## 3.1 Verwandte Arbeiten & Inspiration
@@ -105,7 +105,7 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 Wir konnten die Aussagen aus dem Paper erwartungsgemäß bestätigen.
 Es gab klar erwartete Ergebnisse aber auch Werte die zunächst vermeintlich zufällig – fast wahllos ohne Anzeichen auf Zusammenhänge aufgetreten sind. Die Begründung hierfür liegt in der Aggregation einzelner Staaten zu Regionen bzw. diese wiederum zu Kontinenten. Man kann also klar die Aussage treffen, dass die Qualität von Bildung auf Basis unserer Daten einen Einfluss auf die Mordrate nimmt, die Faktoren BIP sowie Gini-Index mit den Mordraten korrelieren und die Qualität der Bildung keine Auswirkungen bewirkt.
 
-# 4 PROTOTYP
+# 4 Prototyp
 ...//TODO...
 
 ## 4.1 Verwendete Tools & Frameworks
@@ -122,28 +122,28 @@ Technisch umgesetzt wurde der Prototyp mittels node.js im Backend mit express.js
 ...//TODO…
 
 Visualisiert wurde in einem interaktiven Screen dessen obere Hälfte eine Weltkarte und in dessen unterer Hälften jeweils 2 Diagramme passend zur oben getroffenen Auswahl liegen.
-<<Screen>>
+<br>(Screen gesamt)
 Die Karte ist eine sogenannte Choroplethenkarte in welcher wir auf drei Ebenen interagieren und auswählen können vgl. Abbildung X-Y. Die oberste Ebene bildet die Kontinente, die nächst tiefer Ebene das UN-Geoscheme und die tiefste Ebene die einzelnen Staaten ab.
 
-<<Screen Ebene 1>>
-<<Screen Ebene 2>>
-<<Screen Ebene 3>>
+<br>(Screen Ebene 1)
+<br>(Screen Ebene 2)
+<br>(Screen Ebene 3)
 
 In den Diagrammbereichen haben wir 2 Arten von Diagrammen benuzt vgl. Abbildung XY.
 
-<<Screen Diagrammbereich>>
+<br>(Screen Diagrammbereich)
 
 Ein klassisches Balkendiagramm, dass die Mordrate in der ausgewählten Region sowie zum direkten Vergleich der darüberliegenden Ebene anzeigt vgl. Abbildung XY.
 
-<<Screen Balkendiagramm>>
+<br>(Screen Balkendiagramm)
 
 Das zweite Diagramm ist ein Netzdiagramm und zeigt die Faktoren und deren Intensität mittels einer Fläche welche auf 3 Achsen läuft die einen gemeinsamen Ursprung haben vgl. Abbildung XY.
 
-<<Screen Netzdiagramm>>
+<br>(Screen Netzdiagramm)
 
 Erwähnenswert ist hier die negation des GINI-Indexes damit dieser wie alle anderen Faktoren auch nach dem Prinzip je höher der Wert desto besser ist er dargestellt werden kann. Weiterhin ist i.d.R. zumeist im Hintergrund auch noch ein zweites Dreieck zu erkennen welches wie in den Balkendiagrammen auch die nächst höhere Ebene zum Vergleich darstellt.
 
-# 5 FAZIT
+# 5 Fazit
 ...//TODO...
 
 ## 5.1 Ergebnisse
