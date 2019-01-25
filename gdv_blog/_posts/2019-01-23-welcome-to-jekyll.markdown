@@ -16,6 +16,8 @@ external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
 ---
 
 Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten gehen wir der Frage nach, wie sich die Lebensumstände wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf die Mordrate eines Kontinentes, einer Region oder eines Staates auswirken können und ob es Gemeinsam- oder Auffälligkeiten bestimmter Regionen gibt.
+# Inhalt
+...//TODO...
 
 # 1 Konzeption
 Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt 3.2 Visualisierungsprozess.
@@ -45,15 +47,15 @@ Im folgenden werden die für die visualisierung zugrunde liegenden Daten und der
 ## 2.1 Datenquellen
 Unser Themenschwerpunkt spiegelt sich vor allem in den vier folgenden SDG´s und deren Indikatoren wieder.
 - 4 - Hochwertige Bildung
-(UN Human Development Reports, Education Index, Human Development Index)
+-- (UN Human Development Reports, Education Index, Human Development Index)
 - 8 - Menschenwürdige Arbeit und Wirtschaftswachstum 
-(8.1.1 Annual growth rate of real GDP per capita)
+-- (8.1.1 Annual growth rate of real GDP per capita)
 - 10 - Weniger Ungleichheiten
-(OECD Income inequality)
+-- (OECD Income inequality)
 - 16 - Frieden, Gerechtigkeit und starke Institutionen
-(16.1.1 Number of victims of intentional homicide per 100.000 population)
+-- (16.1.1 Number of victims of intentional homicide per 100.000 population)
 - Worldbank
-...//TODO...
+--...//TODO...
 
 Nach Sichtung der oben genannten Daten und dem Vergleich mit unseren Anforderungen entschieden wir uns folgende Quellen für die geplante Visualisierung zu berücksichtigen.
 - UN Educationindex
@@ -79,13 +81,13 @@ Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisieru
 ## 3.1 Verwandte Arbeiten & Inspiration
 Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten mit Visualisierungen, die wir zur Inspiration nahmen und als Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
-- World Income, Inequality and Murder - http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html
-(Screen)
-- Homicide Monitor - https://homicide.igarape.org.br/
-(Screen)
-- WHO Global Health Estimates - http://apps.who.int/violence-info/homicide/
-(Screen)
-- UNODV Global Study on Homicide - https://www.unodc.org/gsh/
+- World Income, Inequality and Murder - <http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html>
+<br>(Screen)
+- Homicide Monitor - <https://homicide.igarape.org.br/>
+<br>(Screen)
+- WHO Global Health Estimates - <http://apps.who.int/violence-info/homicide/>
+<br>(Screen)
+- UNODV Global Study on Homicide - <https://www.unodc.org/gsh/>
 
 ## 3.2 Visualisierungsprozess
 ...//TODO… (Scribbles, Mockups, Entwürfe)
@@ -154,10 +156,10 @@ Für einen besseren Überblick könnten auch Details on Demand auf der Karten un
 Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen u.U. direkter schließen zu können.
 Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können. 
 
-
-
-
-<br>
+<br><br><br><br><br><br><br>
+-----------------
+# TESTSTUFF
+<br><br>
 ![image-title-here](/images/Mordrate/TableauMordsVsBIP.JPG){:class="img-responsive"}
 ![image-title-here](/images/Mordrate/TableauMordsVsEdu.JPG){:class="img-responsive"}
 ![image-title-here](/images/Mordrate/TableauMordsVsGINI.JPG){:class="img-responsive"}
@@ -180,53 +182,3 @@ Der Homicide Monitor veranschaulicht weltweite Mordraten auf anschauliche Weise.
 - <a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide</a> <br>
 [BESCHREIBUNG]<br>
 <a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/UNODVGlobalStudyonHomicide.PNG" alt="drawing" style="width:400px;"/></a>
-
-
-
-
-## Prototyp / Ergebnisse
-
-### Visualisierung
-Ergebnisse, Design, Prototyp. Darstellungen echter oder ausgewählter Daten.
-
-### Erkenntnisse
-Was haben Sie herausgefunden? Können Sie ein/zwei Aussagen oder Stories hervorheben? <br>
-Entgegen der Erwartungen konnten wir die Aussagen aus dem Paper weder bestätigen noch widerlegen. Es gab einige klar erwartete Ergebnisse aber auch Werte die zufällig – 
-fast wahllos ohne Anzeichen auf Zusammenhänge aufgetreten sind.
-Überwiegend kann man aber sagen, dass die Qualität von Bildung auf Basis unserer Daten vermeintlich keinen Einfluss auf die Mordrate nimmt und die Faktoren BIP sowie Gini-Index mit den Mordraten korrelieren. Ob sich das tatsächliche Ergebnis ggf.
-anhand der Aggregation der Daten auf einen Mittelwert von unserem erwarteten
-und dem im Paper unterscheidet gilt es noch zu klären.
-
-
-### Implementierung
-
-Visualisiert wurde in einem interaktiven Screen
-dessen obere Hälfte eine Weltkarte und in dessen unterer Hälften jeweils 2 Diagramme
-passend zur oben getroffenen Auswahl liegen.
-Die Karte ist eine sogenannte Choroplethenkarte
-in welcher wir auf drei Ebenen interagieren und auswählen können. Die oberste
-Ebene bildet die Kontinente, die nächst tiefer Ebene das UN-Geoscheme und die
-tiefste Ebene die einzelnen Staaten ab.
-In den Diagrammbereichen haben wir 2 Arten
-von Diagrammen benutzt. Ein klassisches Balkendiagramm, dass die Mordrate in
-der ausgewählten Region sowie zum direkten Vergleich der darüberliegenden Ebene
-anzeigt. Das zweite Diagramm zeigt die Faktoren und deren Intensität mittels
-einer Fläche welche auf 3 Achsen läuft die einen gemeinsamen Ursprung haben.
-Erwähnenswert ist hier die negation des GINI-Indexes damit dieser wie alle anderen
-Faktoren auch nach dem Prinzip je höher der Wert desto besser ist er
-dargestellt werden kann. Weiterhin ist i.d.R. zumeist im Hintergrund auch noch
-ein zweites Dreieck zu erkennen welches wie in den Balkendiagrammen auch die
-nächst höhere Ebene zum Vergleich darstellt.
-Technisch umgesetzt wurde der Prototyp mittels
-node.js im Backend mit express.js und im Frontend mit d3.js
-
-## Fazit
-### Ergebnisse
-Generell haben wir unser Ziel einer visuellen Übersicht und einer Möglichkeit des Vergleichs erreicht. Dieser Prototyp ist durch die visuelle Kartendarstellung, die Vergleichsmöglichkeiten zwischen Kontinenten, UN-Geoscheme und einzelnen Staaten sowie der Darstellung von Lebensqualität beschreibenden Faktoren vor allem für einen Vergleich der weltweiten Mordrate geeignet.
-
-### Ausblick
-Ein möglicher nächster Schritt in der Aussagekraft ist die Erhöhung des Detailgrads an Informationen, sodass man von einer zunächst recht oberflächlichen und stark aggregierten Betrachtung die Möglichkeit hat spezifische Werte, Daten und auch Trends zeigen zu können.
-Für einen besseren Überblick könnten auch Details on Demand auf der Karten und den Diagrammen sorgen.
-Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen schließen zu können.
-Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können. 
-
