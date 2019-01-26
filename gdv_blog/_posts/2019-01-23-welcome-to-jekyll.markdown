@@ -89,7 +89,7 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 <br>(Screen)
 - UNODV Global Study on Homicide - <https://www.unodc.org/gsh/>
 
-## 3.2 Visualisierungsprozess {#id3.2}
+## 3.2 Visualisierungsprozess (#id3.2)
 ...//TODO… (Scribbles, Mockups, Entwürfe)
 
 ### 3.2.1 Scribbles - integrierbar in 3.2 Visualisierungsprozess
