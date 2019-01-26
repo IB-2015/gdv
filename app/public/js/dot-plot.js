@@ -1,3 +1,5 @@
+// console.log(d3v3.selectAll('input'));
+
 var data = null;
 
 const setData = (d) => {

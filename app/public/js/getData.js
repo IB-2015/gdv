@@ -60,7 +60,7 @@ getPopulationData().then(data => populationData = data);
 //Selects data for a given list ofcountries from given dataset
 //If more than 1 country is in the list, an average for all countries in the list is processed
 const selectData = (data, countryList, name) => {
-  console.log(name);
+    name = name == undefined ? "averageOfCountries" : name;
     let countryData = [];
     //Select only countries from list
     data.forEach(country => {
