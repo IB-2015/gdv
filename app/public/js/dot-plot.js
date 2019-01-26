@@ -1,6 +1,21 @@
-// console.log(d3v3.selectAll('input'));
+d3v3.select('#radios').selectAll('input')
+.on('click', function() {
+  d3v3.select('#radios').selectAll('input').each(function() {
+    this.removeAttribute('checked')
+  })
+  console.log(this);
+  this.setAttribute('checked', null)
+  drawDotPlot()
+});
 
 var data = null;
+var bip_max = null
+
+const chart_mode = {
+  "edu": {x: 1, val: 1},
+  "gdp": {x:126655.598081739, val: 2},
+  "gini": {x:100, val: 3}
+}
 
 const setData = (d) => {
   data = d;
@@ -12,6 +27,15 @@ const logData = () => {
 
 const drawDotPlot = () => {
   // console.log(data);
+  d3.select("#selection2").selectAll("svg").remove();
+  d3v3.select('#radios').selectAll('input').filter(function() {
+    console.log(this.getAttribute('checked'));
+    return this.getAttribute('checked') != null
+  }).each(function() {
+    mode = this.getAttribute('value');
+    mode_text = this.parentNode.innerText;
+  })
+  console.log(mode);
   var chart = RadarChart.chart();
   var cfg = chart.config();
 
@@ -24,29 +48,29 @@ const drawDotPlot = () => {
   .attr('id', 'dotplot2')
   .attr("viewBox", "0 0 " + cfg.w/2 + " " + cfg.h )
   .attr("preserveAspectRatio", "xMinYMin meet");
-    svg.append("text")
-          .style("font-size", "1.5em")
-          .style("font-weight", "bold")
-          .attr("x", cfg.w / 6 )
-          .attr("y", cfg.h/12)
-          .attr("text-anchor", "middle")
-          .style("text-decoration", "underline")
-          .text("hey");
+    // svg.append("text")
+    //       .style("font-size", "1.5em")
+    //       .style("font-weight", "bold")
+    //       .attr("x", cfg.w / 6 )
+    //       .attr("y", cfg.h/12)
+    //       .attr("text-anchor", "middle")
+    //       .style("text-decoration", "underline")
+    //       .text("hey");
 
-  chart.config({w: cfg.w / 2, h: cfg.h / 2})
+  chart.config({w: cfg.w, h: cfg.h})
   cfg = chart.config();
 
-  var width = cfg.w/1.5;
-  var height = cfg.h/1.5;
+  var width = cfg.w;
+  var height = cfg.h/(1+(1/5));
 
   var chart = svg
     .append("g")
-      .attr("transform", "translate(" + width + "," + height + ")");
+      .attr("transform", "translate(" + width/15 + "," + 10 + ")");
 
   ///////////////////////
   // Scales
   var x = d3v3.scale.linear()
-      .domain([0, 100])
+      .domain([0, chart_mode[mode].x])
       .range([0,width]);
 
   max = 100;
@@ -61,6 +85,15 @@ const drawDotPlot = () => {
     .attr("dy", "1em")
     .attr("transform", "rotate(-90)")
     .text("intentional homicide per 100.000 persons");
+
+  chart.append("text")
+  .attr("class", "x label")
+  .attr("text-anchor", "end")
+  .attr("x", width)
+  .attr("y", height)
+  .attr("dy", "3em")
+  // .attr("transform", "rotate(-90)")
+  .text(mode_text);
 
   ///////////////////////
   // Axis
@@ -84,8 +117,9 @@ const drawDotPlot = () => {
   ////////////////////////
   all_data = []
   // 0 hom, 1 edu, 2 gdp, 3 gini
+  x_val = chart_mode[mode].val
   for (i in data) {
-    d = {"x": data[i][3][0], "y": data[i][0][0]};
+    d = {"x": data[i][x_val][0], "y": data[i][0][0]};
     if (d.x != undefined && d.y != undefined) {
       all_data.push(d);
     }
@@ -123,37 +157,4 @@ const drawDotPlot = () => {
   			    .text(function(d) { return d.x.country + ", " + d.y.value; })
   			    .style("fill","none")
   			    .style("font","10px sans-serif");
-  ///////////////////////
-
-  ///////////////////////
-  // Bars
-  // var bar0 = chart.selectAll(".bar")
-  //     .data([data[0]])
-  //   .enter().append("rect")
-  //     .attr("class", className)
-  //     .attr("x", function(d) { return x(d['name']); })
-  //     .attr("y", height)
-  //     .attr("width", x.rangeBand())
-  //     .attr("height", 0);
-  //
-  // bar0.transition()
-  //     .duration(1500)
-  //     .ease("elastic")
-  //     .attr("y", function(d) { return y(d['homicide']); })
-  //     .attr("height", function(d) { return height - y(d['homicide']); })
-  // var bar = chart.selectAll(".bar")
-  //     .data([data[1]])
-  //   .enter().append("rect")
-  //     .attr("class", "bar")
-  //     .attr("x", function(d) { return x(d['name']); })
-  //     .attr("y", height)
-  //     .attr("width", x.rangeBand())
-  //     .attr("height", 0);
-  //
-  // bar.transition()
-  //     .duration(1500)
-  //     .ease("elastic")
-  //     .attr("y", function(d) { return y(d['homicide']); })
-  //     .attr("height", function(d) { return height - y(d['homicide']); })
-
 }
