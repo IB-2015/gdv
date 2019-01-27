@@ -19,7 +19,7 @@ Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Que
 # Inhalt
 ...//TODO...
 
-# 1 Konzeption {#id1}
+# 1 Konzeption {:#id1}
 Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt <a href="#id1">3.2 Visualisierungsprozess</a>.
 
 ## 1.1 Einführung {#id1.1}
@@ -89,7 +89,7 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 <br>(Screen)
 - UNODV Global Study on Homicide - <https://www.unodc.org/gsh/>
 
-## 3.2 Visualisierungsprozess (#id3.2)
+## 3.2 Visualisierungsprozess {:#id3.2}
 ...//TODO… (Scribbles, Mockups, Entwürfe)
 
 ### 3.2.1 Scribbles - integrierbar in 3.2 Visualisierungsprozess
