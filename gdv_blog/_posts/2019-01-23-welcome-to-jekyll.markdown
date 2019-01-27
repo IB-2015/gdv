@@ -24,7 +24,7 @@ Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Que
 <a href="#id5">5 Fazit</a><br>
 
 # 1 <a id =1>Konzeption</a>
-Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt <a href="#id3">3.2 Visualisierungsprozess</a>.
+Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt [3.2 Visualisierungsprozess](#id3).
 
 ## [1.1 Einführung](#id1.1)
 Ziel des Projektes war die Visualisierung der weltweiten Mordrate anhand spezifischer Daten. Im speziellen Daten, welche für bzw. aus den Zielen der Sustainable Development Goals von zentraler Bedeutung sind.
