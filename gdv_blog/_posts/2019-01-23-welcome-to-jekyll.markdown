@@ -23,21 +23,21 @@ Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Que
 <a href="#id4">4 Prototyp</a><br>
 <a href="#id5">5 Fazit</a><br>
 
-# 1 <a id =1>Konzeption</a>
+# <a id =1>1 Konzeption</a>
 Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt [3.2 Visualisierungsprozess](#id3).
 
-## [1.1 Einführung](#id1.1)
+## <a id =1.1>1.1 Einführung</a>
 Ziel des Projektes war die Visualisierung der weltweiten Mordrate anhand spezifischer Daten. Im speziellen Daten, welche für bzw. aus den Zielen der Sustainable Development Goals von zentraler Bedeutung sind.
 
-## [1.2 Motivation](#id1.2)
+## <a id =1.2>1.2 Motivation</a>
 Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper.
 
 > “Whats causes violent crime?” <br>
 Pablo Fajnzylber, European Economic Review 2000 https://siteresources.worldbank.org/DEC/Resources/What_Causes_Crime.pdf”
 
-Welches die Auswirkungen bestimmter Lebensumstände auf die Mordrate eines Landes behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte. Weiterhin stießen wir auf Projekte die diverse Ähnlichkeiten aufwiesen wodurch die qualitative Anforderung entstand ggf. die Darstellungen existierender ähnlicher Ansätze falls möglich zu verbessern. Die interessantesten Ansätze finden Sie unter Punkt <a href="#id3.1">3.1 Verwandte Arbeiten & Inspiration</a>.
+Welches die Auswirkungen bestimmter Lebensumstände auf die Mordrate eines Landes behandelt. Was indirekt zur zusätzlichen Motivation der Darstellung bzw. Prüfung von Inhalten aus diesem führte. Weiterhin stießen wir auf Projekte die diverse Ähnlichkeiten aufwiesen wodurch die qualitative Anforderung entstand ggf. die Darstellungen existierender ähnlicher Ansätze falls möglich zu verbessern. Die interessantesten Ansätze finden Sie unter Punkt [3.1 Verwandte Arbeiten & Inspiration](#3.1).
 
-## [1.3 Thesen oder Fragestellung](#id1.3)
+## <a id =1.3>1.3 Thesen oder Fragestellung</a>
 Aus einer Reihe an konzeptionellen Fragestellungen führten uns die folgenden zur Kernthematik.
 Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Rate von Gewaltverbrechen und Morden?
 Führt eine große Kluft zwischen Arm und Reich zu mehr Gewaltverbrechen?
@@ -45,10 +45,10 @@ Führen schlechte Bildung und Armut zu einer erhöhten Gewaltbereitschaft?
 
 > “Lebensumstände und dessen Auswirkungen auf die Mordrate.”
 
-# [2 Datenbasis](#id2)
+# <a id =2>2 Datenbasis</a>
 Im folgenden werden die für die visualisierung zugrunde liegenden Daten und deren quellen beschrieben.
 
-## 2.1 [Datenquellen](#id2.1)
+## <a id =2.1>2.1 Datenquellen</a>
 Unser Themenschwerpunkt spiegelt sich vor allem in den vier folgenden SDG´s und deren Indikatoren wieder.
 - 4 - Hochwertige Bildung
 <br>(UN Human Development Reports, Education Index, Human Development Index)
@@ -66,23 +66,23 @@ Nach Sichtung der oben genannten Daten und dem Vergleich mit unseren Anforderung
 - Worldbank GDP
 - Worldbank Gini-Index
 
-## [2.2 Datenerhebung](#id2.2)
+## <a id =2.2>2.2 Datenerhebung</a>
 Auffällig war, dass es verhältnismäßig sehr viel Zeit in Anspruch nahm, ansatzweise vielfältige und vollständige Datensätze zu finden. Da es keine zentrale Erfassung der von uns gesuchten Daten gibt und diese von Land zu Land unterschiedlich gehandhabt werden sind zumeist viele Zusammenstellungen mit verschiedenen Werten vorzufinden. Insbesondere Datenlücken in bestimmten Zeitintervallen erschwerte eine so detailreiche Darstellung wie von uns geplant bzw. durch die Aussagen im Paper Vorausgesetzt.
 Die vielversprechendste Lösung war die Idee der Bildung eines Mittelwerts über einen fest definierten Zeitraum.
 
-## [2.3 Datenauswertung](#id2.3)
+## <a id =2.3>2.3 Datenauswertung</a>
 ...//TODO… (kurze Beschreibung ansonsten verweis auf 3.3 Visualisierungsexperimente)
 
-## [2.4 Datenaufbereitung](#id2.4)
+## <a id =2.4>2.4 Datenaufbereitung</a>
 ...//TODO… (Wie haben wir die Datensätze modifiziert/angepasst bspw. Mittelwertbildung,... → scrrens der Datenstruktur/Csv.Datein,...) 
 
 Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll und praktikabel. Wodurch wir in unsere Datenbasis bestätigt wurden. Die Ergebnisse besagter Visualisierungsexperimente finden Sie unter Punkt 3.3 Visualisierungsexperimente.
 <br>(3 Tableauscreens→ auch wenn wir  das in unserem Prototyp hinkriegen brauchen wir 3 einzelnen bilder in Punkt )
 
-# 3 <a id=3>Entwicklungsprozess</a>
+# <a id =3>3 Entwicklungsprozess</a>
 ...//TODO...
 
-## [3.1 Verwandte Arbeiten & Inspiration](#id3.1)
+## <a id =3.1>3.1 Verwandte Arbeiten & Inspiration</a>
 Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten mit Visualisierungen, die wir zur Inspiration nahmen und als Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
 - World Income, Inequality and Murder - <http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html>
@@ -93,7 +93,7 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 <br>(Screen)
 - UNODV Global Study on Homicide - <https://www.unodc.org/gsh/>
 
-## [3.2 Visualisierungsprozess](#id3.2)
+## <a id =3.2>3.2 Visualisierungsprozess</a>
 ...//TODO… (Scribbles, Mockups, Entwürfe)
 
 ### 3.2.1 Scribbles - integrierbar in 3.2 Visualisierungsprozess
@@ -102,27 +102,27 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 ### 3.2.2 Mockups - integrierbar in 3.2 Visualisierungsprozess
 ...//TODO… (s.o.)
 
-## [3.3 Visualisierungsexperimente](#id3.3)
+## <a id =3.3>3.3 Visualisierungsexperimente</a>
 ...//TODO…
 
-## [3.4 Erkenntnisse](#id3.4)
+## <a id =3.4>3.4 Erkenntnisse</a>
 Wir konnten die Aussagen aus dem Paper erwartungsgemäß bestätigen.
 Es gab klar erwartete Ergebnisse aber auch Werte die zunächst vermeintlich zufällig – fast wahllos ohne Anzeichen auf Zusammenhänge aufgetreten sind. Die Begründung hierfür liegt in der Aggregation einzelner Staaten zu Regionen bzw. diese wiederum zu Kontinenten. Man kann also klar die Aussage treffen, dass die Qualität von Bildung auf Basis unserer Daten einen Einfluss auf die Mordrate nimmt, die Faktoren BIP sowie Gini-Index mit den Mordraten korrelieren und die Qualität der Bildung keine Auswirkungen bewirkt.
 
-# [4 Prototyp](#id4)
+# <a id =4>4 Prototyp</a>
 ...//TODO...
 
-## [4.1 Verwendete Tools & Frameworks](#id4.1)
+## <a id =4.1>4.1 Verwendete Tools & Frameworks</a>
 ...//TODO…
 Technisch umgesetzt wurde der Prototyp mittels node.js im Backend mit express.js und im Frontend mit d3.js
 
-## [4.2 Systemarchitektur](#id4.2)
+## <a id =4.2>4.2 Systemarchitektur</a>
 ...//TODO…
 
-## [4.3 Herausforderungen](#id4.3)
+## <a id =4.3>4.3 Herausforderungen</a>
 ...//TODO…
 
-## [4.4 Implementierung](#id4.4)
+## <a id =4.4>4.4 Implementierung</a>
 ...//TODO…
 
 Visualisiert wurde in einem interaktiven Screen dessen obere Hälfte eine Weltkarte und in dessen unterer Hälften jeweils 2 Diagramme passend zur oben getroffenen Auswahl liegen.
@@ -147,14 +147,14 @@ Das zweite Diagramm ist ein Netzdiagramm und zeigt die Faktoren und deren Intens
 
 Erwähnenswert ist hier die negation des GINI-Indexes damit dieser wie alle anderen Faktoren auch nach dem Prinzip je höher der Wert desto besser ist er dargestellt werden kann. Weiterhin ist i.d.R. zumeist im Hintergrund auch noch ein zweites Dreieck zu erkennen welches wie in den Balkendiagrammen auch die nächst höhere Ebene zum Vergleich darstellt.
 
-# [5 Fazit](#id5)
+# <a id =5>5 Fazit</a>
 ...//TODO...
 
-## [5.1 Ergebnisse](#id5.1)
+## <a id =5.1>5.1 Ergebnisse</a>
 Generell haben wir unser Ziel einer visuellen Übersicht, einer Möglichkeit des Vergleichs sowie dem bekräftigen des Papers erreicht.
 Dieser Prototyp ist durch die visuelle Kartendarstellung, die Vergleichsmöglichkeiten zwischen Kontinenten, UN-Geoscheme und einzelnen Staaten sowie der Darstellung von Lebensqualität beschreibenden Faktoren vor allem für einen Vergleich der weltweiten Mordrate geeignet.
 
-## [5.2 Ausblick](#id5.2)
+## <a id =5.2>5.2 Ausblick</a>
 Ein möglicher nächster Schritt in der Aussagekraft ist die Erhöhung des Detailgrads an Informationen, sodass man von einer zunächst recht oberflächlichen und stark aggregierten Betrachtung die Möglichkeit hat spezifische Werte, Daten und auch Trends zeigen zu können.
 Für einen besseren Überblick könnten auch Details on Demand auf der Karten und den Diagrammen sorgen.
 Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen u.U. direkter schließen zu können.
