@@ -17,14 +17,14 @@ external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
 
 Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten gehen wir der Frage nach, wie sich die Lebensumstände wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf die Mordrate eines Kontinentes, einer Region oder eines Staates auswirken können und ob es Gemeinsam- oder Auffälligkeiten bestimmter Regionen gibt.
 # Inhalt
-<a href="#id1">1 Konzeption</a>
-<a href="#id2">2 Datenbasis</a>
-<a href="#id3">3 Entwicklungsprozess</a>
-<a href="#id4">4 Prototyp</a>
-<a href="#id5">5 Fazit</a>
+<a href="#id1">1 Konzeption</a><br>
+<a href="#id2">2 Datenbasis</a><br>
+<a href="#id3">3 Entwicklungsprozess</a><br>
+<a href="#id4">4 Prototyp</a><br>
+<a href="#id5">5 Fazit</a><br>
 
-# 1 [Konzeption](#id1)
-Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt <a href="#id3.2">3.2 Visualisierungsprozess</a>.
+# 1 <a id =1>Konzeption</a>
+Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt <a href="#id3">3.2 Visualisierungsprozess</a>.
 
 ## [1.1 Einführung](#id1.1)
 Ziel des Projektes war die Visualisierung der weltweiten Mordrate anhand spezifischer Daten. Im speziellen Daten, welche für bzw. aus den Zielen der Sustainable Development Goals von zentraler Bedeutung sind.
@@ -79,7 +79,7 @@ Die vielversprechendste Lösung war die Idee der Bildung eines Mittelwerts über
 Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisierungsexperiment als Sinnvoll und praktikabel. Wodurch wir in unsere Datenbasis bestätigt wurden. Die Ergebnisse besagter Visualisierungsexperimente finden Sie unter Punkt 3.3 Visualisierungsexperimente.
 <br>(3 Tableauscreens→ auch wenn wir  das in unserem Prototyp hinkriegen brauchen wir 3 einzelnen bilder in Punkt )
 
-# 3 [Entwicklungsprozess](#id3)
+# 3 <a id=3>Entwicklungsprozess</a>
 ...//TODO...
 
 ## [3.1 Verwandte Arbeiten & Inspiration](#id3.1)
