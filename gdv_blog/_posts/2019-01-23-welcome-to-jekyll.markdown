@@ -45,7 +45,7 @@ Welchen Einfluss haben Bildung, Wohlstand und Verteilung von Reichtum auf die Ra
 Führt eine große Kluft zwischen Arm und Reich zu mehr Gewaltverbrechen?
 Führen schlechte Bildung und Armut zu einer erhöhten Gewaltbereitschaft?
 
-> “Lebensumstände und dessen Auswirkungen auf die Mordrate.”
+> “Lebensumstände und deren Auswirkungen auf Mordraten”
 
 # <a name="Datenbasis"></a>2 Datenbasis
 Im folgenden werden die für die visualisierung zugrunde liegenden Daten und deren Quellen beschrieben.
