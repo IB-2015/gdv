@@ -82,7 +82,10 @@
   height: 12px;
   margin-right: 6px;
   border: 1px solid;
+}
 
+.btn-default {
+  background-color: #eee;
 }
   #content {
     position: relative;

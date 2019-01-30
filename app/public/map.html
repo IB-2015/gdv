@@ -54,13 +54,24 @@
       </div>
       <div class="col-sm-5">
 
-                <div class="" id="selection2">
-                    <p id="radios">
+                <div id="selection2">
+                      <!--
                         <label><input type="radio" name="mode" value="edu" checked>Education Index</label>
                         <label><input type="radio" name="mode" value="gini">GINI Index</label>
                         <label><input type="radio" name="mode" value="gdp">GDP</label>
-                    </p>
-                  </div>
+                      -->
+                      <p id="radios" class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-default" name="mode" value="edu" checked>
+                            <input id='educationPlot' type="radio" checked> Education Index
+                          </label>
+                          <label class="btn btn-default" name="mode" value="gini">
+                            <input class="chartRadioButtons" type="radio" name="mode" value="gini"> GINI Index
+                          </label>
+                          <label class="btn btn-default" name="mode" value="gdp">
+                            <input class="btn btn-default" type="radio" name="mode" value="gdp"> GDP
+                          </label>
+                      </p>
+                </div>
       </div>
 
     </div>

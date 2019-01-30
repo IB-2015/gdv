@@ -1,6 +1,10 @@
-d3v3.select('#radios').selectAll('input')
+$(document).ready(() => {
+  $('#educationPlot').click();
+})
+
+d3v3.select('#radios').selectAll('label')
 .on('click', function() {
-  d3v3.select('#radios').selectAll('input').each(function() {
+  d3v3.select('#radios').selectAll('label').each(function() {
     this.removeAttribute('checked')
   })
   console.log(this);
@@ -26,14 +30,13 @@ const logData = () => {
 }
 
 const drawDotPlot = () => {
-  // console.log(data);
   d3.select("#selection2").selectAll("svg").remove();
-  d3v3.select('#radios').selectAll('input').filter(function() {
+  d3v3.select('#radios').selectAll('label').filter(function() {
     console.log(this.getAttribute('checked'));
     return this.getAttribute('checked') != null
   }).each(function() {
     mode = this.getAttribute('value');
-    mode_text = this.parentNode.innerText;
+    mode_text = this.innerText;
   })
   console.log(mode);
   var chart = RadarChart.chart();
