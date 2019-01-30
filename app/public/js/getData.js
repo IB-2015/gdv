@@ -101,3 +101,21 @@ const selectData = (data, countryList, name) => {
         return countryData;
     }
 }
+
+const getPopulation = (countryList, name) => {
+    name = name == undefined ? "averageOfCountries" : name;
+    return getPopulationData().then(populationData => {
+        let totalPopulation = {
+            'country': name.replace(new RegExp("_", "g"), " "),
+            'value': 0.0
+        };
+            countryList.forEach(country => {
+            populationData.forEach(popData => {
+                if(country === popData.ISO_A3){
+                    totalPopulation.value += parseFloat(popData.value);
+                }
+            })
+        })
+        return totalPopulation;
+    });
+}
