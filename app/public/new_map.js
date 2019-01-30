@@ -347,12 +347,15 @@ function drawMap(geojson, sub_regions, continents) {
       selected = path.classed('selected')
 
       pathTransition = path.transition()
+
       if (selected) {
         if (drawLeft)
           pathTransition.style("stroke", "#533A71").duration(1000);
         if (drawRight)
           pathTransition.style("stroke", "#26532B").duration(1000);
-        pathTransition.style("stroke-width", 5).duration(1000);
+
+        path.style("stroke-width", 5);
+        // pathTransition.style("stroke-width", 5).duration(1000); should work but it does not all the time
       } else {
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
         pathTransition.style("stroke-width", 1).duration(1000);

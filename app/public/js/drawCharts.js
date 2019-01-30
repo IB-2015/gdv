@@ -11,7 +11,7 @@ const draw = (left, right) => {
   rupper_layer_countries = right != null ? right.upper_countries : []
   rdataObject = {};
   rdataObjectUpper = {};
-  promises = [getData(lcountries), getData(lupper_layer_countries), getData(rcountries), getData(rupper_layer_countries)]
+  promises = [getData(lcountries, lname), getData(lupper_layer_countries, lupper_name), getData(rcountries, rname), getData(rupper_layer_countries, rupper_name)]
   Promise.all(promises).then(function(data) {
     // console.log(data);
     // dataObject.assault = data[0];
