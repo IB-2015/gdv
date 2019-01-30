@@ -116,6 +116,6 @@ const getPopulation = (countryList, name) => {
                 }
             })
         })
-        return totalPopulation;
+        return [totalPopulation];
     });
 }

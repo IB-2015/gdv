@@ -60,6 +60,7 @@ const getData = (countries, name) => {
   promises.push(getEducationData(countries, name));
   promises.push(getGDPData(countries, name));
   promises.push(getGINIData(countries, name));
+  promises.push(getPopulation(countries, name));
   return Promise.all(promises);
 }
 

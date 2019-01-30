@@ -554,9 +554,13 @@ function allData() {
   for (key in all_regions)
     pr_c.push(getData(all_regions[key], key));
 
+  pr_c.push(getData(all_countries, "World"));
+
   Promise.all(pr_c).then(data => {
     setData(data)
-    drawDotPlot()
+    $(document).ready(() => {
+      $('#educationPlot').click();
+    })
 
   })
 }

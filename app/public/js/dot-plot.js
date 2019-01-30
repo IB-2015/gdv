@@ -1,7 +1,3 @@
-$(document).ready(() => {
-  $('#educationPlot').click();
-})
-
 d3v3.select('#radios').selectAll('label')
 .on('click', function() {
   d3v3.select('#radios').selectAll('label').each(function() {
@@ -48,14 +44,6 @@ const drawDotPlot = () => {
   .attr('id', 'dotplot2')
   .attr("viewBox", "0 0 " + cfg.w/2 + " " + cfg.h )
   .attr("preserveAspectRatio", "xMinYMin meet");
-    // svg.append("text")
-    //       .style("font-size", "1.5em")
-    //       .style("font-weight", "bold")
-    //       .attr("x", cfg.w / 6 )
-    //       .attr("y", cfg.h/12)
-    //       .attr("text-anchor", "middle")
-    //       .style("text-decoration", "underline")
-    //       .text("hey");
 
   chart.config({w: cfg.w, h: cfg.h})
   cfg = chart.config();
@@ -116,10 +104,11 @@ const drawDotPlot = () => {
 
   ////////////////////////
   all_data = []
-  // 0 hom, 1 edu, 2 gdp, 3 gini
+  world_population = data[data.length - 1][4][0].value
+  // 0 hom, 1 edu, 2 gdp, 3 gini, 4 population
   x_val = chart_mode[mode].val
   for (i in data) {
-    d = {"x": data[i][x_val][0], "y": data[i][0][0]};
+    d = {"x": data[i][x_val][0], "y": data[i][0][0], "population": data[i][4][0]};
     if (d.x != undefined && d.y != undefined) {
       all_data.push(d);
     }
@@ -138,7 +127,7 @@ const drawDotPlot = () => {
 	circleGroups.append("circle")
 	   // .attr("class", "circles")
      .attr("name", function(d) {return d.x.country})
-	   .attr("r", 4)
+	   .attr("r", function(d) {return 4 + (d.population.value / world_population) * 20})
 	   .style("fill", 'red')
 	   .style("stroke", 'black')
 	   .on("mouseenter", function(d) {
