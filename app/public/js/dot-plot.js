@@ -127,7 +127,7 @@ const drawDotPlot = () => {
 	circleGroups.append("circle")
 	   // .attr("class", "circles")
      .attr("name", function(d) {return d.x.country})
-	   .attr("r", function(d) {return 4 + (d.population.value / world_population) * 20})
+	   .attr("r", function(d) {return 6 + 0 * (d.population.value / world_population) * 20})
 	   .style("fill", 'red')
 	   .style("stroke", 'black')
 	   .on("mouseenter", function(d) {
