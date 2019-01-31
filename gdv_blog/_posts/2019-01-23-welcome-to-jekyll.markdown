@@ -11,7 +11,7 @@ image:
     title: image_files/Edu.jpg
     caption: Teaser
 author: Sascha Betzwieser, Markus Klatt, Eugen Krizki, Felix Navas und Anusan Ranjan
-external_site: "https://making.pusher.com/latency-working-set-ghc-gc-pick-two/"
+external_site: "https://github.com/IB-2015/gdv.git"
 
 ---
 
@@ -20,8 +20,8 @@ Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Que
 - [1 Konzeption](#Konzeption)
 - [2 Datenbasis](#Datenbasis)
 - [3 Entwicklungsprozess](#Entwicklungsprozess)
-- [3 Prototyp](#Prototyp)
-- [4 Fazit](#Fazit)
+- [4 Prototyp](#Prototyp)
+- [5 Fazit](#Fazit)
 
 # <a name="Konzeption"></a>1 Konzeption
 Im Projektverlauf entstanden eine Reihe an Ideen wie man mit hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt [3.2 Visualisierungsprozess](#Visualisierungsprozess).
@@ -66,6 +66,10 @@ Nach Sichtung der oben genannten Daten und dem Vergleich mit unseren Anforderung
 - <a href="https://unstats.un.org/sdgs/indicators/database/">UN Intentional homicide per 100,000 population</a>
 - <a href="https://data.worldbank.org/indicator/NY.GDP.PCAP.CD">Worldbank GDP per capita</a>
 - <a href="https://data.worldbank.org/indicator/SI.POV.GINI">Worldbank GINI index</a>
+Zur Anzeige aller Länder in einer Karte und ihrer Gruppierung zu Sub-Regionen und Kontinenten wurden außerdem folgende Datenquellen verwendet:
+- countries.geojson
+- geoscheme.csv
+Außerdem wurde für die Akkumulierung der Indizes in Relation zur Bevölerungsgröße für Sub-Regionen und Kontinente die jeweiligen Bevölkerungszahlen benötigt. 
 - <a href="https://data.worldbank.org/indicator/SP.POP.TOTL">Worldbank Population</a>
 
 ## 2.2 Datenerhebung
@@ -87,23 +91,11 @@ Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisieru
 ## <a name="Verwandte Arbeiten"></a>3.1 Verwandte Arbeiten & Inspiration
 Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten mit Visualisierungen, die wir zur Inspiration nahmen und als Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
 
-- <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder</a> <br>
-[//TODO BESCHREIBUNG]<br>
-Dieses Projekt untersucht den Einfluss der Einkommensungleichverteilung auf die Mordrate von Ländern, durch eine Visualisierung des Gini-Index im Vergleich zur Mordrage.<br>
-<a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html"><img src="/images/Mordrate/GiniFactor.PNG" alt="drawing" style="width:400px;"/></a>
 
-- <a href="https://homicide.igarape.org.br/">Homicide Monitor</a> <br>
-[//TODO BESCHREIBUNG]<br>
-Der Homicide Monitor veranschaulicht weltweite Mordraten auf anschauliche Weise.<br>
-<a href="https://homicide.igarape.org.br/"><img src="/images/Mordrate/hIgarape.PNG" alt="drawing" style="width:400px;"/></a>
-
-- <a href="http://apps.who.int/violence-info/homicide/">WHO Global Health Estimates</a><br>
-[//TODO BESCHREIBUNG]<br>
-<a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/homicidePeryear.PNG" alt="drawing" style="width:400px;"/></a>
-
-- <a href="https://www.unodc.org/gsh/">UNODV Global Study on Homicide</a> <br>
-[//TODO BESCHREIBUNG]<br>
-<a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/UNODVGlobalStudyonHomicide.PNG" alt="drawing" style="width:400px;"/></a>
+| <b>World Income, Inequality and Murder</b> <br>[//TODO BESCHREIBUNG] Dieses Projekt untersucht den Einfluss der Einkommensungleichverteilung auf die Mordrate von Ländern, durch eine Visualisierung des Gini-Index im Vergleich zur Mordrage.<br> | <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html"><img src="/images/Mordrate/GiniFactor.PNG" alt="drawing" style="width:600px;"/></a> |
+| <b> Homicide Monitor </b> <br> [//TODO BESCHREIBUNG] Der Homicide Monitor veranschaulicht weltweite Mordraten auf anschauliche Weise. | <a href="https://homicide.igarape.org.br/"><img src="/images/Mordrate/hIgarape.PNG" alt="drawing" style="width:600px;"/></a> |
+| <b> WHO Global Health Estimates</b><br>[//TODO BESCHREIBUNG] | <a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/homicidePeryear.PNG" alt="drawing" style="width:400px;"/></a> |
+| <b> UNODV Global Study on Homicide</b> <br>[//TODO BESCHREIBUNG]<br> | <a href="https://www.unodc.org/gsh/"><img src="/images/Mordrate/UNODVGlobalStudyonHomicide.PNG" alt="drawing" style="width:400px;"/></a> |
 
 ## <a name="Visualisierungsprozess"></a>3.2 Visualisierungsprozess
 ...//TODO… (Scribbles, Mockups, Entwürfe)
@@ -111,9 +103,9 @@ Der Homicide Monitor veranschaulicht weltweite Mordraten auf anschauliche Weise.
 ## <a name="Visualisierungsexperimente"></a>3.3 Visualisierungsexperimente
 ...//TODO…
 
-<img src="/images/Mordrate/TableauMordsVsBIP.JPG" alt="drawing" width="400"/>
-<img src="/images/Mordrate/TableauMordsVsEdu.JPG" alt="drawing" width="400"/>
-<img src="/images/Mordrate/TableauMordsVsGINI.JPG" alt="drawing" width="400"/>
+| [Beschreibung] | <img src="/images/Mordrate/TableauMordsVsBIP.JPG" alt="drawing" width="400"/> |
+| [Beschreibung] | <img src="/images/Mordrate/TableauMordsVsEdu.JPG" alt="drawing" width="400"/> |
+| [Beschreibung] | <img src="/images/Mordrate/TableauMordsVsGINI.JPG" alt="drawing" width="400"/> |
 
 ## 3.4 Erkenntnisse
 [TODO überarbeiten]
@@ -122,6 +114,7 @@ Es gab klar erwartete Ergebnisse aber auch Werte die zunächst vermeintlich zuf�
 
 # <a name="Prototyp"></a>4 Prototyp
 ...//TODO MARKUS...
+[Nach der IEXPO wurde der Prototyp noch um einen Scatterplot erweiteret, ...]
 
 ## 4.1 Verwendete Tools & Frameworks
 ...//TODO ANUSAN/SASCHA
