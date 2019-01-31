@@ -126,7 +126,7 @@ const drawDotPlot = () => {
 
 	circleGroups.append("circle")
 	   // .attr("class", "circles")
-     .attr("name", function(d) {return d.x.country})
+     .attr("name", function(d) {return d.x["ISO_A3"] || d.x.country})
 	   .attr("r", function(d) {return 6 + 0 * (d.population.value / world_population) * 20})
 	   .style("fill", 'red')
 	   .style("stroke", 'black')
@@ -140,7 +140,7 @@ const drawDotPlot = () => {
 	   });
 
    circleTextGroups.append("text")
-            .attr("name", function(d) {return d.x.country.replace(new RegExp(" ", "g"), "_")})
+            .attr("name", function(d) {return d.x["ISO_A3"] || d.x.country.replace(new RegExp(" ", "g"), "_")})
   			    .attr("dx", 8)
   			    .attr("dy", 12)
   			    .text(function(d) { return d.x.country + ", " + d.y.value; })

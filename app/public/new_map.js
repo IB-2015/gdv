@@ -335,15 +335,18 @@ function drawMap(geojson, sub_regions, continents) {
       selected = path.classed('selected')
 
       pathTransition = path.transition()
-
       if (selected) {
         if (drawLeft) {
           pathTransition.style("stroke", "#533A71").duration(1000);
           circle.transition().style("fill", "#533A71").duration(1000);
+          // console.log("left stylesheet");
+          // console.log(circle);
         }
         if (drawRight) {
           pathTransition.style("stroke", "#26532B").duration(1000);
           circle.transition().style("fill", "#26532B").duration(1000);
+          // circle.style("fill", "#26532B");
+          // console.log("right stylesheet");
         }
 
         path.style("stroke-width", 5);
@@ -352,6 +355,7 @@ function drawMap(geojson, sub_regions, continents) {
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
         pathTransition.style("stroke-width", 1).duration(1000);
         circle.transition().style("fill", "red").duration(1000);
+        // circle.style("fill", "red");
       }
 
       if (deselected_name != null) {
@@ -371,7 +375,6 @@ function drawMap(geojson, sub_regions, continents) {
       if (drawLeft) {
         selected_objects[0].upper_name = upper_name;
         selected_objects[0].upper_countries = upper_layer_value.countries;
-        console.log(selected_objects);
       }
       if (drawRight) {
         // d3.select("#country2").selectAll("*").remove();
