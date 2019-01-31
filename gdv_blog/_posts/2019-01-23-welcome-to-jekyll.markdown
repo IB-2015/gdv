@@ -13,7 +13,7 @@ external_site: "https://github.com/IB-2015/gdv.git"
 
 ---
 
-Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals (SDG) visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten gehen wir der Frage nach, wie sich die Lebensumstände wie die Qualität von Bildung, die Wirtschaftlichkeit und die Wohlstandsverteilung auf die Mordrate eines Kontinentes, einer Region oder eines Staates auswirken können und ob es Gemeinsam- oder Auffälligkeiten bestimmter Regionen gibt.
+Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Quellen, vornehmlich der UN, zur Thematik der Sustainable Development Goals (SDG) visualisiert. In einem stetig wachsenden und sich entwickelnden Zeitalter ist es nur logisch, dass sich nicht alle Menschen weltweit gleichermaßen nachhaltig entwickeln können. Mithilfe der Visualisierung der Mordraten gehen wir der Frage nach, wie sich die Lebensumstände, die Qualität von Bildung, die Wirtschaftlichkeit und die Verteilung von Wohlstand auf die Mordrate auswirken können und ob es Gemeinsam- oder Auffälligkeiten gibt.
 ## Inhalt
 - [1 Konzeption](#Konzeption)
 - [2 Datenbasis](#Datenbasis)
@@ -22,10 +22,10 @@ Im Rahmen des Projektes wurden Daten verschiedener öffentlich zugänglicher Que
 - [5 Fazit](#Fazit)
 
 ## <a name="Konzeption"></a>1 Konzeption
-Im Projektverlauf entstanden eine Reihe an Ideen wie man mit Hilfe einer interaktiven Weboberfläche schnell, einfach und vorzugsweise intuitiv Daten darstellen und hilfreiche Informationen daraus gewinnen kann. Eine Auswahl und Beschreibung der vielversprechendsten Ideen hierzu finden Sie unter Punkt [3.2 Visualisierungsprozess](#Visualisierungsprozess).
+Dem Entwicklungsprozess ist eine Konzeptionsphase vorangegangen. In dieser Phase sind Ideen zu einer intuitiven Weboberfläche gesammelt worden, um Daten nutzerfreundlich darzustellen. Ziel ist es auch gewesen, durch die Visualisierung Information zu gewinnen, die in den Rohdaten nicht direkt ersichtlich sind. Eine Auswahl und Beschreibung dieser Ideen hierzu finden Sie unter Punkt [3.2 Visualisierungsprozess](#Visualisierungsprozess).
 
 ### 1.1 Einführung
-Ziel des Projektes war die Visualisierung der weltweiten Mordrate anhand spezifischer Daten. Im speziellen Daten, welche für bzw. aus den Zielen der Sustainable Development Goals von zentraler Bedeutung sind.
+Ziel des Projektes ist es gewesen durch eine Visualisierung Korrelationen zwischen Mordrate und Wohlstandsfaktoren zu untersuchen. Als Wohlstandsfaktoren sind von uns das Bruttoinlandsprodukt (BIP), der GINI Koeffizient und der Bildungsindex ausgewählt worden.
 
 ### 1.2 Motivation
 Motiviert aus der Möglichkeit einzelne Kontinente, Subregionen und Staaten einfach miteinander vergleichen zu können stießen wir bei der Datenrecherche auf ein Paper.
@@ -52,7 +52,7 @@ Im Folgenden werden, die für die Visualisierung zugrunde liegenden Daten und de
 Unser Themenschwerpunkt spiegelt sich vor allem in den vier folgenden SDGs und deren Indikatoren wieder.
 * <b>SDG 4 - Hochwertige Bildung</b>
 <br>(UN Human Development Reports, Education Index, Human Development Index)
-* <b>SDG 8 - Menschenwürdige Arbeit und Wirtschaftswachstum</b> 
+* <b>SDG 8 - Menschenwürdige Arbeit und Wirtschaftswachstum</b>
 <br>(8.1.1 Annual growth rate of real GDP per capita)
 * <b>SDG 10 - Weniger Ungleichheiten</b>
 <br>(OECD Income inequality)
@@ -82,7 +82,7 @@ Die vielversprechendste Lösung war die Idee der Bildung eines Mittelwerts über
 ### 2.4 Datenaufbereitung
 Die Bearbeitung der Datensätze hat sich als sehr aufwendig herauskristallisiert. Am Anfang war es schwer konsistente Daten zu finden. Unsere erste Idee war es verschiedene Quellen zu benutzen um fehlende Daten aufzufüllen.  Nach der Besprechung mit Professor Nagel haben wir uns aber entschieden nur mit einer Informationsquelle zu arbeiten. Das Auswahlkriterium war simpel es ging vor allem um die Qualität der Daten. wir haben uns schließlich für Datensätze der United Nations entschieden, für die Kategorie Bildung und GINI-Index die World Bank - Datensatz benutzt.
 Danach ging es um die Verarbeitung der Informationen. Man konnte sich verschiedene Dateitypen herunterladen direkt von der Webseite. Wir haben uns entschlossen Python zu verwenden, um die Daten zu behandeln. Dieser Arbeitsschritt war sehr Zeitintensiv und forderte auch ein gewisses Verständnis mit dem Umgang von Informationen. Man musste penibel auf die Form der Daten achten und jeder Datensatz war unterschiedlich strukturiert. Es war unmöglich ein automatisiertes Verfahren zu entwickeln, die für alle Datensätze anwendbar wäre. Man musste jeden Datensatz einzeln behandeln und forderte wiederum Wissen in den jeweiligen Domänen. Die anschließende Bewertung nach den ganzen Änderungen an den Datensätze konnte man nur mit Recherchen realisieren. Um die fehlenden Einträge zu eliminieren haben wir uns entschlossen den Bereich von 2007 bis 2016 zu benutzen und dabei alle Einträge aufzusummieren und mit der Anzahl der Einträge zu dividieren. Diesen Mittelwert haben wir dann verwendet um unsere Darstellungen zu realisieren. Viele Faktoren haben dafür gesorgt Lücken in die Datensätze zu machen, wie z.B. Kriege, Umweltkatastrophen, Embargos (Nord-Korea). Um die Realisierung mit Python zu ermöglichen haben wir verschiedene Bibliotheken benutzt um die Daten zu bearbeiten und abzuspeichern.
- 
+
 
 Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisierungsexperiment als sinnvoll und praktikabel. Wodurch wir in unsere Datenbasis bestätigt wurden. Die Ergebnisse besagter Visualisierungsexperimente finden Sie unter Punkt [3.3 Visualisierungsexperimente](#Visualisierungsexperimente).
 
@@ -104,9 +104,9 @@ Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noc
 
 ### <a name="Visualisierungsexperimente"></a>3.3 Visualisierungsexperimente
 
-| Um sicherzustellen, dass unsere Datensätze eine angemessene Qualität haben, visualisierten wir ähnlich dem Projekt in 3.1 <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder</a>. Die Ergebnisse spiegelten ähnliche Werte wie in den betrachteten verwandten Arbeiten wieder. Weiterhin konnten wir auch die Aussage treffen, dass der GINI-Index und das BIP offensichtlich mit der Mordrate korrelieren. Der Education Index scheint hierbei jedoch nicht relevant. | <img src="/images/Mordrate/TableauMordsVsBIP.JPG" alt="drawing" width="3000"/> | 
+| Um sicherzustellen, dass unsere Datensätze eine angemessene Qualität haben, visualisierten wir ähnlich dem Projekt in 3.1 <a href="http://staff.math.su.se/hoehle/blog/2018/07/09/gini.html">World Income, Inequality and Murder</a>. Die Ergebnisse spiegelten ähnliche Werte wie in den betrachteten verwandten Arbeiten wieder. Weiterhin konnten wir auch die Aussage treffen, dass der GINI-Index und das BIP offensichtlich mit der Mordrate korrelieren. Der Education Index scheint hierbei jedoch nicht relevant. | <img src="/images/Mordrate/TableauMordsVsBIP.JPG" alt="drawing" width="3000"/> |
 | <img src="/images/Mordrate/TableauMordsVsEdu.JPG" alt="drawing" width="3000"/> | <img src="/images/Mordrate/TableauMordsVsGINI.JPG" alt="drawing" width="3000"/> |
- 
+
 ### 3.4 Erkenntnisse
 Wir konnten die Aussagen aus dem Paper erwartungsgemäß bestätigen.
 Es gab klar erwartete Ergebnisse aber auch Werte die zunächst vermeintlich zufällig – fast wahllos ohne Anzeichen auf Zusammenhänge aufgetreten sind. Die Begründung hierfür liegt in der Aggregation einzelner Staaten zu Regionen bzw. diese wiederum zu Kontinenten. Man kann also klar die Aussage treffen, dass die Qualität von Bildung auf Basis unserer Daten einen Einfluss auf die Mordrate nimmt, die Faktoren BIP sowie GINI-Index mit den Mordraten korrelieren und die Qualität der Bildung keine Auswirkungen bewirkt.
@@ -131,7 +131,7 @@ Das Backend wurde als REST API implementiert, welche die
 von uns gefundenen Datenquellen über mehrere Endpunkte zur
 Verfügung stellt. Hierfür wird die jeweilige CSV-Datei
 eingelesen und als JSON-Objekt versendet.
-  
+
 Das Frontend wurde als Single Page Application realisiert.
 Dabei werden die Inhalte dynamisch in eine Seite geladen,
 anstatt dass neue Seite geladen werden, was dabei hilft,
@@ -192,5 +192,5 @@ Dieser Prototyp ist durch die visuelle Kartendarstellung, die Vergleichsmöglich
 Ein möglicher nächster Schritt in der Aussagekraft ist die Erhöhung des Detailgrads an Informationen, sodass man von einer zunächst recht oberflächlichen und stark aggregierten Betrachtung die Möglichkeit hat spezifische Werte, Daten und auch Trends zeigen zu können.
 Für einen besseren Überblick könnten auch Details on Demand auf der Karte und den Diagrammen sorgen.
 Weiterhin wäre es durchaus interessant, spezifische Daten und Zeiträume untersuchen zu können und hierbei vor allem auch Datenlücken aufzuzeigen, welche wiederum mit Medienberichten verknüpft werden könnten, um auf die möglichen Ursachen u.U. direkter schließen zu können.
-Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können. 
+Rein technisch bieten sich hier ebenfalls noch Optionen, die verwendeten Daten nicht nur wie bisher statisch zu integrieren, sondern eine API-Anbindung zu den betreffenden Datensammlungen zu implementieren, um neue Informationen direkt visualisieren zu können.
 [TODO Prototyp erweitern um Quellen und Jahresanzeige der verwendeten Daten, Legenden konkreter bezeichnen, Verbessereung der Usability, es ist nicht direkt einsichtig, wie das Board zu bedienen ist (v.a. Wie ändert man die Ebene der Karte)]
