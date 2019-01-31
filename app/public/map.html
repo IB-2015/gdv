@@ -37,24 +37,41 @@
   </nav>
   <div class="container-fluid">
     <div class="row mapRow">
-      <div class="col-sm-3">
-        <div class="legend">
-          <ul>
-              <li><span style="background-color:rgb(255, 0, 0)"></span>Hohe Mordrate</li>
-              <li><span style="background-color: rgb(255, 255, 255)"></span>Niedrige Mordrate</li>
-              </ul>
-            </div>
-                <!-- <div class="" id="selection1">
-                  </div> -->
-      </div>
       <div class="col-sm-6">
                 <!-- Map-->
                 <div class="" id="content">
                   </div>
       </div>
-      <div class="col-sm-3">
-                <!-- <div class="" id="selection2">
+      <div class="col-sm-1">
+        <div class="legend">
+          <ul>
+              <li><span style="background-color:rgb(255, 0, 0)"></span>High homicide per capita</li>
+              <li><span style="background-color: rgb(255, 255, 255)"></span>Low homicide per capita</li>
+              </ul>
+            </div>
+                <!-- <div class="" id="selection1">
                   </div> -->
+      </div>
+      <div class="col-sm-5">
+
+                <div id="selection2">
+                      <!--
+                        <label><input type="radio" name="mode" value="edu" checked>Education Index</label>
+                        <label><input type="radio" name="mode" value="gini">GINI Index</label>
+                        <label><input type="radio" name="mode" value="gdp">GDP</label>
+                      -->
+                      <p id="radios" class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-default" name="mode" value="edu" checked>
+                            <input id='educationPlot' type="radio" checked> Education Index
+                          </label>
+                          <label class="btn btn-default" name="mode" value="gini">
+                            <input class="chartRadioButtons" type="radio" name="mode" value="gini"> GINI Index
+                          </label>
+                          <label class="btn btn-default" name="mode" value="gdp">
+                            <input class="btn btn-default" type="radio" name="mode" value="gdp"> GDP
+                          </label>
+                      </p>
+                </div>
       </div>
 
     </div>
@@ -81,6 +98,7 @@
   <script src="./js/radar-chart.js"></script>
   <script src="./js/draw_radar_chart.js"></script>
   <script src="./js/drawCharts.js"></script>
+  <script src="./js/dot-plot.js"></script>
   <script src="new_map.js"></script>
 </body>
 </html>

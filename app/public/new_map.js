@@ -129,12 +129,10 @@ Promise.all(promises).then(function(data) {
     return a["Country or Area"] < b["Country or Area"] ? -1 : 1;
   });
 
-  // d3.csv("homicide0.csv").then(function(data0) {
   // set geoscheme for every country and count missing afterwards
   geojson_countries.features.forEach(function(d) {
     d.properties.name = d.properties.name.replace(new RegExp(" ", "g"), "_")
     setScheme(d, geoscheme)
-    // setHomicide(d, data0)
 
     function setScheme(geojson_country, scheme) {
       scheme.forEach(function(d) {
@@ -147,22 +145,11 @@ Promise.all(promises).then(function(data) {
         }
       })
     }
-
-    // function setHomicide(geojson_country, homicide) {
-    //   homicide.forEach(function(d) {
-    //     if (d.ISO_A3 === geojson_country.id) {
-    //       console.log(d);
-    //       geojson_country.homicide = d;
-    //       return;
-    //     }
-    //   })
-    // }
   });
 
 
   drawMap(geojson_countries, geojson_schemes, geojson_continents);
 
-// }) // csv
 
 }).catch(function(error) {
   console.log(error);
@@ -341,6 +328,7 @@ function drawMap(geojson, sub_regions, continents) {
       // console.log(selected_objects);
 
       category = d3.select(`[name=${name}]`).attr('category');
+      circle = d3.select(`circle[name=${name}]`);
       path = d3.select(`[name=${name}]`).select('path');
       selected = path.classed('selected')
       selected = path.classed('selected', !selected)
@@ -348,17 +336,31 @@ function drawMap(geojson, sub_regions, continents) {
 
       pathTransition = path.transition()
       if (selected) {
-        if (drawLeft)
+        if (drawLeft) {
           pathTransition.style("stroke", "#533A71").duration(1000);
-        if (drawRight)
+          circle.transition().style("fill", "#533A71").duration(1000);
+          // console.log("left stylesheet");
+          // console.log(circle);
+        }
+        if (drawRight) {
           pathTransition.style("stroke", "#26532B").duration(1000);
-        pathTransition.style("stroke-width", 5).duration(1000);
+          circle.transition().style("fill", "#26532B").duration(1000);
+          // circle.style("fill", "#26532B");
+          // console.log("right stylesheet");
+        }
+
+        path.style("stroke-width", 5);
+        // pathTransition.style("stroke-width", 5).duration(1000); should work but it does not all the time
       } else {
         pathTransition.style("stroke", color_config[category].stroke).duration(1000);
         pathTransition.style("stroke-width", 1).duration(1000);
+        circle.transition().style("fill", "red").duration(1000);
+        // circle.style("fill", "red");
       }
 
       if (deselected_name != null) {
+        deselected_circle = d3.select(`circle[name=${deselected_name}]`);
+        deselected_circle.transition().style("fill", "red").duration(1000);
         deselected_category = d3.select(`[name=${deselected_name}]`).attr('category');
         deselected_path = d3.select(`[name=${deselected_name}]`).select('path');
         deselected_selected = deselected_path.classed('selected')
@@ -373,7 +375,6 @@ function drawMap(geojson, sub_regions, continents) {
       if (drawLeft) {
         selected_objects[0].upper_name = upper_name;
         selected_objects[0].upper_countries = upper_layer_value.countries;
-        console.log(selected_objects);
       }
       if (drawRight) {
         // d3.select("#country2").selectAll("*").remove();
@@ -466,6 +467,8 @@ function drawMap(geojson, sub_regions, continents) {
 
       colorByHomicide(map_element_cc)
 
+      allData()
+
       gg = map_svg.selectAll('g').data(map_svg.selectAll('g')._groups[0]);
 
       function sortGAfterIndex() {
@@ -513,31 +516,52 @@ function getCountriesForName(name) {
   return countries;
 }
 
-// function homicideCountry() {
-//   all_countries = []
-//   geojson_countries.features
-//   .forEach(function(d) {
-//     if (d.properties.sub_region != undefined) {
-//         for (key in geojson_schemes)
-//           if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
-//             all_sub_regions[key].push(d.id)
-//           }
-//         for (key in geojson_continents)
-//           if (key == d.properties.region) {
-//             all_regions[key].push(d.id)
-//           }
-//         }
-//     all_countries.push(d.id)
-//   });
-//
-//   pr_c = []
-//   all_countries.forEach(function(d) {
-//     pr_c.push(getHomicideData([d]))
-//   })
-//
-//   return Promise.all(pr_c)
-//
-// }
+function allData() {
+
+  all_countries = []
+  all_sub_regions = {}
+  all_regions = {}
+
+  for (key in geojson_schemes)
+    all_sub_regions[key] = []
+  for (key in geojson_continents)
+    all_regions[key] = []
+
+  geojson_countries.features
+  .forEach(function(d) {
+    if (d.properties.sub_region != undefined) {
+        for (key in geojson_schemes)
+          if (key == d.properties.sub_region.replace(new RegExp(" ", "g"), "_")) {
+            all_sub_regions[key].push(d.id)
+          }
+        for (key in geojson_continents)
+          if (key == d.properties.region) {
+            all_regions[key].push(d.id)
+          }
+        }
+    all_countries.push(d.id)
+  });
+  pr_c = []
+  all_countries.forEach(function(d) {
+    pr_c.push(getData([d]))
+  })
+
+  for (key in all_sub_regions)
+    pr_c.push(getData(all_sub_regions[key], key));
+
+  for (key in all_regions)
+    pr_c.push(getData(all_regions[key], key));
+
+  pr_c.push(getData(all_countries, "World"));
+
+  Promise.all(pr_c).then(data => {
+    setData(data)
+    $(document).ready(() => {
+      $('#educationPlot').click();
+    })
+
+  })
+}
 
 function colorByHomicide(map_element_cc) {
 

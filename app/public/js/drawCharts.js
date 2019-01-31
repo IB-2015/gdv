@@ -11,7 +11,7 @@ const draw = (left, right) => {
   rupper_layer_countries = right != null ? right.upper_countries : []
   rdataObject = {};
   rdataObjectUpper = {};
-  promises = [getData(lcountries), getData(lupper_layer_countries), getData(rcountries), getData(rupper_layer_countries)]
+  promises = [getData(lcountries, lname), getData(lupper_layer_countries, lupper_name), getData(rcountries, rname), getData(rupper_layer_countries, rupper_name)]
   Promise.all(promises).then(function(data) {
     // console.log(data);
     // dataObject.assault = data[0];
@@ -52,14 +52,15 @@ const draw = (left, right) => {
 
 }
 
-const getData = (countries) => {
+const getData = (countries, name) => {
   dataObject = {}
   promises = []
   // promises.push(getAssaultData(countries));
-  promises.push(getHomicideData(countries));
-  promises.push(getEducationData(countries));
-  promises.push(getGDPData(countries));
-  promises.push(getGINIData(countries));
+  promises.push(getHomicideData(countries, name));
+  promises.push(getEducationData(countries, name));
+  promises.push(getGDPData(countries, name));
+  promises.push(getGINIData(countries, name));
+  promises.push(getPopulation(countries, name));
   return Promise.all(promises);
 }
 
