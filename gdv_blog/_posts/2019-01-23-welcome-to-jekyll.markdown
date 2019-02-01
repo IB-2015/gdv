@@ -77,7 +77,7 @@ Auffällig war, dass es verhältnismäßig sehr viel Zeit in Anspruch nahm, ansa
 Die vielversprechendste Lösung war die Idee der Bildung eines Mittelwerts über einen fest definierten Zeitraum.
 
 ### 2.3 Datenauswertung
-...//TODO MARKUS… (kurze Beschreibung ansonsten verweis auf 3.3 Visualisierungsexperimente)
+Die Auswertung der Daten und dessen Qualität erfolgte ausschließlich manuell. Detailliertere Informationen zur Qualität der verwendeten Daten finden Sie unter [3.3 Visualisierungsexperimente](#Visualisierungsexperimente)
 
 ### 2.4 Datenaufbereitung
 Die Bearbeitung der Datensätze hat sich als sehr aufwendig herauskristallisiert. Am Anfang war es schwer konsistente Daten zu finden. Unsere erste Idee war es verschiedene Quellen zu benutzen um fehlende Daten aufzufüllen.  Nach der Besprechung mit Professor Nagel haben wir uns aber entschieden nur mit einer Informationsquelle zu arbeiten. Das Auswahlkriterium war simpel es ging vor allem um die Qualität der Daten. wir haben uns schließlich für Datensätze der United Nations entschieden, für die Kategorie Bildung und GINI-Index die World Bank - Datensatz benutzt.
@@ -88,7 +88,7 @@ Unsere Datenaufbereitung erwies sich in einem ersten prototypischen Visualisieru
 
 
 ## <a name="Entwicklungsprozess"></a>3 Entwicklungsprozess
-...//TODO MARKUS...
+Im folgenden Abschnitt wird die inhaltliche Entwicklung der Darstellung und Visualisierungsmöglichkeiten des Prototyps geschildert.
 
 ### <a name="Verwandte Arbeiten"></a>3.1 Verwandte Arbeiten & Inspiration
 Während der Datenrecherche stießen wir neben dem oben genannten Paper auch noch auf einige Interessante verwandte Arbeiten mit Visualisierungen, die wir zur Inspiration nahmen und als Nebeneffekt zu unserem Prototyp sinnvoll ergänzen bzw. ggf. verbessern wollten.
@@ -113,7 +113,7 @@ Es gab klar erwartete Ergebnisse aber auch Werte die zunächst vermeintlich zuf�
 
 
 ## <a name="Prototyp"></a>4 Prototyp
-...//TODO MARKUS...
+In diesem Abschnitt werden technische Details und besondere Herausforderungen in der Umsetzung sowie eine Funktionsbeschreibung durchgeführt.
 [Nach der IEXPO wurde der Prototyp noch um einen Scatterplot erweiteret, ...]
 
 ### 4.1 Verwendete Tools & Frameworks
@@ -170,6 +170,8 @@ Die Karte ist eine sogenannte Choroplethenkarte in welcher wir auf drei Ebenen i
 
 | ![image](/images/Mordrate/mapContinent.PNG) | ![image](/images/Mordrate/mapSubRegions.PNG) | ![image](/images/Mordrate/mapCountries.PNG)|
 
+| [Beschreibung] | ![image](/images/Mordrate/dotplot.gif) |
+
 In den Diagrammbereichen haben wir 2 Arten von Diagrammen benutzt vgl. Abbildung XY.
 
 ![image](/images/Mordrate/lowerDashboard.PNG)
@@ -182,7 +184,11 @@ In den Diagrammbereichen haben wir 2 Arten von Diagrammen benutzt vgl. Abbildung
 
 
 ## <a name="Fazit"></a>5 Fazit
-...//TODO MARKUS...
+Abschließend kann man sagen, dass die Thematik durch die Unmengen an Daten und fast schon beliebig vielfältige Faktoren die eventuell Einflussnahme haben könnten ein sehr großes Potential für viele Darstellungsvarianten bietet.
+
+Wir haben in Bezug auf unsere Kernthematik sehr viele Informationen ansammeln und vor allem den Bezug zu dem Paper herstellen können. Insbesondere der Vergleich auf mehreren Ebenen, die mögliche Einflussnahme bestimmter Faktoren, als auch die schnelle Klassifizierung konnten realisiert werden.
+
+Auffällig ist die beliebigen Möglichkeiten den hier vorgestellten Prototyp zu erweitern und oder zu verbessern.
 
 ### 5.1 Ergebnisse
 Generell haben wir unser Ziel einer visuellen Übersicht, einer Möglichkeit des Vergleichs sowie dem bekräftigen des Papers erreicht.
